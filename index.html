@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Built by Compo · Bespoke websites for local businesses in Essex</title>
+<meta name="description" content="Built by Compo makes bespoke, phone-first websites for local businesses in Essex, built and looked after by Luke Compton. New website coming soon.">
+<link rel="canonical" href="https://builtbycompo.co.uk/">
+<meta name="theme-color" content="#f2f0eb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121419" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Built by Compo">
+<meta property="og:title" content="Built by Compo · Websites built by hand">
+<meta property="og:description" content="Bespoke, phone-first websites for local businesses in Essex. New website coming soon.">
+<meta property="og:url" content="https://builtbycompo.co.uk/">
+<meta property="og:image" content="https://builtbycompo.co.uk/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Built by Compo logo: websites built by hand">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="fonts/bricolage.woff" as="font" type="font/woff" crossorigin>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Built by Compo","url":"https://builtbycompo.co.uk/","email":"luke@builtbycompo.co.uk","founder":{"@type":"Person","name":"Luke Compton"},"areaServed":"Essex, England","description":"Bespoke, phone-first websites for local businesses in Essex."}</script>
+<style>
+/* Layout: one screen. Logo top-left, a big statement with the brick sliding into the C, then contact and latest work. */
+@font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage.woff") format("woff"); font-weight: 500 800; font-display: swap; }
+@font-face { font-family: "Instrument Sans"; src: url("fonts/instrument-sans.woff") format("woff"); font-weight: 400 700; font-display: swap; }
+
+:root {
+  --paper: #f2f0eb; --paper-2: #e8e5dd; --ink: #15171c; --muted: #5d606a; --line: #d6d2c8;
+  --blue: #2f4fe0; --blue-ink: #ffffff; --brick: #2f4fe0; --grid: rgba(47, 79, 224, .07);
+  --f-display: "Bricolage Grotesque", "Arial Rounded MT Bold", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #121419; --paper-2: #1b1e25; --ink: #f2f0eb; --muted: #a3a6b0; --line: #2c3039;
+    --blue: #6f86ff; --blue-ink: #0d1020; --brick: #7c93ff; --grid: rgba(124, 147, 255, .07);
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;
+  background: var(--paper); color: var(--ink); font: 400 1.0625rem/1.6 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+/* Faint blueprint grid behind the top of the page */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 32px 32px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0, transparent 75%); mask-image: linear-gradient(to bottom, #000 0, transparent 75%);
+}
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+
+.wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); }
+
+header { padding-top: max(20px, env(safe-area-inset-top)); }
+.logo { display: inline-flex; align-items: center; gap: 4px; text-decoration: none; min-height: 48px; }
+.logo svg { width: 40px; height: 40px; flex: none; margin-left: -6px; }
+.logo span { font: 520 1.35rem/1 var(--f-display); letter-spacing: -.02em; color: var(--muted); }
+.logo b { font-weight: 800; color: var(--ink); }
+
+main { flex: 1; display: flex; align-items: center; padding-block: 48px 56px; }
+.hero { display: grid; gap: 28px; }
+
+.status { display: inline-flex; align-items: center; gap: 10px; width: fit-content; font: 600 .78rem/1 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.status i { width: 10px; height: 10px; background: var(--brick); display: block; animation: blink 1.6s steps(2, start) infinite; }
+@keyframes blink { to { visibility: hidden; } }
+
+.big { display: grid; grid-template-columns: auto 1fr; gap: 6px 22px; align-items: center; }
+.big .mark { width: clamp(72px, 18vw, 148px); height: auto; display: block; grid-row: span 1; }
+.big .mark .brick { transform: translateX(30px); opacity: 0; animation: lay .9s cubic-bezier(.2, .9, .25, 1.15) .35s forwards; }
+@keyframes lay { to { transform: translateX(0); opacity: 1; } }
+h1 { margin: 0; font: 800 clamp(2.5rem, 1.4rem + 5.6vw, 5.4rem)/.98 var(--f-display); letter-spacing: -.035em; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--blue); }
+
+.lede { margin: 0; max-width: 34rem; font-size: clamp(1.08rem, 1rem + .4vw, 1.3rem); line-height: 1.55; color: var(--muted); }
+.lede strong { color: var(--ink); font-weight: 600; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .55em; min-height: 54px; padding: 0 1.5em; border-radius: 12px; background: var(--blue); color: var(--blue-ink); font: 700 1.02rem/1 var(--f-body); text-decoration: none; transition: transform .15s ease, box-shadow .15s ease; box-shadow: 0 6px 18px rgba(47, 79, 224, .28); }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(47, 79, 224, .34); }
+.btn svg, .link svg { width: 1.1em; height: 1.1em; flex: none; }
+.link { display: inline-flex; align-items: center; gap: .45em; min-height: 48px; font-weight: 600; text-decoration: none; border-bottom: 2px solid var(--line); }
+.link:hover { border-color: var(--blue); }
+.email { font-size: .95rem; color: var(--muted); }
+.email a { color: var(--ink); font-weight: 600; text-decoration-color: var(--line); text-underline-offset: 3px; }
+
+.work { margin-top: 12px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 6px 28px; color: var(--muted); font-size: .95rem; max-width: 40rem; }
+.work b { color: var(--ink); font-weight: 600; }
+
+footer { padding-block: 18px max(22px, env(safe-area-inset-bottom)); border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: space-between; }
+
+@media (max-width: 560px) {
+  .btn { width: 100%; }
+  .big { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .big .mark .brick { animation: none; transform: none; opacity: 1; }
+  .status i { animation: none; }
+  .btn { transition: none; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Built by Compo, home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M45 13H13v38h32" fill="none" stroke="currentColor" stroke-width="9" style="color:var(--ink)"/><rect x="35" y="27" width="11" height="10" fill="var(--brick)"/></svg>
+      <span>built by <b>compo</b></span>
+    </a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <p class="status"><i aria-hidden="true"></i>Under construction</p>
+
+    <div class="big">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M45 13H13v38h32" fill="none" stroke="currentColor" stroke-width="9"/><rect class="brick" x="35" y="27" width="11" height="10" fill="var(--brick)"/></svg>
+      <h1>Websites, <em>built by&nbsp;hand.</em></h1>
+    </div>
+
+    <p class="lede">My new website is being built right now. In the meantime: I make <strong>bespoke, phone-first websites for local businesses in Essex</strong>, and look after them once they're live.</p>
+
+    <div class="actions">
+      <a class="btn" href="mailto:luke@builtbycompo.co.uk?subject=Website%20enquiry"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email me about a website</a>
+      <a class="link" href="https://tanyahill.co.uk" rel="noopener">See my latest site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <p class="email">Or write to <a href="mailto:luke@builtbycompo.co.uk">luke@builtbycompo.co.uk</a></p>
+
+    <div class="work" aria-label="Latest work">
+      <span><b>Latest project:</b> Tanya Hill Coaching, business coach to the trades</span>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Built by Compo · Luke Compton, Essex</span>
+    <span>Full website coming soon</span>
+  </div>
+</footer>
+</body>
+</html>
