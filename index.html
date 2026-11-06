@@ -26,25 +26,9 @@
 html, body { height: 100%; }
 body { margin: 0; overflow: hidden; color: var(--secondary); background: var(--main); -webkit-font-smoothing: antialiased; }
 
-/* Moving red gradient */
-.bg {
-  position: fixed; inset: 0; z-index: 0;
-  background: linear-gradient(120deg, #b51a00 0%, var(--main) 28%, #ff5a1e 50%, var(--main) 72%, #b51a00 100%);
-  background-size: 400% 400%;
-  animation: flow 8s ease-in-out infinite alternate;
-}
-/* Yellow sweep on top, faded out in the middle so the yellow text always sits on red */
-.bg::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(120deg, transparent 0%, transparent 35%, rgba(200, 253, 2, .65) 50%, transparent 65%, transparent 100%);
-  background-size: 400% 400%;
-  animation: sweep 6s ease-in-out infinite alternate;
-  -webkit-mask-image: radial-gradient(ellipse 58% 42% at 50% 48%, transparent 45%, #000 100%);
-          mask-image: radial-gradient(ellipse 58% 42% at 50% 48%, transparent 45%, #000 100%);
-  opacity: .9;
-}
-@keyframes flow { 0% { background-position: 0% 30%; } 100% { background-position: 100% 70%; } }
-@keyframes sweep { 0% { background-position: 100% 0%; } 100% { background-position: 0% 100%; } }
+/* Flowing liquid background (drawn by liquid.js). Plain red shows until it starts, or if a phone can't run it. */
+#liquid { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; opacity: 0; transition: opacity .8s ease; }
+#liquid.on { opacity: 1; }
 
 main {
   position: relative; z-index: 1; height: 100%;
@@ -65,12 +49,10 @@ h1 { margin: 0; display: grid; justify-items: center; line-height: .82; font-wei
 }
 .email:hover { color: var(--accent); }
 .email:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 3px; }
-/* Phones set to reduce motion still get the colour drift, just slower */
-@media (prefers-reduced-motion: reduce) { .bg { animation-duration: 16s; } .bg::after { animation-duration: 12s; } }
 </style>
 </head>
 <body>
-<div class="bg" aria-hidden="true"></div>
+<canvas id="liquid" aria-hidden="true"></canvas>
 <main>
   <div>
     <h1><span class="built">Built by</span><span class="compo">Compo</span></h1>
@@ -78,5 +60,6 @@ h1 { margin: 0; display: grid; justify-items: center; line-height: .82; font-wei
   </div>
 </main>
 <a class="email" href="mailto:luke@builtbycompo.co.uk">luke@builtbycompo.co.uk</a>
+<script src="liquid.js?v=1" defer></script>
 </body>
 </html>
