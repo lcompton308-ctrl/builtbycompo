@@ -29,19 +29,19 @@ body { margin: 0; overflow: hidden; color: var(--secondary); background: var(--m
 /* Moving red gradient */
 .bg {
   position: fixed; inset: 0; z-index: 0;
-  background: linear-gradient(120deg, var(--main-deep) 0%, var(--main) 30%, var(--main-light) 50%, var(--main) 70%, var(--main-deep) 100%);
-  background-size: 300% 300%;
-  animation: flow 14s ease-in-out infinite alternate;
+  background: linear-gradient(120deg, #b51a00 0%, var(--main) 28%, #ff5a1e 50%, var(--main) 72%, #b51a00 100%);
+  background-size: 400% 400%;
+  animation: flow 8s ease-in-out infinite alternate;
 }
 /* Yellow sweep on top, faded out in the middle so the yellow text always sits on red */
 .bg::after {
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(120deg, transparent 0%, transparent 35%, rgba(200, 253, 2, .5) 50%, transparent 65%, transparent 100%);
-  background-size: 300% 300%;
-  animation: sweep 11s ease-in-out infinite alternate;
+  background: linear-gradient(120deg, transparent 0%, transparent 35%, rgba(200, 253, 2, .65) 50%, transparent 65%, transparent 100%);
+  background-size: 400% 400%;
+  animation: sweep 6s ease-in-out infinite alternate;
   -webkit-mask-image: radial-gradient(ellipse 58% 42% at 50% 48%, transparent 45%, #000 100%);
           mask-image: radial-gradient(ellipse 58% 42% at 50% 48%, transparent 45%, #000 100%);
-  opacity: .8;
+  opacity: .9;
 }
 @keyframes flow { 0% { background-position: 0% 30%; } 100% { background-position: 100% 70%; } }
 @keyframes sweep { 0% { background-position: 100% 0%; } 100% { background-position: 0% 100%; } }
@@ -65,7 +65,8 @@ h1 { margin: 0; display: grid; justify-items: center; line-height: .82; font-wei
 }
 .email:hover { color: var(--accent); }
 .email:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 3px; }
-@media (prefers-reduced-motion: reduce) { .bg, .bg::after { animation: none; } }
+/* Phones set to reduce motion still get the colour drift, just slower */
+@media (prefers-reduced-motion: reduce) { .bg { animation-duration: 16s; } .bg::after { animation-duration: 12s; } }
 </style>
 </head>
 <body>
