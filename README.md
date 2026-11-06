@@ -6,6 +6,9 @@ Right now it's a temporary "Website under construction" holding page. Colours an
 
 - `index.html`: the page
 - `404.html`: sends any unknown address back to the home page
+- `liquid.js`: the moving red and yellow background (WebGL)
+- `img/og.jpg`: the preview image WhatsApp, LinkedIn etc. show when the link is shared (1200×630, a still of the page)
+- `favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, `site.webmanifest`: browser tab and phone home-screen icons (a white "C" on brand red, temporary)
 - `CNAME`: tells GitHub Pages the address is builtbycompo.co.uk (DNS is in Cloudflare)
 - `fonts/`: free stand-ins, self-hosted (no Google Fonts, no cookies)
   - TeX Gyre Adventor Bold, standing in for ITC Avant Garde Gothic (GUST Font Licence)
