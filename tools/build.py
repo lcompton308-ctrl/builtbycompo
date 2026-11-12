@@ -108,7 +108,7 @@ PAGES["index.html"] = dict(
   <div class="wrap" style="display:grid;gap:clamp(24px,4vw,44px)">
     <div style="display:grid;gap:14px">
       <p class="eyebrow reveal">What I do</p>
-      <h2 id="svc-h" class="reveal">This is my <span class="coop">thing</span></h2>
+      <h2 id="svc-h" class="reveal">Designed and <span class="coop">built by Compo</span></h2>
     </div>
     <ul class="svc-list">
       <li class="reveal"><h3>Design</h3><p>A look made for your business, drawn up for a phone screen first because that's where most of your visitors are.</p></li>
@@ -192,7 +192,7 @@ PAGES["what-i-do.html"] = dict(
   body=f'''
 <section class="page-hero">
   <div class="wrap">
-    <h1 class="wipe">This is my <span class="coop">thing.</span></h1>
+    <h1 class="wipe">Designed and <span class="coop">built by Compo.</span></h1>
     <p class="lede reveal" style="max-width:44ch">I take a website from first idea to live and looked after. Here's what that covers.</p>
   </div>
 </section>
