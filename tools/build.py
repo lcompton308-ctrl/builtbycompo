@@ -79,7 +79,7 @@ PAGES["index.html"] = dict(
 <section class="statement-sec">
   <div class="wrap">
     <p class="eyebrow reveal">A bit about me</p>
-    <div class="sticker-row"><span class="sticker pop" style="--r:-5deg">One-person studio</span><span class="sticker peach pop" style="--r:3deg;--d:.35s">No templates</span><span class="sticker red pop" style="--r:-3deg;--d:.5s">Mobile and PC design</span></div>
+    <div class="sticker-row"><span class="sticker pop" style="--r:-5deg">One-person studio</span><span class="sticker peach pop" style="--r:3deg;--d:.35s">No templates</span><span class="sticker red pop" style="--r:-3deg;--d:.5s">Any screen, any size</span></div>
     <p class="statement" data-fill>I think a good website should be simple to use, quick to load and easy to find. So I design and build each one from scratch, then look after it once it's live.</p>
     <div class="row reveal"><a class="btn ghost" href="about.html">More about me {ARROW}</a></div>
   </div>
