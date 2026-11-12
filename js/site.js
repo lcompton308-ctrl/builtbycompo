@@ -26,6 +26,10 @@
       var els = document.elementsFromPoint(x, y);
       for (var i = 0; i < els.length; i++) {
         if (head.contains(els[i]) || els[i].classList.contains("intro-cover")) continue;
+        if (els[i].classList.contains("site-foot")) {   // the top of the footer is still mostly off-white while it fades in
+          var fr = els[i].getBoundingClientRect(), fade = parseFloat(getComputedStyle(els[i], "::before").height) || 0;
+          if (y - fr.top < fade * 0.5) return [246, 244, 239];
+        }
         var m = getComputedStyle(els[i]).backgroundColor.match(/[\d.]+/g);
         if (m && (m.length < 4 || parseFloat(m[3]) > 0.5)) return [+m[0], +m[1], +m[2]];
       }

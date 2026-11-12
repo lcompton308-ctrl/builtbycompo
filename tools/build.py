@@ -501,7 +501,7 @@ def page(name, p, preview=False):
     <div class="foot-talk">
       <h2>Tell me about <b>your project.</b></h2>
       <p>Send me a message and we'll have a proper conversation. I reply within one working day.</p>
-      <a class="foot-btn solid" href="contact.html">Let's talk</a>
+      <a class="foot-btn solid" href="contact.html#project-form">Let's talk</a>
       <a class="foot-btn" href="mailto:{EMAIL}">{EMAIL} <span aria-hidden="true">↗</span></a>
       <a class="foot-btn" href="https://wa.me/{WA}" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a>
     </div>
