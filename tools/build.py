@@ -32,11 +32,11 @@ def ribbon_solo(words, cls="a", speed="-0.3"):
     t = ribbon_track(words).replace("{speed}", speed)
     return f'<div class="ribbon solo {cls}" role="img" aria-label="{html.escape(". ".join(words))}.">{t}</div>'
 
-SEAL = '''<svg class="{cls}" viewBox="0 0 200 200" role="img" aria-label="Built by Compo seal: bespoke websites, Essex, England">
+SEAL = '''<svg class="{cls}" viewBox="0 0 200 200" role="img" aria-label="Built by Compo. Bespoke websites. Essex, England.">
   <defs><path id="sealpath-{id}" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
   <circle cx="100" cy="100" r="97" fill="none" stroke="currentColor" stroke-width="3"/>
   <circle cx="100" cy="100" r="54" fill="none" stroke="currentColor" stroke-width="2"/>
-  <text font-family="Nunito,'Century Gothic',sans-serif" font-weight="800" font-size="17" fill="currentColor"><textPath href="#sealpath-{id}" startOffset="0" textLength="458" lengthAdjust="spacing">BESPOKE WEBSITES ✦ ESSEX, ENGLAND ✦</textPath></text>
+  <text font-family="Nunito,'Century Gothic',sans-serif" font-weight="800" font-size="13.5" fill="currentColor"><textPath href="#sealpath-{id}" startOffset="0" textLength="463" lengthAdjust="spacing">BUILT BY COMPO ✦ BESPOKE WEBSITES ✦ ESSEX, ENGLAND ✦ </textPath></text>
   <text x="100" y="100" dy=".355em" text-anchor="middle" font-family="Nunito,'Century Gothic',sans-serif" font-weight="900" font-size="78" fill="currentColor">C</text>
 </svg>'''
 
