@@ -501,6 +501,8 @@ def page(name, p, preview=False):
     <div class="foot-talk">
       <h2>Tell me about <b>your project.</b></h2>
       <a class="foot-btn solid" href="contact.html#project-form">Let's talk</a>
+      <a class="foot-btn" href="mailto:{EMAIL}">{EMAIL} <span aria-hidden="true">↗</span></a>
+      <a class="foot-btn" href="https://wa.me/{WA}" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a>
     </div>
     <p class="foot-small"><span>© {YEAR} Built by Compo</span><a href="privacy.html">Privacy policy</a><button class="motion-link" type="button" aria-pressed="false">Pause animations</button></p>
   </div>
