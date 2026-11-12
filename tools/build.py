@@ -150,9 +150,6 @@ PAGES["about.html"] = dict(
 
 <section class="about-main" style="padding-top:0">
   <div class="wrap">
-    <div class="portrait reveal" role="img" aria-label="Space for an illustration of Compo">
-      <p>{TODO("Illustration of me goes here")}</p>
-    </div>
     <div class="about-copy">
       <h2 class="reveal" style="font-size:clamp(1.6rem,4vw,2.6rem)">A small studio based in Essex, England</h2>
       <p class="reveal">Built by Compo is me, a laptop and a lot of coffee. Compo has been my nickname for years, and it stuck.</p>
@@ -365,19 +362,19 @@ DRAFT = '<p class="draft"><b>Draft.</b> Highlighted parts still need your decisi
 def legal(h1, inner):
     return f'''
 <section class="page-hero"><div class="wrap narrow"><h1 style="font-size:clamp(2.2rem,7vw,4.5rem)">{h1}</h1><p class="muted">Last updated: 12 November {YEAR}</p></div></section>
-<section style="padding-top:0"><div class="wrap narrow legal">{DRAFT}{inner}</div></section>'''
+<section style="padding-top:0"><div class="wrap narrow legal">{inner}</div></section>'''
 
 WHO = f'Built by Compo is the trading name of Luke Compton, a sole trader based in Essex, England. Business address: {TODO("BUSINESS ADDRESS")}. Email: <a href="mailto:{EMAIL}">{EMAIL}</a>.'
 
 PAGES["privacy.html"] = dict(title="Privacy policy · Built by Compo", desc="How Built by Compo collects, uses and protects your personal information.", body=legal("Privacy policy", f'''
 <h2>Who I am</h2>
-<p>{WHO} I'm the "controller" of your personal information, which means I decide how it's used. ICO registration number: {TODO("ICO NUMBER, once registered")}.</p>
+<p>{WHO} I'm the "controller" of your personal information, which means I decide how it's used.</p>
 <h2>What I collect, and why</h2>
 <div class="scroll-x"><table>
 <tr><th>When</th><th>What</th><th>Why (lawful basis)</th></tr>
 <tr><td>You email or WhatsApp me</td><td>Your name, business name, contact details and whatever you tell me</td><td>To reply and discuss your project (legitimate interests; steps before a contract)</td></tr>
 <tr><td>You become a client</td><td>Contact and billing details, project files, and records of our messages and payments</td><td>To do the work and get paid (contract); to keep tax records (legal obligation)</td></tr>
-<tr><td>You visit this website</td><td>Technical details such as your IP address, kept briefly in my host's security logs. {TODO("If Cloudflare Web Analytics is added: page views counted without cookies and without identifying you")}</td><td>To keep the site secure and working (legitimate interests)</td></tr>
+<tr><td>You visit this website</td><td>Technical details such as your IP address, kept briefly in my host's security logs.</td><td>To keep the site secure and working (legitimate interests)</td></tr>
 </table></div>
 <p>The contact form on this site does not send or store anything. It only prepares a message in your own email or WhatsApp app.</p>
 <h2>Who I share it with</h2>
@@ -386,7 +383,7 @@ PAGES["privacy.html"] = dict(title="Privacy policy · Built by Compo", desc="How
 <li>Google Workspace, for email and documents</li>
 <li>WhatsApp (Meta), if you choose to message me there</li>
 <li>GitHub, which hosts this website</li>
-<li>Cloudflare, for my domain and privacy-friendly visitor counts</li>
+<li>Cloudflare, which manages my domain name</li>
 </ul>
 <p>Some of these companies store information outside the UK. Where they do, they use safeguards approved under UK data protection law, such as the UK–US Data Bridge or standard contract clauses.</p>
 <h2>How long I keep it</h2>
@@ -409,7 +406,7 @@ PAGES["cookies.html"] = dict(title="Cookie policy · Built by Compo", desc="Buil
 <h2>What is saved on your device</h2>
 <p>Nothing. This website doesn't save anything in your browser.</p>
 <h2>Visitor counts</h2>
-<p>{TODO("If Cloudflare Web Analytics is added")} I count page visits with Cloudflare Web Analytics. It doesn't use cookies, doesn't store anything on your device and doesn't follow you around the web.</p>
+<p>This website doesn't use any analytics or visitor tracking.</p>
 <h2>Other websites</h2>
 <p>If you follow a link to WhatsApp, a client's website or a social network, that site may set its own cookies. Their policies apply there.</p>
 <h2>Questions</h2>
