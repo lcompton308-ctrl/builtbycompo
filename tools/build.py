@@ -502,34 +502,26 @@ def page(name, p, preview=False):
 </header>
 <main id="main">{p["body"].replace("{HOME}", home)}</main>
 <footer class="site-foot">
-  <canvas class="liquid" data-strength="0.42" aria-hidden="true"></canvas>
+  <canvas class="liquid" data-strength="0.3" aria-hidden="true"></canvas>
   <div class="wrap">
+    <div class="foot-hello">
+      <p class="foot-label">Say hello</p>
+      <a class="foot-email" href="mailto:{EMAIL}">{EMAIL}</a>
+      <div class="row"><a class="btn hot" href="https://wa.me/{WA}" rel="noopener">Message me on WhatsApp {ARROW}</a></div>
+    </div>
+    <nav class="foot-pills" aria-label="Footer">
+      {"".join(f'<a href="{h}">{t}</a>' for h, t in NAV)}<a href="contact.html">Contact</a>
+    </nav>
     <a class="foot-logo" href="{home}" aria-label="Built by Compo, home">Built by Compo</a>
-    <div class="foot-panel">
-      <div>
-        <h2>Say hello</h2>
-        <ul>
-          <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
-          <li><a href="https://wa.me/{WA}" rel="noopener">Message me on WhatsApp</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2>Pages</h2>
-        <ul>{"".join(f'<li><a href="{h}">{t}</a></li>' for h, t in NAV)}<li><a href="contact.html">Contact</a></li></ul>
-      </div>
-      <div>
-        <h2>The small print</h2>
-        <ul>
-          <li><a href="privacy.html">Privacy policy</a></li>
-          <li><a href="cookies.html">Cookie policy</a></li>
-          <li><a href="terms.html">Terms and conditions</a></li>
-          <li><a href="refunds.html">Refund policy</a></li>
-        </ul>
-      </div>
-      <div class="foot-small">
-        <p>© {YEAR} Built by Compo · Essex, England. Designed and built by me, obviously.</p>
-        <p><button class="motion-link" type="button" aria-pressed="false">Pause animations</button></p>
-      </div>
+    <div class="foot-bar">
+      <ul>
+        <li><a href="privacy.html">Privacy policy</a></li>
+        <li><a href="cookies.html">Cookie policy</a></li>
+        <li><a href="terms.html">Terms and conditions</a></li>
+        <li><a href="refunds.html">Refund policy</a></li>
+        <li><button class="motion-link" type="button" aria-pressed="false">Pause animations</button></li>
+      </ul>
+      <p>© {YEAR} Built by Compo · Essex, England. Designed and built by me, obviously.</p>
     </div>
   </div>
 </footer>
