@@ -20,11 +20,12 @@ def ribbon_track(words, n=8):
     return f'<div class="ribbon-shift" data-speed="{{speed}}"><div class="ribbon-track" aria-hidden="true">{spans}{spans}</div></div>'
 
 def ribbons():
-    a = ribbon_track(["Websites that work", "Bespoke builds"]).replace("{speed}", "-0.22")
-    b = ribbon_track(["Bespoke builds", "Websites that work"]).replace("{speed}", "0.18")
-    return f'''<div class="ribbons" role="img" aria-label="Websites that work. Bespoke builds.">
-  <div class="ribbon b">{b}</div>
-  <div class="ribbon a">{a}</div>
+    unit = "Websites that work  •  Bespoke builds  •  "
+    return f'''<div class="arc" role="img" aria-label="Websites that work. Bespoke builds.">
+  <svg viewBox="0 0 1600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path id="arc-path" d="M-200,395 Q760,-70 1800,215" fill="none" stroke="#ff5412" stroke-width="150"/>
+    <text dy="32" xml:space="preserve"><textPath href="#arc-path" startOffset="0" data-unit="{len(unit)}">{unit * 9}</textPath></text>
+  </svg>
 </div>'''
 
 def ribbon_solo(words, cls="a", speed="-0.3"):
@@ -35,14 +36,15 @@ SEAL = '''<svg class="{cls}" viewBox="0 0 200 200" role="img" aria-label="Built 
   <defs><path id="sealpath-{id}" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
   <circle cx="100" cy="100" r="97" fill="none" stroke="currentColor" stroke-width="3"/>
   <circle cx="100" cy="100" r="54" fill="none" stroke="currentColor" stroke-width="2"/>
-  <text font-family="'Avant Garde Stand-in','Century Gothic',sans-serif" font-weight="700" font-size="15" fill="currentColor"><textPath href="#sealpath-{id}" startOffset="0" textLength="458" lengthAdjust="spacing">BESPOKE WEBSITES ✦ ESSEX, ENGLAND ✦ EST. 2026 ✦</textPath></text>
-  <text x="100" y="128" text-anchor="middle" font-family="'Cooper Stand-in','Cooper Black',Georgia,serif" font-weight="900" font-size="84" fill="#c82828">C</text>
+  <text font-family="Outfit,'Century Gothic',sans-serif" font-weight="600" font-size="15.5" fill="currentColor"><textPath href="#sealpath-{id}" startOffset="0" textLength="458" lengthAdjust="spacing">BESPOKE WEBSITES ✦ ESSEX, ENGLAND ✦ EST. 2026 ✦</textPath></text>
+  <text x="100" y="129" text-anchor="middle" font-family="Outfit,'Century Gothic',sans-serif" font-weight="700" font-size="84" fill="currentColor">C</text>
 </svg>'''
 
 def cta_panel(heading='Tell me about <span class="coop">your project</span>'):
     return f'''<section>
   <div class="wrap">
-    <div class="cta-panel on-dark reveal">
+    <div class="cta-panel reveal">
+      <span class="sticker pop">No pressure</span>
       <h2>{heading}</h2>
       <p>Send me a message and we'll have a proper conversation. I'd like to get to know your business before I suggest anything.</p>
       <div class="row"><a class="btn hot" href="contact.html">Start a conversation {ARROW}</a></div>
@@ -55,18 +57,20 @@ PAGES = {}
 
 PAGES["index.html"] = dict(
   title="Built by Compo · Website design in Essex",
-  desc="Bespoke websites for small businesses, designed, built and looked after by Luke Compton. A small web studio based in Essex, England.",
+  desc="Bespoke websites for small businesses, designed, built and looked after by Compo. A small web studio based in Essex, England.",
   body=f'''
 <section class="hero">
   <div class="wrap">
-    <div class="seal-wrap">{SEAL.format(cls="seal", id="h")}</div>
-    <p class="eyebrow reveal">Small web studio · Essex, England</p>
-    <h1 class="wipe">Websites<br>that <span class="coop">work.</span></h1>
-    <div class="hero-foot">
-      <p class="lede reveal" style="--d:.25s">I'm Luke. I design, build and look after bespoke websites for small businesses.</p>
-      <div class="row reveal" style="--d:.35s">
-        <a class="btn" href="contact.html">Tell me about your project {ARROW}</a>
-        <a class="btn ghost" href="pricing.html">See pricing</a>
+    <div class="hero-panel">
+      <canvas class="liquid" data-strength="0.3" aria-hidden="true"></canvas>
+      <div class="seal-wrap">{SEAL.format(cls="seal", id="h")}</div>
+      <h1 class="wipe">Websites<br>that work.</h1>
+      <div class="hero-foot">
+        <p class="lede reveal" style="--d:.25s">I'm Compo. I design, build and look after bespoke websites for small businesses.</p>
+        <div class="row reveal" style="--d:.35s">
+          <a class="btn" href="contact.html">Tell me about your project {ARROW}</a>
+          <a class="btn ghost" href="pricing.html">See pricing</a>
+        </div>
       </div>
     </div>
   </div>
@@ -74,29 +78,20 @@ PAGES["index.html"] = dict(
 
 {ribbons()}
 
-<section class="intro">
+<section class="statement-sec">
   <div class="wrap">
-    <div class="copy">
-      <p class="eyebrow reveal">A bit about me</p>
-      <h2 class="reveal">One person.<br>Every <span class="coop">detail.</span></h2>
-      <p class="lede reveal" style="max-width:42ch">Built by Compo is just me. You talk to the person who designs your site, builds it and keeps it running. No account managers and no templates.</p>
-      <div class="row reveal"><a class="btn ghost" href="about.html">More about me {ARROW}</a></div>
-    </div>
-    <ul class="tags">
-      <li class="reveal">Built for phones first</li>
-      <li class="reveal" style="--d:.08s">Fast to load</li>
-      <li class="reveal" style="--d:.16s">Set up for Google</li>
-      <li class="reveal" style="--d:.24s">Looked after once it's live</li>
-    </ul>
+    <p class="eyebrow reveal">A bit about me</p>
+    <p class="statement" data-fill>I think a good website should be simple to use, quick to load and easy to find. So I design and build each one from scratch, then look after it once it's live.
+      <span class="sticker pop s1">One-person studio</span><span class="sticker peach pop s2" style="--d:.35s">Allergic to templates</span><span class="sticker red pop s3" style="--d:.5s">Phones first</span>
+    </p>
+    <div class="row reveal"><a class="btn ghost" href="about.html">More about me {ARROW}</a></div>
   </div>
 </section>
 
 <section class="work" aria-labelledby="work-h">
   <div class="wrap sec-head">
-    <div>
-      <p class="eyebrow reveal">Selected work</p>
-      <h2 id="work-h" class="reveal">Recently <span class="coop">built</span></h2>
-    </div>
+    <p class="eyebrow reveal">Selected work</p>
+    <h2 id="work-h" class="reveal">Recently <span class="coop">built</span></h2>
     <p class="muted reveal" style="max-width:34ch">Drag or swipe to look around. One of these spots is always yours.</p>
   </div>
   <div class="slider reveal" tabindex="0" role="region" aria-label="Portfolio, scrolls sideways">
@@ -160,29 +155,28 @@ PAGES["index.html"] = dict(
 
 PAGES["about.html"] = dict(
   title="About me · Built by Compo",
-  desc="Built by Compo is a small web studio in Essex, England, run by Luke Compton. I design, build and look after bespoke websites for small businesses.",
+  desc="Built by Compo is a small web studio in Essex, England, run by Compo. I design, build and look after bespoke websites for small businesses.",
   body=f'''
 <section class="page-hero">
   <div class="wrap">
-    <p class="eyebrow reveal">About me</p>
-    <h1 class="wipe">Hello, I'm <span class="coop">Luke.</span></h1>
+    <h1 class="wipe">Hello, I'm <span class="coop">Compo.</span></h1>
   </div>
 </section>
 
 <section class="about-main" style="padding-top:0">
   <div class="wrap">
-    <div class="portrait reveal" role="img" aria-label="Space for an illustration of Luke">
-      <p>{TODO("Illustration of Luke goes here")}</p>
+    <div class="portrait reveal" role="img" aria-label="Space for an illustration of Compo">
+      <p>{TODO("Illustration of me goes here")}</p>
     </div>
     <div class="about-copy">
       <h2 class="reveal" style="font-size:clamp(1.6rem,4vw,2.6rem)">A small studio based in Essex, England</h2>
-      <p class="reveal">Built by Compo is me, a laptop and a lot of tea. Family and friends call me Compo, and the name stuck.</p>
-      <p class="reveal">I make websites for small businesses that want something better than a template. I design each one from scratch, build it by hand and get it set up properly for Google. Then I host it and look after it, so you never have to log in to anything.</p>
+      <p class="reveal">Built by Compo is me, a laptop and a lot of tea. Compo has been my nickname for years, and it stuck.</p>
+      <p class="reveal">I make websites for small businesses that want something better than a template. I design each one from scratch, build it by hand and set it up to be found on Google. Then I host it and look after it, so you never have to log in to anything.</p>
       <p class="reveal">I like things that are simple, quick and a bit different. I'll tell you plainly what I think will work, and I'll always give you a fixed price before I start.</p>
       <p class="reveal">When I'm not building websites, I'm usually out walking Lemon, my chihuahua. She's in charge of morale.</p>
     </div>
     <div class="reveal" style="display:grid;gap:14px;justify-items:center">
-      <p class="display" style="font-size:clamp(1.6rem,4vw,2.4rem);color:var(--crimson)">Websites that work</p>
+      <p class="display" style="font-size:clamp(1.6rem,4vw,2.4rem);color:var(--orange-text)">Websites that work</p>
       {SEAL.format(cls="about-seal", id="a")}
     </div>
   </div>
@@ -214,11 +208,10 @@ def svc(h, lead, ticks, i):
 
 PAGES["what-i-do.html"] = dict(
   title="What I do · Built by Compo",
-  desc="Website design, hand-built websites, custom features, Google set-up, hosting and monthly care for small businesses in Essex and beyond.",
+  desc="Website design, hand-built websites, custom features, SEO set-up, hosting and monthly care for small businesses in Essex and beyond.",
   body=f'''
 <section class="page-hero">
   <div class="wrap">
-    <p class="eyebrow reveal">What I do</p>
     <h1 class="wipe">This is my <span class="coop">thing.</span></h1>
     <p class="lede reveal" style="max-width:44ch">I take a website from first idea to live and looked after. Here's what that covers.</p>
   </div>
@@ -236,9 +229,9 @@ PAGES["what-i-do.html"] = dict(
 <section style="padding-block:0"><div class="wrap">
     {svc('Custom <span class="coop">features</span>', "Sometimes a site needs to do more than show information. I can build tools that are made just for you.", ["Quizzes with personal results, like the one on tanyahill.co.uk", "Photo galleries, booking helpers and enquiry buttons", "Custom animation and illustration as extras"], 3)}
 </div></section>
-{ribbon_solo(["Found on Google", "Set up properly"], "a rev", "0.3")}
+{ribbon_solo(["Found on Google", "SEO set-up"], "a rev", "0.3")}
 <section style="padding-block:0"><div class="wrap">
-    {svc('Google <span class="coop">set-up</span>', "A good-looking site still needs to be found. I set up the basics properly from day one.", ["Page titles and descriptions written for search", "Google Search Console set up and your sitemap sent", "Help with your Google Business Profile", "A proper preview image when your link is shared"], 4)}
+    {svc('SEO <span class="coop">set-up</span>', "SEO is short for search engine optimisation. It's the behind-the-scenes work that helps Google understand your site and show it to people searching for what you do.", ["Page titles and descriptions written the way people search", "Your site registered with Google, so new pages get picked up", "Fast, tidy pages, which Google rewards", "Help with your Google Business Profile, so you show up on Maps", "A proper preview image when your link is shared"], 4)}
 </div></section>
 {ribbon_solo(["Hosting", "Health checks", "Changes made for you"], "b", "-0.3")}
 <section style="padding-block:0"><div class="wrap">
@@ -256,8 +249,9 @@ PAGES["what-i-do.html"] = dict(
 
 def price(name, amt, per, blurb, ticks, feature=False):
     lis = "".join(f"<li>{t}</li>" for t in ticks)
-    cls = "price feature on-dark" if feature else "price"
+    cls = "price feature" if feature else "price"
     return f'''<article class="{cls} reveal">
+      {'<span class="sticker pop">Most popular</span>' if feature else ''}
       <h3>{name}</h3>
       <p class="amt">{amt}{f" <small>{per}</small>" if per else ""}</p>
       <p>{blurb}</p>
@@ -270,7 +264,6 @@ PAGES["pricing.html"] = dict(
   body=f'''
 <section class="page-hero">
   <div class="wrap">
-    <p class="eyebrow reveal">Pricing</p>
     <h1 class="wipe">Clear <span class="coop">prices.</span></h1>
     <p class="lede reveal" style="max-width:46ch">No hidden extras. You get one fixed price in writing before I start, and these are the starting points.</p>
   </div>
@@ -280,8 +273,8 @@ PAGES["pricing.html"] = dict(
   <div class="wrap" style="display:grid;gap:24px">
     <h2 id="builds-h" class="reveal">Website <span class="coop">builds</span></h2>
     <div class="price-grid">
-      {price("Starter", "£1,195", "", "A smart, simple site that gets you found and gets you contacted.", ["Up to 5 pages", "Designed for phones first", "WhatsApp or booking button", "Google basics set up", "Privacy policy page"])}
-      {price("Standard", "£1,795", "", "More room to show what you do, with one custom feature.", ["Up to 8 pages", "One custom feature, such as a gallery or simple quiz", "Full Google set-up", "Help with your Google Business Profile"], True)}
+      {price("Starter", "£1,195", "", "A smart, simple site that gets you found and gets you contacted.", ["Up to 5 pages", "Designed for phones first", "WhatsApp or booking button", "SEO basics set up", "Privacy policy page"])}
+      {price("Standard", "£1,795", "", "More room to show what you do, with one custom feature.", ["Up to 8 pages", "One custom feature, such as a gallery or simple quiz", "Full SEO set-up", "Help with your Google Business Profile"], True)}
       {price("Bespoke", "from £2,750", "", "For custom tools, custom animation or a more involved design.", ["Custom tools, like a quiz with result pages", "Custom animation and design", "Help with your wording", "Quoted to fit the job"])}
     </div>
     <p class="muted reveal">Every build includes simple animations, connecting your domain, and two rounds of changes.</p>
@@ -320,18 +313,17 @@ PAGES["pricing.html"] = dict(
 
 PAGES["contact.html"] = dict(
   title="Contact · Built by Compo",
-  desc="Tell me about your project. Message Luke at Built by Compo by email or WhatsApp to talk about a new website for your business.",
+  desc="Tell me about your project. Message Compo at Built by Compo by email or WhatsApp to talk about a new website for your business.",
   body=f'''
 <section class="page-hero" style="padding-bottom:0">
   <div class="wrap">
-    <p class="eyebrow reveal">Contact</p>
     <h1 class="wipe">Let's <span class="coop">talk.</span></h1>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <div class="cta-panel on-dark contact-grid reveal">
+    <div class="cta-panel contact-grid reveal">
       <div style="display:grid;gap:20px">
         <h2 style="font-size:clamp(2rem,5vw,3.8rem)">Tell me about <span class="coop">your project</span></h2>
         <p>I'd like a proper conversation, so I can understand your business before I suggest anything. Pop your name in and I'll get a message started for you.</p>
@@ -358,10 +350,10 @@ PAGES["contact.html"] = dict(
 <section style="padding-top:0">
   <div class="wrap narrow">
     <ul class="plain-list">
-      <li class="reveal"><b>Email</b><span><a href="mailto:{EMAIL}">{EMAIL}</a> <button class="btn ghost" style="min-height:36px;padding:0 1em;margin-left:8px;font-size:.85rem" type="button" data-copy="{EMAIL}">Copy</button></span></li>
+      <li class="reveal"><b>Email</b><span><a href="mailto:{EMAIL}">{EMAIL}</a> <button class="btn ghost mini" type="button" data-copy="{EMAIL}">Copy</button></span></li>
       <li class="reveal"><b>WhatsApp</b><span><a href="https://wa.me/{WA}" rel="noopener">Message me on WhatsApp</a></span></li>
       <li class="reveal"><b>Where</b><span>Essex, England. I work with businesses anywhere in the UK.</span></li>
-      <li class="reveal"><b>When</b><span>I work evenings and weekends, and I aim to reply within one working day.</span></li>
+      <li class="reveal"><b>When</b><span>Monday to Saturday. I aim to reply within one working day.</span></li>
     </ul>
   </div>
 </section>
@@ -382,7 +374,6 @@ PAGES["faqs.html"] = dict(
   body=f'''
 <section class="page-hero">
   <div class="wrap">
-    <p class="eyebrow reveal">FAQs</p>
     <h1 class="wipe">Things you <span class="coop">might ask.</span></h1>
   </div>
 </section>
@@ -399,7 +390,7 @@ PAGES["faqs.html"] = dict(
 DRAFT = '<p class="draft"><b>Draft.</b> Highlighted parts still need your decision, and this page should be checked by a solicitor or a fixed-fee legal service before you rely on it.</p>'
 def legal(h1, inner):
     return f'''
-<section class="page-hero"><div class="wrap narrow"><p class="eyebrow">The small print</p><h1 style="font-size:clamp(2.2rem,7vw,4.5rem)">{h1}</h1><p class="muted">Last updated: 12 November {YEAR}</p></div></section>
+<section class="page-hero"><div class="wrap narrow"><h1 style="font-size:clamp(2.2rem,7vw,4.5rem)">{h1}</h1><p class="muted">Last updated: 12 November {YEAR}</p></div></section>
 <section style="padding-top:0"><div class="wrap narrow legal">{DRAFT}{inner}</div></section>'''
 
 WHO = f'Built by Compo is the trading name of Luke Compton, a sole trader based in Essex, England. Business address: {TODO("BUSINESS ADDRESS")}. Email: <a href="mailto:{EMAIL}">{EMAIL}</a>.'
@@ -504,7 +495,7 @@ PAGES["refunds.html"] = dict(title="Refund policy · Built by Compo", desc="How 
 '''))
 
 PAGES["404.html"] = dict(title="Page not found · Built by Compo", desc="That page doesn't exist.", noindex=True, body=f'''
-<section class="page-hero"><div class="wrap"><p class="eyebrow">Error 404</p><h1>Nothing <span class="coop">here.</span></h1><p class="lede">That page has moved or never existed.</p><div class="row"><a class="btn" href="{{HOME}}">Back to the homepage {ARROW}</a></div></div></section>''')
+<section class="page-hero"><div class="wrap"><h1>Nothing <span class="coop">here.</span></h1><p class="lede">That page has moved or never existed.</p><div class="row"><a class="btn" href="{{HOME}}">Back to the homepage {ARROW}</a></div></div></section>''')
 
 # ------------------------------------------------------------------ LAYOUT
 def page(name, p, preview=False):
@@ -512,7 +503,7 @@ def page(name, p, preview=False):
     cur = lambda href: ' aria-current="page"' if href == name else ""
     nav = "".join(f'<a href="{h}"{cur(h)}>{t}</a>' for h, t in NAV)
     canon = SITE + "/" + ("" if name == "index.html" else name.replace(".html", ""))
-    ld = p.get("jsonld") or ({"@context": "https://schema.org", "@type": "ProfessionalService", "name": "Built by Compo", "url": SITE + "/", "email": EMAIL, "founder": {"@type": "Person", "name": "Luke Compton"}, "areaServed": "GB", "address": {"@type": "PostalAddress", "addressRegion": "Essex", "addressCountry": "GB"}, "description": "Bespoke websites for small businesses, designed, built and looked after by Luke Compton."} if name == "index.html" else None)
+    ld = p.get("jsonld") or ({"@context": "https://schema.org", "@type": "ProfessionalService", "name": "Built by Compo", "url": SITE + "/", "email": EMAIL, "areaServed": "GB", "address": {"@type": "PostalAddress", "addressRegion": "Essex", "addressCountry": "GB"}, "description": "Bespoke websites for small businesses, designed, built and looked after by Compo."} if name == "index.html" else None)
     head = f'''<title>{p["title"]}</title>
 <meta name="description" content="{html.escape(p["desc"])}">
 {'<meta name="robots" content="noindex">' if p.get("noindex") else f'<link rel="canonical" href="{canon}">'}
@@ -531,23 +522,23 @@ def page(name, p, preview=False):
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<link rel="preload" href="fonts/avant-garde-standin.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="fonts/outfit.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="css/site.css">
 {f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>' if ld else ""}'''
     body = f'''<a class="skip" href="#main">Skip to content</a>
 <header class="site-head">
   <div class="wrap">
-    <a class="logo" href="{home}" aria-label="Built by Compo, home"><span class="b">Built by</span><span class="c">Compo</span></a>
+    <a class="logo" href="{home}" aria-label="Built by Compo, home">Built by <b>Compo</b></a>
     <button class="btn menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main">{nav}<a class="btn" href="contact.html"{cur("contact.html")}>Let's talk</a></nav>
   </div>
 </header>
 <main id="main">{p["body"].replace("{HOME}", home)}</main>
 <footer class="site-foot">
-  <canvas id="liquid" aria-hidden="true"></canvas>
+  <canvas class="liquid" data-strength="0.42" aria-hidden="true"></canvas>
   <div class="wrap">
-    <a class="foot-logo" href="{home}" aria-label="Built by Compo, home"><span class="b">Built by</span><span class="c">Compo</span></a>
-    <div class="foot-panel on-dark">
+    <a class="foot-logo" href="{home}" aria-label="Built by Compo, home">Built by Compo</a>
+    <div class="foot-panel">
       <div>
         <h2>Say hello</h2>
         <ul>
@@ -570,8 +561,7 @@ def page(name, p, preview=False):
         </ul>
       </div>
       <div class="foot-small">
-        <p>Built by Compo is the trading name of Luke Compton, sole trader. {TODO("BUSINESS ADDRESS")}, Essex, England.</p>
-        <p>© {YEAR} Built by Compo. Designed and built by me, obviously.</p>
+        <p>© {YEAR} Built by Compo · Essex, England. Designed and built by me, obviously.</p>
       </div>
     </div>
   </div>

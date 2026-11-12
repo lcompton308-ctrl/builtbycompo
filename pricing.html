@@ -21,7 +21,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<link rel="preload" href="fonts/avant-garde-standin.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="fonts/outfit.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="css/site.css">
 
 </head>
@@ -29,7 +29,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-head">
   <div class="wrap">
-    <a class="logo" href="./" aria-label="Built by Compo, home"><span class="b">Built by</span><span class="c">Compo</span></a>
+    <a class="logo" href="./" aria-label="Built by Compo, home">Built by <b>Compo</b></a>
     <button class="btn menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main"><a href="about.html">About me</a><a href="what-i-do.html">What I do</a><a href="pricing.html" aria-current="page">Pricing</a><a href="faqs.html">FAQs</a><a class="btn" href="contact.html">Let's talk</a></nav>
   </div>
@@ -37,7 +37,6 @@
 <main id="main">
 <section class="page-hero">
   <div class="wrap">
-    <p class="eyebrow reveal">Pricing</p>
     <h1 class="wipe">Clear <span class="coop">prices.</span></h1>
     <p class="lede reveal" style="max-width:46ch">No hidden extras. You get one fixed price in writing before I start, and these are the starting points.</p>
   </div>
@@ -48,18 +47,21 @@
     <h2 id="builds-h" class="reveal">Website <span class="coop">builds</span></h2>
     <div class="price-grid">
       <article class="price reveal">
+      
       <h3>Starter</h3>
       <p class="amt">£1,195</p>
       <p>A smart, simple site that gets you found and gets you contacted.</p>
-      <ul class="ticks"><li>Up to 5 pages</li><li>Designed for phones first</li><li>WhatsApp or booking button</li><li>Google basics set up</li><li>Privacy policy page</li></ul>
+      <ul class="ticks"><li>Up to 5 pages</li><li>Designed for phones first</li><li>WhatsApp or booking button</li><li>SEO basics set up</li><li>Privacy policy page</li></ul>
     </article>
-      <article class="price feature on-dark reveal">
+      <article class="price feature reveal">
+      <span class="sticker pop">Most popular</span>
       <h3>Standard</h3>
       <p class="amt">£1,795</p>
       <p>More room to show what you do, with one custom feature.</p>
-      <ul class="ticks"><li>Up to 8 pages</li><li>One custom feature, such as a gallery or simple quiz</li><li>Full Google set-up</li><li>Help with your Google Business Profile</li></ul>
+      <ul class="ticks"><li>Up to 8 pages</li><li>One custom feature, such as a gallery or simple quiz</li><li>Full SEO set-up</li><li>Help with your Google Business Profile</li></ul>
     </article>
       <article class="price reveal">
+      
       <h3>Bespoke</h3>
       <p class="amt">from £2,750</p>
       <p>For custom tools, custom animation or a more involved design.</p>
@@ -77,12 +79,14 @@
     <h2 id="care-h" class="reveal">Monthly <span class="coop">plans</span></h2>
     <div class="price-grid two">
       <article class="price reveal">
+      
       <h3>Care</h3>
       <p class="amt">£50 <small>a month</small></p>
       <p>Your site hosted, checked and kept up to date.</p>
       <ul class="ticks"><li>Hosting</li><li>A health check every month</li><li>Renewals and security looked after</li><li>Up to 30 minutes of small changes each month</li></ul>
     </article>
       <article class="price reveal">
+      
       <h3>Growth</h3>
       <p class="amt">£125 <small>a month</small></p>
       <p>Everything in Care, with more time and more help being found.</p>
@@ -109,7 +113,8 @@
 
 <section>
   <div class="wrap">
-    <div class="cta-panel on-dark reveal">
+    <div class="cta-panel reveal">
+      <span class="sticker pop">No pressure</span>
       <h2>Not sure which <span class="coop">fits?</span></h2>
       <p>Send me a message and we'll have a proper conversation. I'd like to get to know your business before I suggest anything.</p>
       <div class="row"><a class="btn hot" href="contact.html">Start a conversation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
@@ -118,10 +123,10 @@
 </section>
 </main>
 <footer class="site-foot">
-  <canvas id="liquid" aria-hidden="true"></canvas>
+  <canvas class="liquid" data-strength="0.42" aria-hidden="true"></canvas>
   <div class="wrap">
-    <a class="foot-logo" href="./" aria-label="Built by Compo, home"><span class="b">Built by</span><span class="c">Compo</span></a>
-    <div class="foot-panel on-dark">
+    <a class="foot-logo" href="./" aria-label="Built by Compo, home">Built by Compo</a>
+    <div class="foot-panel">
       <div>
         <h2>Say hello</h2>
         <ul>
@@ -144,8 +149,7 @@
         </ul>
       </div>
       <div class="foot-small">
-        <p>Built by Compo is the trading name of Luke Compton, sole trader. <mark class="todo">[BUSINESS ADDRESS]</mark>, Essex, England.</p>
-        <p>© 2026 Built by Compo. Designed and built by me, obviously.</p>
+        <p>© 2026 Built by Compo · Essex, England. Designed and built by me, obviously.</p>
       </div>
     </div>
   </div>

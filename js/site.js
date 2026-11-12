@@ -32,7 +32,7 @@
   }
 
   /* ----- Reveal on scroll ----- */
-  var items = document.querySelectorAll(".reveal, .wipe");
+  var items = document.querySelectorAll(".reveal, .wipe, .pop");
   if (!("IntersectionObserver" in window) || reduce) { items.forEach(function (el) { el.classList.add("in"); }); }
   else {
     var io = new IntersectionObserver(function (entries) {
@@ -58,6 +58,42 @@
       });
     }, { passive: true });
   }
+
+  /* ----- Curved ribbon: text travels along the curve ----- */
+  document.querySelectorAll(".arc textPath").forEach(function (tp) {
+    var text = tp.parentNode, unit = 0, off = 0, last = 0, vis = true;
+    function measure() { try { unit = text.getSubStringLength(0, parseInt(tp.dataset.unit, 10)); } catch (e) { unit = 0; } }
+    measure(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    if (reduce) return;
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { vis = en[0].isIntersecting; }).observe(text.ownerSVGElement);
+    function step(t) {
+      var dt = Math.min(50, t - (last || t)); last = t;
+      if (!paused && vis && unit > 0) { off -= dt * 0.07; if (off <= -unit) off += unit; tp.setAttribute("startOffset", (off - unit).toFixed(1)); }
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+
+  /* ----- Big statement: words turn from pale orange to charcoal as you scroll ----- */
+  document.querySelectorAll("[data-fill]").forEach(function (el) {
+    var words = [];
+    Array.prototype.slice.call(el.childNodes).forEach(function (n) {
+      if (n.nodeType !== 3) return;
+      var frag = document.createDocumentFragment();
+      n.textContent.split(/(\s+)/).forEach(function (part) {
+        if (!part.trim()) { frag.appendChild(document.createTextNode(part)); return; }
+        var s = document.createElement("span"); s.className = "w"; s.textContent = part; frag.appendChild(s); words.push(s);
+      });
+      el.replaceChild(frag, n);
+    });
+    function fill() {
+      var r = el.getBoundingClientRect(), vh = window.innerHeight;
+      var p = (vh * 0.85 - r.top) / (r.height + vh * 0.35), n = Math.round(Math.max(0, Math.min(1, p)) * words.length);
+      words.forEach(function (w, i) { w.classList.toggle("on", i < n); });
+    }
+    if (reduce) { words.forEach(function (w) { w.classList.add("on"); }); return; }
+    window.addEventListener("scroll", fill, { passive: true }); window.addEventListener("resize", fill); fill();
+  });
 
   /* ----- Work slider: drifts sideways, can be swiped or dragged ----- */
   document.querySelectorAll(".slider").forEach(function (sl) {
@@ -126,7 +162,7 @@
       e.preventDefault();
       var f = form.first.value.trim(), l = form.last.value.trim(), b = form.business.value.trim();
       if (!f || !l) { out.textContent = "Please add your first and last name."; out.className = "err"; (f ? form.last : form.first).focus(); return; }
-      var msg = "Hi Luke,\n\nI'm " + f + " " + l + (b ? " from " + b : "") + ". I'd like to talk about a website.\n\n";
+      var msg = "Hi Compo,\n\nI'm " + f + " " + l + (b ? " from " + b : "") + ". I'd like to talk about a website.\n\n";
       var url = how() === "whatsapp"
         ? "https://wa.me/" + form.dataset.wa + "?text=" + encodeURIComponent(msg)
         : "mailto:" + form.dataset.email + "?subject=" + encodeURIComponent("Website enquiry" + (b ? ": " + b : "")) + "&body=" + encodeURIComponent(msg);

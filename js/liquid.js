@@ -1,10 +1,8 @@
-/* Built by Compo: flowing "liquid" background for the footer.
+/* Built by Compo: flowing "liquid" background for the hero and footer.
    Red pools with yellow bands winding between them, drawn on the graphics chip (WebGL).
    The yellow is kept soft (STRENGTH) so it reads as a glow, not a stripe.
    If WebGL isn't available the page keeps its plain CSS background. */
-(function () {
-  var canvas = document.getElementById("liquid");
-  if (!canvas) return;
+function bbcLiquid(canvas) {
 
   // Colours as 0-1 RGB. Change these to re-theme the background.
   var PRIMARY = [244 / 255, 41 / 255, 2 / 255];    // #F42902 red orange
@@ -91,7 +89,7 @@
   gl.uniform3fv(gl.getUniformLocation(prog, "u_a"), PRIMARY);
   gl.uniform3fv(gl.getUniformLocation(prog, "u_b"), SECONDARY);
   gl.uniform1f(gl.getUniformLocation(prog, "u_scale"), SCALE);
-  gl.uniform1f(gl.getUniformLocation(prog, "u_k"), STRENGTH);
+  gl.uniform1f(gl.getUniformLocation(prog, "u_k"), parseFloat(canvas.dataset.strength) || STRENGTH);
 
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var speed = reduce ? SPEED * 0.35 : SPEED;
@@ -119,4 +117,5 @@
   }
   requestAnimationFrame(frame);
   canvas.classList.add("on");
-})();
+}
+Array.prototype.forEach.call(document.querySelectorAll("canvas.liquid"), bbcLiquid);
