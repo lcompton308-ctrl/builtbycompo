@@ -325,13 +325,3 @@ fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 10px; }
 .hero-panel { padding-bottom: clamp(190px, 28vw, 360px); min-height: calc(100vh + 120px); min-height: calc(100svh + 120px); }
 .hero-panel::after { content: ""; position: absolute; inset: auto 0 0 0; height: clamp(170px, 26vw, 330px); background: linear-gradient(to top, var(--canvas) 0%, rgba(246, 244, 239, .92) 18%, rgba(246, 244, 239, .6) 45%, rgba(246, 244, 239, .22) 72%, rgba(246, 244, 239, 0) 100%); pointer-events: none; }
 .arc { margin-top: clamp(-40px, -3vw, -10px); }
-
-/* ---------- Header backing options (preview: pick one) ---------- */
-.site-head::before { content: ""; position: absolute; inset: 0 0 -26px 0; z-index: -1; pointer-events: none; opacity: 0; transition: opacity .4s ease; }
-.h-blur .site-head::before { opacity: 1; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); -webkit-mask-image: linear-gradient(#000 55%, transparent); mask-image: linear-gradient(#000 55%, transparent); }
-.h-fade .site-head::before { opacity: 1; background: linear-gradient(var(--canvas) 30%, rgba(246, 244, 239, .8) 60%, rgba(246, 244, 239, 0)); }
-.h-fade .site-head.over-dark::before { opacity: 0; }
-.menu-open .site-head::before { opacity: 0; }
-.pv-switch { position: fixed; z-index: 90; left: 50%; bottom: max(12px, env(safe-area-inset-bottom, 0px)); translate: -50% 0; display: flex; gap: 4px; padding: 5px; border-radius: 999px; background: var(--ink); font: 700 .8rem/1 var(--f-body); white-space: nowrap; }
-.pv-switch button { font: inherit; color: var(--canvas); background: none; border: 0; border-radius: 999px; padding: 10px 12px; cursor: pointer; }
-.pv-switch button[aria-pressed="true"] { background: var(--canvas); color: var(--ink); }

@@ -509,7 +509,6 @@ def page(name, p, preview=False):
   </div>
   <a class="foot-logo" href="{home}" aria-label="Built by Compo, home">Built by <b>Compo</b></a>
 </footer>
-{'<div class="pv-switch" role="group" aria-label="Preview: header backing"><button type="button" data-h="" aria-pressed="false">No backing</button><button type="button" data-h="h-blur" aria-pressed="true">Soft blur</button><button type="button" data-h="h-fade" aria-pressed="false">Fade strip</button></div><script>document.documentElement.classList.add("h-blur")</script>' if preview else ''}
 <script src="js/site.js{v}"></script>
 <script src="js/liquid.js{v}"></script>'''
     if name == "404.html" and not preview: head = '<base href="/">\n' + head

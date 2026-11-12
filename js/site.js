@@ -212,12 +212,4 @@
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, function () {});
     });
   });
-
-  /* ----- Preview only: switch between header backings ----- */
-  var sw = document.querySelector(".pv-switch");
-  if (sw) sw.addEventListener("click", function (e) {
-    var b = e.target.closest("button"); if (!b) return;
-    root.classList.remove("h-blur", "h-fade"); if (b.dataset.h) root.classList.add(b.dataset.h);
-    sw.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
-  });
 })();
