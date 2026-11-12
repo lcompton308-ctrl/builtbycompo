@@ -364,7 +364,7 @@ def legal(h1, inner):
 <section class="page-hero"><div class="wrap narrow"><h1 style="font-size:clamp(2.2rem,7vw,4.5rem)">{h1}</h1><p class="muted">Last updated: 12 November {YEAR}</p></div></section>
 <section style="padding-top:0"><div class="wrap narrow legal">{inner}</div></section>'''
 
-WHO = f'Built by Compo is the trading name of Luke Compton, a sole trader based in Essex, England. Business address: {TODO("BUSINESS ADDRESS")}. Email: <a href="mailto:{EMAIL}">{EMAIL}</a>.'
+WHO = f'Built by Compo is the trading name of Luke Compton, a sole trader based in Essex, England. Email: <a href="mailto:{EMAIL}">{EMAIL}</a>.'
 
 PAGES["privacy.html"] = dict(title="Privacy policy · Built by Compo", desc="How Built by Compo collects, uses and protects your personal information.", body=legal("Privacy policy", f'''
 <h2>Who I am</h2>
@@ -441,8 +441,8 @@ PAGES["refunds.html"] = dict(title="Refund policy · Built by Compo", desc="How 
 <h2>Website builds</h2>
 <ul>
 <li>You pay half to start and half when your site is ready to go live.</li>
-<li><b>Deposit:</b> {TODO("TO DECIDE: for example, refundable in full until the agreed start date, and not refundable once work has started")}</li>
-<li>If you cancel part-way through, you pay for the work done up to that point. If that's less than you've already paid, I refund the difference.</li>
+<li><b>Deposit:</b> the deposit books your place in my diary and is non-refundable once paid.</li>
+<li>If you cancel part-way through, I keep the deposit. If the work done by then is worth more than the deposit, you pay the difference.</li>
 <li>The final payment isn't refundable once your site has gone live.</li>
 </ul>
 <h2>If something isn't right</h2>
