@@ -30,6 +30,10 @@
           var fr = els[i].getBoundingClientRect(), fade = parseFloat(getComputedStyle(els[i], "::before").height) || 0;
           if (y - fr.top < fade * 0.5) return [246, 244, 239];
         }
+        if (els[i].classList.contains("hero-panel")) {  // and the bottom of the hero is fading out
+          var hr = els[i].getBoundingClientRect(), hf = parseFloat(getComputedStyle(els[i], "::after").height) || 0;
+          if (hr.bottom - y < hf * 0.5) return [246, 244, 239];
+        }
         var m = getComputedStyle(els[i]).backgroundColor.match(/[\d.]+/g);
         if (m && (m.length < 4 || parseFloat(m[3]) > 0.5)) return [+m[0], +m[1], +m[2]];
       }
@@ -42,6 +46,7 @@
         var c = behind(r.left + Math.min(r.width / 2, 60), r.top + r.height / 2), L = lum(c[0], c[1], c[2]);
         el.classList.toggle("is-white", (1.05) / (L + 0.05) > 2.4 && c[0] > c[2] + 60 && L < 0.5);
       });
+      var lg = head.querySelector(".logo"); head.classList.toggle("over-dark", !!lg && lg.classList.contains("is-white"));
     };
     window.addEventListener("scroll", function () { if (!headTick) { headTick = true; requestAnimationFrame(headCheck); } }, { passive: true });
     window.addEventListener("resize", headCheck); headCheck(); setTimeout(headCheck, 2400);
@@ -206,5 +211,13 @@
       var t = b.dataset.copy, done = function () { var o = b.textContent; b.textContent = "Copied"; setTimeout(function () { b.textContent = o; }, 1600); };
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, function () {});
     });
+  });
+
+  /* ----- Preview only: switch between header backings ----- */
+  var sw = document.querySelector(".pv-switch");
+  if (sw) sw.addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    root.classList.remove("h-blur", "h-fade"); if (b.dataset.h) root.classList.add(b.dataset.h);
+    sw.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
   });
 })();
