@@ -1,5 +1,5 @@
 /* Built by Compo: small behaviours. No tracking, no cookies.
-   The only thing saved in the browser is the "pause animations" choice. */
+   Nothing is saved in the browser. */
 (function () {
   var root = document.documentElement;
   root.classList.remove("no-js"); root.classList.add("js");
@@ -7,16 +7,14 @@
 
   /* ----- Pause / play all movement ----- */
   var paused = reduce;
-  try { if (localStorage.getItem("bbc-motion") === "off") paused = true; } catch (e) {}
-  var motionBtn = document.querySelector(".motion-btn");
+  var motionBtn = document.querySelector(".motion-link");
   function setPaused(p) {
     paused = p; root.classList.toggle("paused", p); window.BBC_PAUSED = p;
-    if (motionBtn) { motionBtn.setAttribute("aria-pressed", String(p)); motionBtn.setAttribute("aria-label", p ? "Play animations" : "Pause animations"); }
+    if (motionBtn) { motionBtn.setAttribute("aria-pressed", String(p)); motionBtn.textContent = p ? "Play animations" : "Pause animations"; }
   }
   setPaused(paused);
   if (motionBtn) motionBtn.addEventListener("click", function () {
     setPaused(!paused);
-    try { localStorage.setItem("bbc-motion", paused ? "off" : "on"); } catch (e) {}
   });
 
   /* ----- Mobile menu ----- */

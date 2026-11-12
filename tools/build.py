@@ -36,8 +36,8 @@ SEAL = '''<svg class="{cls}" viewBox="0 0 200 200" role="img" aria-label="Built 
   <defs><path id="sealpath-{id}" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
   <circle cx="100" cy="100" r="97" fill="none" stroke="currentColor" stroke-width="3"/>
   <circle cx="100" cy="100" r="54" fill="none" stroke="currentColor" stroke-width="2"/>
-  <text font-family="Outfit,'Century Gothic',sans-serif" font-weight="600" font-size="15.5" fill="currentColor"><textPath href="#sealpath-{id}" startOffset="0" textLength="458" lengthAdjust="spacing">BESPOKE WEBSITES ✦ ESSEX, ENGLAND ✦ EST. 2026 ✦</textPath></text>
-  <text x="100" y="129" text-anchor="middle" font-family="Outfit,'Century Gothic',sans-serif" font-weight="700" font-size="84" fill="currentColor">C</text>
+  <text font-family="Nunito,'Century Gothic',sans-serif" font-weight="800" font-size="17" fill="currentColor"><textPath href="#sealpath-{id}" startOffset="0" textLength="458" lengthAdjust="spacing">BESPOKE WEBSITES ✦ ESSEX, ENGLAND ✦</textPath></text>
+  <text x="100" y="100" dy=".355em" text-anchor="middle" font-family="Nunito,'Century Gothic',sans-serif" font-weight="900" font-size="78" fill="currentColor">C</text>
 </svg>'''
 
 def cta_panel(heading='Tell me about <span class="coop">your project</span>'):
@@ -125,24 +125,13 @@ PAGES["index.html"] = dict(
     <div style="display:grid;gap:14px;justify-items:center;text-align:center">
       <h2 id="say-h" class="reveal">Apparently, they <span class="coop">like it</span></h2>
     </div>
-    <ul class="deck reveal">
+    <ul class="deck solo reveal">
       <li>
         <div class="quote-mark" aria-hidden="true">“</div>
-        <blockquote>{TODO("Tanya's testimonial goes here, in her own words")}</blockquote>
-        <div class="who"><span class="av" aria-hidden="true">T</span><span><b>Tanya Hill</b><span>Tanya Hill Coaching</span></span></div>
-      </li>
-      <li>
-        <div class="quote-mark" aria-hidden="true">“</div>
-        <blockquote>{TODO("Second testimonial, coming soon")}</blockquote>
-        <div class="who"><span class="av" aria-hidden="true">?</span><span><b>{TODO("Name")}</b><span>{TODO("Business")}</span></span></div>
-      </li>
-      <li>
-        <div class="quote-mark" aria-hidden="true">“</div>
-        <blockquote>{TODO("Third testimonial, coming soon")}</blockquote>
-        <div class="who"><span class="av" aria-hidden="true">?</span><span><b>{TODO("Name")}</b><span>{TODO("Business")}</span></span></div>
+        <blockquote>Built by Compo was amazing and gave me a website that helped my business grow and looks great.</blockquote>
+        <div class="who"><img class="av" src="img/tanya-hill.jpg" width="96" height="96" loading="lazy" alt="Tanya Hill"><span><b>Tanya Hill</b><span>Tanya Hill Coaching</span></span></div>
       </li>
     </ul>
-    <div class="row"><button class="btn ghost deck-next" type="button">Next card {ARROW}</button><span class="deck-count muted" aria-live="polite"></span></div>
   </div>
 </section>
 
@@ -166,7 +155,7 @@ PAGES["about.html"] = dict(
     </div>
     <div class="about-copy">
       <h2 class="reveal" style="font-size:clamp(1.6rem,4vw,2.6rem)">A small studio based in Essex, England</h2>
-      <p class="reveal">Built by Compo is me, a laptop and a lot of tea. Compo has been my nickname for years, and it stuck.</p>
+      <p class="reveal">Built by Compo is me, a laptop and a lot of coffee. Compo has been my nickname for years, and it stuck.</p>
       <p class="reveal">I make websites for small businesses that want something better than a template. I design each one from scratch, build it by hand and set it up to be found on Google. Then I host it and look after it, so you never have to log in to anything.</p>
       <p class="reveal">I like things that are simple, quick and a bit different. I'll tell you plainly what I think will work, and I'll always give you a fixed price before I start.</p>
       <p class="reveal">When I'm not building websites, I'm usually out walking Lemon, my chihuahua. She's in charge of morale.</p>
@@ -213,23 +202,18 @@ PAGES["what-i-do.html"] = dict(
   </div>
 </section>
 
-{ribbon_solo(["Websites that work", "Bespoke builds"], "a", "-0.3")}
 <section style="padding-block:0"><div class="wrap">
     {svc('Website <span class="coop">design</span>', "Every site starts as a blank page, not a template. I design it around your business and your customers.", ["Designed for phones first, then tablets and laptops", "Your colours, your photos and your way of talking", "Clear buttons that lead to a call, a message or a booking"], 1)}
 </div></section>
-{ribbon_solo(["Built by hand", "Fast to load"], "b", "0.3")}
 <section style="padding-block:0"><div class="wrap">
     {svc('Website <span class="coop">build</span>', "I build your site by hand, so it's quick, tidy and only carries what it needs.", ["Fast pages, tested on real phones", "Built to be easy to read and use for everyone", "Simple animations included, like the ones on this site", "Your domain connected for you"], 2)}
 </div></section>
-{ribbon_solo(["Quizzes", "Galleries", "Booking buttons", "Something new"], "ink", "-0.3")}
 <section style="padding-block:0"><div class="wrap">
     {svc('Custom <span class="coop">features</span>', "Sometimes a site needs to do more than show information. I can build tools that are made just for you.", ["Quizzes with personal results, like the one on tanyahill.co.uk", "Photo galleries, booking helpers and enquiry buttons", "Custom animation and illustration as extras"], 3)}
 </div></section>
-{ribbon_solo(["Found on Google", "SEO set-up"], "a", "0.3")}
 <section style="padding-block:0"><div class="wrap">
     {svc('SEO <span class="coop">set-up</span>', "SEO is short for search engine optimisation. It's the behind-the-scenes work that helps Google understand your site and show it to people searching for what you do.", ["Page titles and descriptions written the way people search", "Your site registered with Google, so new pages get picked up", "Fast, tidy pages, which Google rewards", "Help with your Google Business Profile, so you show up on Maps", "A proper preview image when your link is shared"], 4)}
 </div></section>
-{ribbon_solo(["Hosting", "Health checks", "Changes made for you"], "b", "-0.3")}
 <section style="padding-block:0"><div class="wrap">
     {svc('Hosting and <span class="coop">care</span>', "Once you're live, I keep things running. You send me changes by WhatsApp or email and I make them.", ["Hosting included in every care plan", "A health check every month", "Small changes made for you, with no logging in", "You own your domain, your accounts and your finished site"], 5)}
 </div></section>
@@ -508,7 +492,7 @@ def page(name, p, preview=False):
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<link rel="preload" href="fonts/outfit.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="fonts/nunito.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="css/site.css">
 {f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>' if ld else ""}'''
     body = f'''<a class="skip" href="#main">Skip to content</a>
@@ -530,7 +514,6 @@ def page(name, p, preview=False):
         <ul>
           <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
           <li><a href="https://wa.me/{WA}" rel="noopener">Message me on WhatsApp</a></li>
-          <li>{TODO("Facebook link")} {TODO("Instagram link")}</li>
         </ul>
       </div>
       <div>
@@ -548,6 +531,7 @@ def page(name, p, preview=False):
       </div>
       <div class="foot-small">
         <p>© {YEAR} Built by Compo · Essex, England. Designed and built by me, obviously.</p>
+        <p><button class="motion-link" type="button" aria-pressed="false">Pause animations</button></p>
       </div>
     </div>
   </div>
