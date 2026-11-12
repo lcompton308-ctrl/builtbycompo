@@ -69,7 +69,7 @@ PAGES["index.html"] = dict(
         </svg>
       </div>
       <h1 class="hero-say" aria-label="I'm Compo, a small studio that creates bespoke websites for small businesses.">
-        <span aria-hidden="true">I'm Compo, a small studio that <span class="swap" data-words="creates|builds|designs|hosts|maintains"><span class="swap-w">creates</span></span> bespoke websites for <span class="swap" data-words="small businesses|you|your business"><span class="swap-w">small businesses</span></span>.</span>
+        <span aria-hidden="true"><span class="ln">I'm Compo, a small studio that</span><span class="ln"><span class="swap" data-words="creates|builds|designs|hosts|maintains"><span class="swap-w">creates</span></span></span><span class="ln">bespoke websites for</span><span class="ln"><span class="swap" data-words="small businesses|you|your business"><span class="swap-w">small businesses</span></span></span></span>
       </h1>
     </div>
 </section>
@@ -165,7 +165,7 @@ PAGES["about.html"] = dict(
     </div>
     <div class="reveal" style="display:grid;gap:14px;justify-items:center">
       <p class="display" style="font-size:clamp(1.6rem,4vw,2.4rem);color:var(--orange-text)">Websites that work</p>
-      {SEAL.format(cls="about-seal", id="a")}
+      <p class="logo-text">Built by <b>Compo</b></p>
     </div>
   </div>
 </section>
