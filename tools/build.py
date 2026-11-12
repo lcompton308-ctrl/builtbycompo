@@ -36,8 +36,8 @@ SEAL = '''<svg class="{cls}" viewBox="0 0 200 200" role="img" aria-label="Built 
   <defs><path id="sealpath-{id}" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
   <circle cx="100" cy="100" r="97" fill="none" stroke="currentColor" stroke-width="3"/>
   <circle cx="100" cy="100" r="54" fill="none" stroke="currentColor" stroke-width="2"/>
-  <text font-family="Nunito,'Century Gothic',sans-serif" font-weight="800" font-size="13.5" fill="currentColor"><textPath href="#sealpath-{id}" startOffset="0" textLength="463" lengthAdjust="spacing">BUILT BY COMPO ✦ BESPOKE WEBSITES ✦ ESSEX, ENGLAND ✦ </textPath></text>
-  <text x="100" y="100" dy=".355em" text-anchor="middle" font-family="Nunito,'Century Gothic',sans-serif" font-weight="900" font-size="78" fill="currentColor">C</text>
+  <text font-family="Roboto,Arial,sans-serif" font-weight="800" font-size="13.5" fill="currentColor"><textPath href="#sealpath-{id}" startOffset="0" textLength="463" lengthAdjust="spacing">BUILT BY COMPO ✦ BESPOKE WEBSITES ✦ ESSEX, ENGLAND ✦ </textPath></text>
+  <text x="100" y="100" dy=".355em" text-anchor="middle" font-family="'Luckiest Guy',Impact,sans-serif" font-weight="400" font-size="78" fill="currentColor">C</text>
 </svg>'''
 
 def cta_panel(heading='Tell me about <span class="coop">your project</span>'):
@@ -481,7 +481,7 @@ def page(name, p, preview=False):
 <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<link rel="preload" href="fonts/nunito.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="fonts/roboto.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="css/site.css{v}">
 <script>(function(){{try{{var r=document.referrer,same=r&&new URL(r).host===location.host;if(!same&&!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches))document.documentElement.classList.add("intro")}}catch(e){{}}}})()</script>
 {f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>' if ld else ""}'''
