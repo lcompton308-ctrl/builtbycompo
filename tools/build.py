@@ -482,10 +482,10 @@ def page(name, p, preview=False):
 <meta property="og:title" content="{html.escape(p["title"])}">
 <meta property="og:description" content="{html.escape(p["desc"])}">
 <meta property="og:url" content="{canon}">
-<meta property="og:image" content="{SITE}/img/og-3.jpg">
+<meta property="og:image" content="{SITE}/img/og-4.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Built by Compo. Websites that work.">
+<meta property="og:image:alt" content="Built by Compo. Bespoke websites for small businesses.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
