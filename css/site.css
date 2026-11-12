@@ -334,4 +334,4 @@ h1, .coop, .foot-talk h2 b, .logo b, .foot-logo b, .intro-cover b, .card-work.yo
 h1 { line-height: .98; letter-spacing: -.025em; }
 .hero h1 { line-height: .94; }
 .price .amt { letter-spacing: -.01em; }
-.arc text { font-family: var(--f-accent); letter-spacing: 0; }
+.arc text { font-family: var(--f-display); font-weight: 900; letter-spacing: -.01em; }
