@@ -17,18 +17,30 @@
     setPaused(!paused);
   });
 
-  /* ----- Header colours: white over the red areas, pills everywhere else ----- */
-  var head = document.querySelector(".site-head"), reds = document.querySelectorAll(".hero-panel, .site-foot");
-  if (head) {
-    var headTick = false;
+  /* ----- Header colours: the logo and menu look at what is behind them and turn white over red or orange ----- */
+  var head = document.querySelector(".site-head");
+  if (head && document.elementsFromPoint) {
+    var watch = head.querySelectorAll(".logo, .menu-btn, .nav > .btn"), headTick = false;
+    var lum = function (r, g, b) { var f = function (v) { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
+    var behind = function (x, y) {
+      var els = document.elementsFromPoint(x, y);
+      for (var i = 0; i < els.length; i++) {
+        if (head.contains(els[i]) || els[i].classList.contains("intro-cover")) continue;
+        var m = getComputedStyle(els[i]).backgroundColor.match(/[\d.]+/g);
+        if (m && (m.length < 4 || parseFloat(m[3]) > 0.5)) return [+m[0], +m[1], +m[2]];
+      }
+      return [246, 244, 239];
+    };
     var headCheck = function () {
       headTick = false;
-      var y = head.offsetHeight / 2, on = false;
-      reds.forEach(function (r) { var b = r.getBoundingClientRect(); if (b.top <= y && b.bottom >= y) on = true; });
-      head.classList.toggle("on-red", on);
+      watch.forEach(function (el) {
+        var r = el.getBoundingClientRect(); if (!r.width) return;
+        var c = behind(r.left + Math.min(r.width / 2, 60), r.top + r.height / 2), L = lum(c[0], c[1], c[2]);
+        el.classList.toggle("is-white", (1.05) / (L + 0.05) > 2.4 && c[0] > c[2] + 60 && L < 0.5);
+      });
     };
     window.addEventListener("scroll", function () { if (!headTick) { headTick = true; requestAnimationFrame(headCheck); } }, { passive: true });
-    window.addEventListener("resize", headCheck); headCheck();
+    window.addEventListener("resize", headCheck); headCheck(); setTimeout(headCheck, 2400);
   }
 
   /* ----- Mobile menu ----- */

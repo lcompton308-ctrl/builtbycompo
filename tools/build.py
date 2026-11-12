@@ -135,7 +135,6 @@ PAGES["index.html"] = dict(
   </div>
 </section>
 
-{cta_panel()}
 ''')
 
 PAGES["about.html"] = dict(
@@ -178,7 +177,6 @@ PAGES["about.html"] = dict(
   </div>
 </section>
 
-{cta_panel('Fancy a <span class="coop">chat?</span>')}
 ''')
 
 def svc(h, lead, ticks, i):
@@ -215,7 +213,6 @@ PAGES["what-i-do.html"] = dict(
     {svc('Hosting and <span class="coop">care</span>', "Once you're live, I keep things running. You send me changes by WhatsApp or email and I make them.", ["Hosting included in every care plan", "A health check every month", "Small changes made for you, with no logging in", "You own your domain, your accounts and your finished site"], 5)}
 </div></section>
 
-{cta_panel('Got something <span class="coop">in mind?</span>')}
 ''')
 
 def price(name, amt, per, blurb, ticks, feature=False):
@@ -279,7 +276,6 @@ PAGES["pricing.html"] = dict(
   </div>
 </section>
 
-{cta_panel('Not sure which <span class="coop">fits?</span>')}
 ''')
 
 PAGES["contact.html"] = dict(
@@ -355,7 +351,6 @@ PAGES["faqs.html"] = dict(
     </div>
   </div>
 </section>
-{cta_panel('Something <span class="coop">else?</span>')}
 ''')
 
 DRAFT = '<p class="draft"><b>Draft.</b> Highlighted parts still need your decision, and this page should be checked by a solicitor or a fixed-fee legal service before you rely on it.</p>'
@@ -492,10 +487,10 @@ def page(name, p, preview=False):
 {f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>' if ld else ""}'''
     body = f'''<a class="skip" href="#main">Skip to content</a>
 <div class="intro-cover" aria-hidden="true"><span>Built by <b>Compo</b></span></div>
-<header class="site-head{" on-red" if name == "index.html" else ""}">
+<header class="site-head">
   <div class="wrap">
-    <a class="logo" href="{home}" aria-label="Built by Compo, home">Built by <b>Compo</b></a>
-    <button class="btn menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <a class="logo{" is-white" if name == "index.html" else ""}" href="{home}" aria-label="Built by Compo, home">Built by <b>Compo</b></a>
+    <button class="btn menu-btn{" is-white" if name == "index.html" else ""}" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main"><canvas class="liquid" data-strength="0.3" aria-hidden="true"></canvas>{nav}<a class="btn" href="contact.html"{cur("contact.html")}>Let's talk</a></nav>
   </div>
 </header>
@@ -503,13 +498,16 @@ def page(name, p, preview=False):
 <footer class="site-foot">
   <canvas class="liquid" data-strength="0.3" aria-hidden="true"></canvas>
   <div class="wrap">
-    <p class="foot-contact"><a href="mailto:{EMAIL}">{EMAIL}</a><a href="https://wa.me/{WA}" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a></p>
-    <a class="foot-logo" href="{home}" aria-label="Built by Compo, home">Built by <b>Compo</b></a>
-    <div class="foot-rows">
-      <span>© {YEAR} Built by Compo</span>
-      <span class="foot-links"><a href="privacy.html">Privacy policy</a><button class="motion-link" type="button" aria-pressed="false">Pause animations</button></span>
+    <div class="foot-talk">
+      <h2>Tell me about <b>your project.</b></h2>
+      <p>Send me a message and we'll have a proper conversation. I reply within one working day.</p>
+      <a class="foot-btn solid" href="contact.html">Let's talk</a>
+      <a class="foot-btn" href="mailto:{EMAIL}">{EMAIL} <span aria-hidden="true">↗</span></a>
+      <a class="foot-btn" href="https://wa.me/{WA}" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a>
     </div>
+    <p class="foot-small"><span>© {YEAR} Built by Compo</span><a href="privacy.html">Privacy policy</a><button class="motion-link" type="button" aria-pressed="false">Pause animations</button></p>
   </div>
+  <a class="foot-logo" href="{home}" aria-label="Built by Compo, home">Built by <b>Compo</b></a>
 </footer>
 <script src="js/site.js{v}"></script>
 <script src="js/liquid.js{v}"></script>'''
