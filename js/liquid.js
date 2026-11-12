@@ -1,6 +1,6 @@
-/* Built by Compo: flowing "liquid" background.
+/* Built by Compo: flowing "liquid" background for the footer.
    Red pools with yellow bands winding between them, drawn on the graphics chip (WebGL).
-   Calmer in the middle of the screen so the text stays readable.
+   The yellow is kept soft (STRENGTH) so it reads as a glow, not a stripe.
    If WebGL isn't available the page keeps its plain CSS background. */
 (function () {
   var canvas = document.getElementById("liquid");
@@ -11,6 +11,7 @@
   var SECONDARY = [200 / 255, 253 / 255, 2 / 255]; // #C8FD02 yellow
   var SPEED = 0.16;          // how fast the pattern flows
   var SCALE = 1.3;           // bigger number = smaller pools
+  var STRENGTH = 0.42;        // how strong the yellow is (0 to 1)
   var RESOLUTION = 0.5;      // draws at half size and lets the browser smooth it (saves battery)
 
   var gl = canvas.getContext("webgl", { antialias: false, alpha: false, premultipliedAlpha: false, powerPreference: "low-power" });
@@ -23,7 +24,7 @@
     "#else",
     "precision mediump float;",
     "#endif",
-    "uniform vec2 u_res; uniform float u_t; uniform vec3 u_a; uniform vec3 u_b; uniform float u_scale; uniform float u_px;",
+    "uniform vec2 u_res; uniform float u_t; uniform vec3 u_a; uniform vec3 u_b; uniform float u_scale; uniform float u_k;",
     // 3D simplex noise by Ian McEwan and Stefan Gustavson (MIT licence)
     "vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}",
     "vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}",
@@ -57,13 +58,7 @@
     " float v=snoise(vec3(p+w*0.6,t));",
     // bands of the second colour along the noise contours, like the reference video
     " float band=1.0-smoothstep(0.0,0.46,abs(v));",
-    // calm zone behind the text so the yellow wording stays readable
-    " vec2 c=(gl_FragCoord.xy-0.5*u_res)/s; c.y+=0.02;",
-    " float calm=smoothstep(0.16,0.62,length(c*vec2(0.95,1.5)));",
-    " vec2 q=(gl_FragCoord.xy-vec2(u_res.x,0.0))/u_px;",
-    // and calm in the bottom-right corner behind the email address
-    " float calmE=smoothstep(0.6,1.25,length(q/vec2(250.0,85.0)));",
-    " float k=band*mix(0.25,0.85,calm)*mix(0.12,1.0,calmE);",
+    " float k=band*u_k;",
     " vec3 col=mix(u_a,u_b,k);",
     " col*=1.0-0.10*smoothstep(0.45,0.95,abs(v));",
     " gl_FragColor=vec4(col,1.0);",
@@ -96,7 +91,7 @@
   gl.uniform3fv(gl.getUniformLocation(prog, "u_a"), PRIMARY);
   gl.uniform3fv(gl.getUniformLocation(prog, "u_b"), SECONDARY);
   gl.uniform1f(gl.getUniformLocation(prog, "u_scale"), SCALE);
-  gl.uniform1f(gl.getUniformLocation(prog, "u_px"), RESOLUTION);
+  gl.uniform1f(gl.getUniformLocation(prog, "u_k"), STRENGTH);
 
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var speed = reduce ? SPEED * 0.35 : SPEED;
@@ -110,11 +105,16 @@
   window.addEventListener("resize", resize);
   resize();
 
-  var start = performance.now(), offset = Math.random() * 50;
+  // Only draw while the footer is on screen and animations aren't paused
+  var visible = false, t = Math.random() * 50, last = 0, drawn = false;
+  if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(canvas);
+  else visible = true;
   function frame(now) {
-    resize();
-    gl.uniform1f(uT, offset + (now - start) / 1000 * speed);
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
+    var dt = Math.min(0.1, (now - (last || now)) / 1000); last = now;
+    if (visible && (!window.BBC_PAUSED || !drawn)) {
+      if (!window.BBC_PAUSED) t += dt * speed;
+      resize(); gl.uniform1f(uT, t); gl.drawArrays(gl.TRIANGLES, 0, 6); drawn = true;
+    }
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);

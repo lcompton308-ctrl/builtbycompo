@@ -1,111 +1,195 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-GB" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Built by Compo · Website design in Essex</title>
-<meta name="description" content="Built by Compo: bespoke, phone-first websites for small businesses in Essex, designed and built by Luke Compton. Full website coming soon.">
-<meta name="theme-color" content="#f42902">
+<meta name="description" content="Bespoke websites for small businesses, designed, built and looked after by Luke Compton. A small web studio based in Essex, England.">
 <link rel="canonical" href="https://builtbycompo.co.uk/">
-<!-- Link previews (WhatsApp, LinkedIn, Facebook, iMessage) -->
+<meta name="theme-color" content="#f6f4ef">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Built by Compo">
-<meta property="og:title" content="Built by Compo">
-<meta property="og:description" content="Bespoke, phone-first websites for small businesses in Essex. Full website coming soon.">
+<meta property="og:title" content="Built by Compo · Website design in Essex">
+<meta property="og:description" content="Bespoke websites for small businesses, designed, built and looked after by Luke Compton. A small web studio based in Essex, England.">
 <meta property="og:url" content="https://builtbycompo.co.uk/">
 <meta property="og:image" content="https://builtbycompo.co.uk/img/og.jpg">
-<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Built by Compo: website under construction">
-<meta property="og:locale" content="en_GB">
+<meta property="og:image:alt" content="Built by Compo">
 <meta name="twitter:card" content="summary_large_image">
-<!-- Browser tab and home-screen icons -->
-<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<!-- Business details for Google -->
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Built by Compo","url":"https://builtbycompo.co.uk/","email":"luke@builtbycompo.co.uk","founder":{"@type":"Person","name":"Luke Compton"},"areaServed":{"@type":"AdministrativeArea","name":"Essex"},"description":"Bespoke, phone-first websites for small businesses in Essex."}</script>
-<link rel="preload" href="fonts/cooper-standin.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="fonts/avant-garde-standin.woff" as="font" type="font/woff" crossorigin>
-<script>document.documentElement.classList.add("js");</script>
-<style>
-/* Temporary holding page (6 Nov 2026). Colours and fonts are placeholders. */
-@font-face { font-family: "Avant Garde Stand-in"; src: url("fonts/avant-garde-standin.woff") format("woff"); font-weight: 700; font-display: swap; }
-@font-face { font-family: "Cooper Stand-in"; src: url("fonts/cooper-standin.woff") format("woff"); font-weight: 900; font-display: swap; }
-:root {
-  --main: #f42902;        /* Red Orange */
-  --main-deep: #c81f00;
-  --main-light: #ff4a14;
-  --secondary: #fdfdff;   /* Snowy White */
-  --accent: #c8fd02;      /* Yellow Punk */
-  --f-gothic: "Avant Garde Stand-in", "Century Gothic", "Segoe UI", sans-serif;
-  --f-cooper: "Cooper Stand-in", "Cooper Black", Georgia, serif;
-}
-* { box-sizing: border-box; }
-html, body { height: 100%; }
-body { margin: 0; overflow: hidden; color: var(--secondary); background: var(--main); -webkit-font-smoothing: antialiased; }
-
-/* Flowing liquid background (drawn by liquid.js). Plain red shows until it starts, or if a phone can't run it. */
-#liquid { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; opacity: 0; transition: opacity .8s ease; }
-#liquid.on { opacity: 1; }
-
-main {
-  position: relative; z-index: 1; height: 100%;
-  display: grid; place-items: center; text-align: center;
-  padding-left: max(24px, env(safe-area-inset-left)); padding-right: max(24px, env(safe-area-inset-right));
-}
-h1 { margin: 0; display: grid; justify-items: center; line-height: .82; font-weight: normal; }
-.built { font-family: var(--f-gothic); font-weight: 700; font-size: clamp(2.2rem, .6rem + 8vw, 5.2rem); letter-spacing: -.035em; }
-.compo { font-family: var(--f-cooper); font-weight: 900; font-size: clamp(5.4rem, 1rem + 22vw, 13.5rem); letter-spacing: -.03em; margin-top: -.02em; padding-bottom: .2em; }
-.status { margin: 0; font-family: var(--f-gothic); font-weight: 700; font-size: clamp(1.05rem, .9rem + .7vw, 1.6rem); letter-spacing: -.02em; color: var(--accent); }
-
-.email {
-  position: fixed; z-index: 1;
-  right: max(24px, calc(env(safe-area-inset-right) + 24px));
-  bottom: max(22px, calc(env(safe-area-inset-bottom) + 22px));
-  font-family: var(--f-gothic); font-weight: 700; font-size: clamp(.85rem, .78rem + .25vw, 1rem); letter-spacing: -.01em;
-  color: var(--secondary); text-decoration: none; padding: 10px 0; transition: color .2s ease;
-}
-.email:hover { color: var(--accent); }
-.email:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 3px; }
-
-/* Brand reveal (option 5, Wipe): each line is uncovered left to right once the fonts are ready.
-   Without JavaScript everything simply shows. */
-.js .built, .js .compo { clip-path: inset(-30% 100% -40% -10%); }
-.js .status, .js .email { opacity: 0; }
-.js.go .built { animation: wipe .8s cubic-bezier(.65, 0, .35, 1) .1s both; }
-.js.go .compo { animation: wipe 1s cubic-bezier(.65, 0, .35, 1) .35s both; }
-.js.go .status { animation: fadeUp .7s cubic-bezier(.2, .7, .2, 1) 1s both; }
-.js.go .email { animation: fadeIn .8s ease 1.25s both; }
-@keyframes wipe { from { clip-path: inset(-30% 100% -40% -10%); } to { clip-path: inset(-30% -10% -40% -10%); } }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-/* Phones set to reduce motion get a quick fade instead */
-@media (prefers-reduced-motion: reduce) {
-  .js .built, .js .compo { clip-path: none; opacity: 0; }
-  .js.go .built, .js.go .compo, .js.go .status, .js.go .email { animation: fadeIn .5s ease .1s both; transform: none; }
-}
-</style>
+<link rel="stylesheet" href="css/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfessionalService", "name": "Built by Compo", "url": "https://builtbycompo.co.uk/", "email": "luke@builtbycompo.co.uk", "founder": {"@type": "Person", "name": "Luke Compton"}, "areaServed": "GB", "address": {"@type": "PostalAddress", "addressRegion": "Essex", "addressCountry": "GB"}, "description": "Bespoke websites for small businesses, designed, built and looked after by Luke Compton."}</script>
 </head>
 <body>
-<canvas id="liquid" aria-hidden="true"></canvas>
-<main>
-  <div>
-    <h1><span class="built">Built by</span><span class="compo">Compo</span></h1>
-    <p class="status">Website under construction</p>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="./" aria-label="Built by Compo, home"><span class="b">Built by</span><span class="c">Compo</span></a>
+    <button class="btn menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main"><a href="about.html">About me</a><a href="what-i-do.html">What I do</a><a href="pricing.html">Pricing</a><a href="faqs.html">FAQs</a><a class="btn" href="contact.html">Let's talk</a></nav>
   </div>
+</header>
+<main id="main">
+<section class="hero">
+  <div class="wrap">
+    <div class="seal-wrap"><svg class="seal" viewBox="0 0 200 200" role="img" aria-label="Built by Compo seal: bespoke websites, Essex, England">
+  <defs><path id="sealpath-h" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
+  <circle cx="100" cy="100" r="97" fill="none" stroke="currentColor" stroke-width="3"/>
+  <circle cx="100" cy="100" r="54" fill="none" stroke="currentColor" stroke-width="2"/>
+  <text font-family="'Avant Garde Stand-in','Century Gothic',sans-serif" font-weight="700" font-size="15" fill="currentColor"><textPath href="#sealpath-h" startOffset="0" textLength="458" lengthAdjust="spacing">BESPOKE WEBSITES ✦ ESSEX, ENGLAND ✦ EST. 2026 ✦</textPath></text>
+  <text x="100" y="128" text-anchor="middle" font-family="'Cooper Stand-in','Cooper Black',Georgia,serif" font-weight="900" font-size="84" fill="#c82828">C</text>
+</svg></div>
+    <p class="eyebrow reveal">Small web studio · Essex, England</p>
+    <h1 class="wipe">Websites<br>that <span class="coop">work.</span></h1>
+    <div class="hero-foot">
+      <p class="lede reveal" style="--d:.25s">I'm Luke. I design, build and look after bespoke websites for small businesses.</p>
+      <div class="row reveal" style="--d:.35s">
+        <a class="btn" href="contact.html">Tell me about your project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn ghost" href="pricing.html">See pricing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ribbons" role="img" aria-label="Websites that work. Bespoke builds.">
+  <div class="ribbon b"><div class="ribbon-shift" data-speed="0.18"><div class="ribbon-track" aria-hidden="true"><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span></div></div></div>
+  <div class="ribbon a"><div class="ribbon-shift" data-speed="-0.22"><div class="ribbon-track" aria-hidden="true"><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span><span>Websites that work</span><span>Bespoke builds</span></div></div></div>
+</div>
+
+<section class="intro">
+  <div class="wrap">
+    <div class="copy">
+      <p class="eyebrow reveal">A bit about me</p>
+      <h2 class="reveal">One person.<br>Every <span class="coop">detail.</span></h2>
+      <p class="lede reveal" style="max-width:42ch">Built by Compo is just me. You talk to the person who designs your site, builds it and keeps it running. No account managers and no templates.</p>
+      <div class="row reveal"><a class="btn ghost" href="about.html">More about me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    </div>
+    <ul class="tags">
+      <li class="reveal">Built for phones first</li>
+      <li class="reveal" style="--d:.08s">Fast to load</li>
+      <li class="reveal" style="--d:.16s">Set up for Google</li>
+      <li class="reveal" style="--d:.24s">Looked after once it's live</li>
+    </ul>
+  </div>
+</section>
+
+<section class="work" aria-labelledby="work-h">
+  <div class="wrap sec-head">
+    <div>
+      <p class="eyebrow reveal">Selected work</p>
+      <h2 id="work-h" class="reveal">Recently <span class="coop">built</span></h2>
+    </div>
+    <p class="muted reveal" style="max-width:34ch">Drag or swipe to look around. One of these spots is always yours.</p>
+  </div>
+  <div class="slider reveal" tabindex="0" role="region" aria-label="Portfolio, scrolls sideways">
+    <div class="slider-track">
+      <a class="card-work" href="https://tanyahill.co.uk" rel="noopener">
+        <img src="img/work-tanya.jpg" width="960" height="960" loading="lazy" alt="Homepage of tanyahill.co.uk, a business coaching website with a 'Which boss are you?' quiz">
+        <span class="cap"><span>Tanya Hill Coaching</span><small>Coaching · custom quiz</small></span>
+      </a>
+      <a class="card-work yours c1" href="contact.html"><span><span class="big">Your website</span><span class="sm">This spot's free</span></span></a>
+      <a class="card-work yours c2" href="contact.html"><span><span class="big">Your website</span><span class="sm">Could be next</span></span></a>
+      <a class="card-work yours c3" href="contact.html"><span><span class="big">Your website</span><span class="sm">Let's talk</span></span></a>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="svc-h">
+  <div class="wrap" style="display:grid;gap:clamp(24px,4vw,44px)">
+    <div style="display:grid;gap:14px">
+      <p class="eyebrow reveal">What I do</p>
+      <h2 id="svc-h" class="reveal">This is my <span class="coop">thing</span></h2>
+    </div>
+    <ul class="svc-list">
+      <li class="reveal"><h3>Design</h3><p>A look made for your business, drawn up for a phone screen first because that's where most of your visitors are.</p></li>
+      <li class="reveal"><h3>Build</h3><p>Written by hand, so it loads quickly and only has what you need on it.</p></li>
+      <li class="reveal"><h3>Custom features</h3><p>Quizzes, galleries, booking buttons. If it helps your customers get in touch, I can build it.</p></li>
+      <li class="reveal"><h3>Hosting and care</h3><p>I keep your site online, check it every month and make your changes for you.</p></li>
+    </ul>
+    <div class="row reveal"><a class="btn ghost" href="what-i-do.html">Everything I do <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  </div>
+</section>
+
+<section aria-labelledby="say-h">
+  <div class="wrap deck-wrap">
+    <div style="display:grid;gap:14px;justify-items:center;text-align:center">
+      <p class="eyebrow reveal">Kind words</p>
+      <h2 id="say-h" class="reveal">Apparently, they <span class="coop">like it</span></h2>
+    </div>
+    <ul class="deck reveal">
+      <li>
+        <div class="quote-mark" aria-hidden="true">“</div>
+        <blockquote><mark class="todo">[Tanya's testimonial goes here, in her own words]</mark></blockquote>
+        <div class="who"><span class="av" aria-hidden="true">T</span><span><b>Tanya Hill</b><span>Tanya Hill Coaching</span></span></div>
+      </li>
+      <li>
+        <div class="quote-mark" aria-hidden="true">“</div>
+        <blockquote><mark class="todo">[Second testimonial, coming soon]</mark></blockquote>
+        <div class="who"><span class="av" aria-hidden="true">?</span><span><b><mark class="todo">[Name]</mark></b><span><mark class="todo">[Business]</mark></span></span></div>
+      </li>
+      <li>
+        <div class="quote-mark" aria-hidden="true">“</div>
+        <blockquote><mark class="todo">[Third testimonial, coming soon]</mark></blockquote>
+        <div class="who"><span class="av" aria-hidden="true">?</span><span><b><mark class="todo">[Name]</mark></b><span><mark class="todo">[Business]</mark></span></span></div>
+      </li>
+    </ul>
+    <div class="row"><button class="btn ghost deck-next" type="button">Next card <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><span class="deck-count muted" aria-live="polite"></span></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta-panel on-dark reveal">
+      <h2>Tell me about <span class="coop">your project</span></h2>
+      <p>Send me a message and we'll have a proper conversation. I'd like to get to know your business before I suggest anything.</p>
+      <div class="row"><a class="btn hot" href="contact.html">Start a conversation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    </div>
+  </div>
+</section>
 </main>
-<a class="email" href="mailto:luke@builtbycompo.co.uk">luke@builtbycompo.co.uk</a>
-<script src="liquid.js?v=1" defer></script>
-<script>
-(function () {
-  var root = document.documentElement, done = false;
-  function go() { if (!done) { done = true; root.classList.add("go"); } }
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(go);
-  setTimeout(go, 1500); // never wait longer than this
-})();
-</script>
+<footer class="site-foot">
+  <canvas id="liquid" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <a class="foot-logo" href="./" aria-label="Built by Compo, home"><span class="b">Built by</span><span class="c">Compo</span></a>
+    <div class="foot-panel on-dark">
+      <div>
+        <h2>Say hello</h2>
+        <ul>
+          <li><a href="mailto:luke@builtbycompo.co.uk">luke@builtbycompo.co.uk</a></li>
+          <li><a href="https://wa.me/447517945561" rel="noopener">Message me on WhatsApp</a></li>
+          <li><mark class="todo">[Facebook link]</mark> <mark class="todo">[Instagram link]</mark></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Pages</h2>
+        <ul><li><a href="about.html">About me</a></li><li><a href="what-i-do.html">What I do</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="contact.html">Contact</a></li></ul>
+      </div>
+      <div>
+        <h2>The small print</h2>
+        <ul>
+          <li><a href="privacy.html">Privacy policy</a></li>
+          <li><a href="cookies.html">Cookie policy</a></li>
+          <li><a href="terms.html">Terms and conditions</a></li>
+          <li><a href="refunds.html">Refund policy</a></li>
+        </ul>
+      </div>
+      <div class="foot-small">
+        <p>Built by Compo is the trading name of Luke Compton, sole trader. <mark class="todo">[BUSINESS ADDRESS]</mark>, Essex, England.</p>
+        <p>© 2026 Built by Compo. Designed and built by me, obviously.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+<button class="motion-btn" type="button" aria-pressed="false" aria-label="Pause animations">
+  <svg class="pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="4" width="5" height="16" rx="1"/><rect x="14" y="4" width="5" height="16" rx="1"/></svg>
+  <svg class="play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>
+</button>
+<script src="js/site.js"></script>
+<script src="js/liquid.js"></script>
 </body>
 </html>
