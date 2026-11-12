@@ -476,7 +476,7 @@ def page(name, p, preview=False):
 <meta property="og:title" content="{html.escape(p["title"])}">
 <meta property="og:description" content="{html.escape(p["desc"])}">
 <meta property="og:url" content="{canon}">
-<meta property="og:image" content="{SITE}/img/og-2.jpg">
+<meta property="og:image" content="{SITE}/img/og-3.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Built by Compo. Websites that work.">
