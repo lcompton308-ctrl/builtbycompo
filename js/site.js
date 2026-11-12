@@ -5,6 +5,13 @@
   root.classList.remove("no-js"); root.classList.add("js");
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ----- While a finger is scrolling the page, the heavy animations hold still so scrolling stays smooth ----- */
+  var scrollTimer = null;
+  window.addEventListener("scroll", function () {
+    window.BBC_SCROLLING = true; clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(function () { window.BBC_SCROLLING = false; }, 160);
+  }, { passive: true });
+
   /* ----- Pause / play all movement ----- */
   var paused = reduce;
   var motionBtn = document.querySelector(".motion-link");
@@ -113,7 +120,7 @@
     swaps.forEach(function (sw) { sw._words = sw.dataset.words.split("|"); sw._i = 0; sw.style.width = sw.firstElementChild.offsetWidth + "px"; });
     var turn = 0;
     var roll = function () {
-      if (paused || document.hidden) return;
+      if (paused || document.hidden || window.BBC_SCROLLING || window.scrollY > window.innerHeight) return;
       var sw = swaps[turn % swaps.length]; turn++;
       var old = sw.firstElementChild; sw._i = (sw._i + 1) % sw._words.length;
       var nw = document.createElement("span"); nw.className = "swap-w pre"; nw.textContent = sw._words[sw._i];
@@ -135,12 +142,11 @@
     measure(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
     if (reduce) return;
     if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { vis = en[0].isIntersecting; }).observe(text.ownerSVGElement);
-    var skip = false;
     function step(t) {
       requestAnimationFrame(step);
-      skip = !skip; if (skip) return;               // redraw every other frame: plenty for slow text, half the work
+      if (t - last < 33) return;                    // about 30 redraws a second, whatever the screen's refresh rate
       var dt = Math.min(100, t - (last || t)); last = t;
-      if (!paused && vis && unit > 0) { off -= dt * 0.07; if (off <= -unit) off += unit; tp.setAttribute("startOffset", (off - unit).toFixed(1)); }
+      if (!paused && vis && unit > 0 && !window.BBC_SCROLLING) { off -= dt * 0.07; if (off <= -unit) off += unit; tp.setAttribute("startOffset", (off - unit).toFixed(1)); }
     }
     requestAnimationFrame(step);
   });
@@ -200,7 +206,7 @@
     var last = 0;
     function step(t) {
       var dt = Math.min(50, t - (last || t)); last = t;
-      if (!paused && !hold && !down && visible) { acc += dt * 0.045; var whole = Math.floor(acc); if (whole > 0) { sl.scrollLeft += whole; acc -= whole; wrap(); } }
+      if (!paused && !hold && !down && visible && !window.BBC_SCROLLING) { acc += dt * 0.045; var whole = Math.floor(acc); if (whole > 0) { sl.scrollLeft += whole; acc -= whole; wrap(); } }
       requestAnimationFrame(step);
     }
     requestAnimationFrame(step);

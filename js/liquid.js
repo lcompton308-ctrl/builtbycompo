@@ -10,7 +10,7 @@ function bbcLiquid(canvas) {
   var SPEED = 0.16;          // how fast the pattern flows
   var SCALE = 1.3;           // bigger number = smaller pools
   var STRENGTH = 0.42;        // how strong the yellow is (0 to 1)
-  var RESOLUTION = 0.5;      // draws at half size and lets the browser smooth it (saves battery)
+  var RESOLUTION = 0.4;      // draws at half size and lets the browser smooth it (saves battery)
 
   var gl = canvas.getContext("webgl", { antialias: false, alpha: false, premultipliedAlpha: false, powerPreference: "low-power" });
   if (!gl) return;
@@ -107,12 +107,13 @@ function bbcLiquid(canvas) {
   var visible = false, t = Math.random() * 50, last = 0, drawn = false;
   if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(canvas);
   else visible = true;
-  // The pattern moves slowly, so it is drawn on every other frame (about 30 a second) to leave room for scrolling
-  var skip = false, sized = 0;
+  // The pattern moves slowly, so a modest redraw rate looks the same and leaves room for scrolling
+  var sized = 0;
   function frame(now) {
     requestAnimationFrame(frame);
-    skip = !skip; if (skip) return;
+    if (now - last < 40) return;                                   // about 25 pictures a second on any screen, including 120Hz phones
     var dt = Math.min(0.1, (now - (last || now)) / 1000); last = now;
+    if (window.BBC_SCROLLING && drawn) return;                     // hold still while the page is being scrolled
     if (visible && (!window.BBC_PAUSED || !drawn)) {
       if (!window.BBC_PAUSED) t += dt * speed;
       if (!sized || now - sized > 500) { resize(); sized = now; }
