@@ -27,20 +27,29 @@
       for (var i = 0; i < els.length; i++) {
         if (head.contains(els[i]) || els[i].classList.contains("intro-cover")) continue;
         if (els[i].classList.contains("site-foot")) {   // the top of the footer is still mostly off-white while it fades in
-          var fr = els[i].getBoundingClientRect(), fade = parseFloat(getComputedStyle(els[i], "::before").height) || 0;
+          var fr = els[i].getBoundingClientRect(), fade = fadeOf(els[i], "::before");
           if (y - fr.top < fade * 0.5) return [246, 244, 239];
         }
         if (els[i].classList.contains("hero-panel")) {  // and the bottom of the hero is fading out
-          var hr = els[i].getBoundingClientRect(), hf = parseFloat(getComputedStyle(els[i], "::after").height) || 0;
+          var hr = els[i].getBoundingClientRect(), hf = fadeOf(els[i], "::after");
           if (hr.bottom - y < hf * 0.5) return [246, 244, 239];
         }
-        var m = getComputedStyle(els[i]).backgroundColor.match(/[\d.]+/g);
-        if (m && (m.length < 4 || parseFloat(m[3]) > 0.5)) return [+m[0], +m[1], +m[2]];
+        var col = bgOf(els[i]); if (col) return col;
       }
       return [246, 244, 239];
     };
+    // Looking up colours is slow, so remember each element's answer (cleared on resize)
+    var bgCache = new WeakMap(), fadeCache = {};
+    var bgOf = function (el) {
+      if (bgCache.has(el)) return bgCache.get(el);
+      var m = getComputedStyle(el).backgroundColor.match(/[\d.]+/g), col = (m && (m.length < 4 || parseFloat(m[3]) > 0.5)) ? [+m[0], +m[1], +m[2]] : null;
+      if (el.tagName !== "DETAILS") bgCache.set(el, col);   // FAQ pills change colour when opened
+      return col;
+    };
+    var fadeOf = function (el, pseudo) { if (!(pseudo in fadeCache)) fadeCache[pseudo] = parseFloat(getComputedStyle(el, pseudo).height) || 0; return fadeCache[pseudo]; };
+    var headLast = 0, headTimer = null;
     var headCheck = function () {
-      headTick = false;
+      headTick = false; headLast = performance.now();
       watch.forEach(function (el) {
         var r = el.getBoundingClientRect(); if (!r.width) return;
         var c = behind(r.left + Math.min(r.width / 2, 60), r.top + r.height / 2), L = lum(c[0], c[1], c[2]);
@@ -48,8 +57,14 @@
       });
       var lg = head.querySelector(".logo"); head.classList.toggle("over-dark", !!lg && lg.classList.contains("is-white"));
     };
-    window.addEventListener("scroll", function () { if (!headTick) { headTick = true; requestAnimationFrame(headCheck); } }, { passive: true });
-    window.addEventListener("resize", headCheck); headCheck(); setTimeout(headCheck, 2400);
+    // While scrolling, check at most about 8 times a second, plus once when the scroll settles
+    window.addEventListener("scroll", function () {
+      if (headTick) return;
+      var wait = 120 - (performance.now() - headLast);
+      if (wait <= 0) { headTick = true; requestAnimationFrame(headCheck); }
+      else { clearTimeout(headTimer); headTimer = setTimeout(headCheck, wait + 20); }
+    }, { passive: true });
+    window.addEventListener("resize", function () { bgCache = new WeakMap(); fadeCache = {}; headCheck(); }); headCheck(); setTimeout(headCheck, 2400);
   }
 
   /* ----- Mobile menu ----- */
@@ -120,10 +135,12 @@
     measure(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
     if (reduce) return;
     if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { vis = en[0].isIntersecting; }).observe(text.ownerSVGElement);
+    var skip = false;
     function step(t) {
-      var dt = Math.min(50, t - (last || t)); last = t;
-      if (!paused && vis && unit > 0) { off -= dt * 0.07; if (off <= -unit) off += unit; tp.setAttribute("startOffset", (off - unit).toFixed(1)); }
       requestAnimationFrame(step);
+      skip = !skip; if (skip) return;               // redraw every other frame: plenty for slow text, half the work
+      var dt = Math.min(100, t - (last || t)); last = t;
+      if (!paused && vis && unit > 0) { off -= dt * 0.07; if (off <= -unit) off += unit; tp.setAttribute("startOffset", (off - unit).toFixed(1)); }
     }
     requestAnimationFrame(step);
   });
@@ -140,13 +157,19 @@
       });
       el.replaceChild(frag, n);
     });
+    var shown = 0, fillTick = false;
     function fill() {
+      fillTick = false;
       var r = el.getBoundingClientRect(), vh = window.innerHeight;
+      if (r.bottom < -200 || r.top > vh + 200) return;                       // nowhere near the screen
       var p = (vh * 0.85 - r.top) / (r.height + vh * 0.35), n = Math.round(Math.max(0, Math.min(1, p)) * words.length);
-      words.forEach(function (w, i) { w.classList.toggle("on", i < n); });
+      if (n === shown) return;
+      for (var i = Math.min(n, shown); i < Math.max(n, shown); i++) words[i].classList.toggle("on", i < n);   // only the words that changed
+      shown = n;
     }
     if (reduce) { words.forEach(function (w) { w.classList.add("on"); }); return; }
-    window.addEventListener("scroll", fill, { passive: true }); window.addEventListener("resize", fill); fill();
+    var askFill = function () { if (!fillTick) { fillTick = true; requestAnimationFrame(fill); } };
+    window.addEventListener("scroll", askFill, { passive: true }); window.addEventListener("resize", askFill); fill();
   });
 
   /* ----- Work slider: drifts sideways, can be swiped or dragged ----- */

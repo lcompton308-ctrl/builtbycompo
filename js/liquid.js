@@ -107,13 +107,17 @@ function bbcLiquid(canvas) {
   var visible = false, t = Math.random() * 50, last = 0, drawn = false;
   if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(canvas);
   else visible = true;
+  // The pattern moves slowly, so it is drawn on every other frame (about 30 a second) to leave room for scrolling
+  var skip = false, sized = 0;
   function frame(now) {
+    requestAnimationFrame(frame);
+    skip = !skip; if (skip) return;
     var dt = Math.min(0.1, (now - (last || now)) / 1000); last = now;
     if (visible && (!window.BBC_PAUSED || !drawn)) {
       if (!window.BBC_PAUSED) t += dt * speed;
-      resize(); gl.uniform1f(uT, t); gl.drawArrays(gl.TRIANGLES, 0, 6); drawn = true;
+      if (!sized || now - sized > 500) { resize(); sized = now; }
+      gl.uniform1f(uT, t); gl.drawArrays(gl.TRIANGLES, 0, 6); drawn = true;
     }
-    requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
   canvas.classList.add("on");

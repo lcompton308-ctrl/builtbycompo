@@ -337,8 +337,10 @@ h1, .page-hero h1 { line-height: .98; }
 
 /* ---------- Hero: the name turning on a big circle (top half only), with a sentence whose words change ---------- */
 .hero-panel { --halo: clamp(600px, 175vw, 1500px); display: block; align-content: center; padding: 0 0 clamp(150px, 22vw, 300px); min-height: calc(100vh + 120px); min-height: calc(100svh + 120px); }
-.halo { position: relative; height: calc(var(--halo) * .47); margin-top: clamp(70px, 9vh, 110px); overflow: hidden; -webkit-mask-image: linear-gradient(#000 58%, transparent 96%); mask-image: linear-gradient(#000 58%, transparent 96%); pointer-events: none; }
-.halo svg { position: absolute; left: 50%; top: 0; width: var(--halo); height: var(--halo); max-width: none; margin-left: calc(var(--halo) / -2); animation: halo-turn 70s linear infinite; }
+.halo { position: relative; height: calc(var(--halo) * .47); margin-top: clamp(70px, 9vh, 110px); overflow: hidden; pointer-events: none; }
+/* The soft fade on the arc's sides is costly to draw, and on phones the sides are off-screen anyway */
+@media (min-width: 900px) { .halo { -webkit-mask-image: linear-gradient(#000 58%, transparent 96%); mask-image: linear-gradient(#000 58%, transparent 96%); } }
+.halo svg { position: absolute; left: 50%; top: 0; width: var(--halo); height: var(--halo); max-width: none; margin-left: calc(var(--halo) / -2); animation: halo-turn 70s linear infinite; will-change: transform; }
 .halo text { font-family: var(--f-accent); font-weight: 800; font-size: 124px; fill: #fff; }
 @keyframes halo-turn { to { transform: rotate(-360deg); } }
 .hero h1.hero-say { position: relative; margin: calc(var(--halo) * -.245) auto 0; width: min(100% - 44px, 22em); text-align: center; font: 600 clamp(1.4rem, 3.9vw, 2.9rem)/1.22 var(--f-display); letter-spacing: -.025em; text-wrap: balance; }
