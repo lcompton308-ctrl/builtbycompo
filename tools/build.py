@@ -79,7 +79,7 @@ PAGES["index.html"] = dict(
 <section class="statement-sec">
   <div class="wrap">
     <p class="eyebrow reveal">A bit about me</p>
-    <div class="sticker-row"><span class="sticker pop" style="--r:-5deg">One-person studio</span><span class="sticker peach pop" style="--r:3deg;--d:.35s">Allergic to templates</span><span class="sticker red pop" style="--r:-3deg;--d:.5s">Phones first</span></div>
+    <div class="sticker-row"><span class="sticker pop" style="--r:-5deg">One-person studio</span><span class="sticker peach pop" style="--r:3deg;--d:.35s">No templates</span><span class="sticker red pop" style="--r:-3deg;--d:.5s">Mobile and PC design</span></div>
     <p class="statement" data-fill>I think a good website should be simple to use, quick to load and easy to find. So I design and build each one from scratch, then look after it once it's live.</p>
     <div class="row reveal"><a class="btn ghost" href="about.html">More about me {ARROW}</a></div>
   </div>
@@ -219,7 +219,6 @@ def price(name, amt, per, blurb, ticks, feature=False):
     lis = "".join(f"<li>{t}</li>" for t in ticks)
     cls = "price feature" if feature else "price"
     return f'''<article class="{cls} reveal">
-      {'<span class="sticker pop">Most popular</span>' if feature else ''}
       <h3>{name}</h3>
       <p class="amt">{amt}{f" <small>{per}</small>" if per else ""}</p>
       <p>{blurb}</p>
