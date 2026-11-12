@@ -2,7 +2,7 @@
    stickers, a curved moving ribbon, and the red/yellow liquid behind the hero and footer.
    One light look on purpose (brand colours). */
 @font-face { font-family: "Roboto"; src: url("../fonts/roboto.woff") format("woff"); font-weight: 100 900; font-stretch: 75% 100%; font-display: swap; }
-@font-face { font-family: "Bodoni Moda"; src: url("../fonts/bodoni-moda.woff") format("woff"); font-weight: 400 900; font-display: swap; }
+@font-face { font-family: "Calistoga"; src: url("../fonts/calistoga.woff") format("woff"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Sao Torpes"; src: url("../fonts/sao-torpes.woff") format("woff"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Anton"; src: url("../fonts/anton.woff") format("woff"); font-weight: 400; font-display: swap; }
 
@@ -18,7 +18,7 @@
   --line: #e7dccf;
   --footer-red: #f42902;
   --f-display: "Roboto", "Segoe UI", Arial, sans-serif;
-  --f-accent: "Bodoni Moda", "Bodoni MT", Didot, Georgia, serif;
+  --f-accent: "Calistoga", "Cooper Black", Georgia, serif;
   --f-ribbon: "Sao Torpes", "Anton", "Arial Narrow", Impact, sans-serif;
   --f-body: "Roboto", "Segoe UI", system-ui, -apple-system, sans-serif;
   --radius: 26px;
@@ -329,9 +329,8 @@ fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 10px; }
 .hero-panel::after { content: ""; position: absolute; inset: auto 0 0 0; height: clamp(170px, 26vw, 330px); background: linear-gradient(to top, var(--canvas) 0%, rgba(246, 244, 239, .92) 18%, rgba(246, 244, 239, .6) 45%, rgba(246, 244, 239, .22) 72%, rgba(246, 244, 239, 0) 100%); pointer-events: none; }
 .arc { margin-top: clamp(-40px, -3vw, -10px); }
 
-/* ---------- Font test: Roboto everywhere, a tall high-contrast serif for the loud bits ---------- */
-h1, .coop, .foot-talk h2 b, .logo b, .foot-logo b, .intro-cover b, .card-work.yours .big, .price .amt { font-family: var(--f-accent); font-weight: 600; letter-spacing: -.035em; }
-h1 { line-height: .95; letter-spacing: -.045em; }
-.hero h1 { line-height: .9; font-weight: 700; }
-.logo b, .foot-logo b, .foot-talk h2 b, .intro-cover b { font-weight: 700; }
-.price .amt { font-variant-numeric: lining-nums; letter-spacing: -.03em; }
+/* ---------- Fonts: Roboto everywhere, Calistoga for the loud bits (it only has one weight) ---------- */
+h1, .coop, .foot-talk h2 b, .logo b, .foot-logo b, .intro-cover b, .card-work.yours .big, .price .amt { font-family: var(--f-accent); font-weight: 400; letter-spacing: -.02em; }
+h1 { line-height: .98; letter-spacing: -.025em; }
+.hero h1 { line-height: .94; }
+.price .amt { letter-spacing: -.01em; }

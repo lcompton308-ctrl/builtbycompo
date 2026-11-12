@@ -37,7 +37,7 @@ SEAL = '''<svg class="{cls}" viewBox="0 0 200 200" role="img" aria-label="Built 
   <circle cx="100" cy="100" r="97" fill="none" stroke="currentColor" stroke-width="3"/>
   <circle cx="100" cy="100" r="54" fill="none" stroke="currentColor" stroke-width="2"/>
   <text font-family="Roboto,Arial,sans-serif" font-weight="800" font-size="13.5" fill="currentColor"><textPath href="#sealpath-{id}" startOffset="0" textLength="463" lengthAdjust="spacing">BUILT BY COMPO ✦ BESPOKE WEBSITES ✦ ESSEX, ENGLAND ✦ </textPath></text>
-  <text x="100" y="100" dy=".355em" text-anchor="middle" font-family="'Bodoni Moda',Didot,Georgia,serif" font-weight="500" font-size="84" fill="currentColor">C</text>
+  <text x="100" y="100" dy=".355em" text-anchor="middle" font-family="Calistoga,'Cooper Black',Georgia,serif" font-weight="400" font-size="76" fill="currentColor">C</text>
 </svg>'''
 
 def cta_panel(heading='Tell me about <span class="coop">your project</span>'):
