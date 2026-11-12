@@ -37,7 +37,7 @@ SEAL = '''<svg class="{cls}" viewBox="0 0 200 200" role="img" aria-label="Built 
   <circle cx="100" cy="100" r="97" fill="none" stroke="currentColor" stroke-width="3"/>
   <circle cx="100" cy="100" r="54" fill="none" stroke="currentColor" stroke-width="2"/>
   <text font-family="Roboto,Arial,sans-serif" font-weight="800" font-size="13.5" fill="currentColor"><textPath href="#sealpath-{id}" startOffset="0" textLength="463" lengthAdjust="spacing">BUILT BY COMPO ✦ BESPOKE WEBSITES ✦ ESSEX, ENGLAND ✦ </textPath></text>
-  <text x="100" y="100" dy=".355em" text-anchor="middle" font-family="'Sao Torpes',Roboto,Arial,sans-serif" font-weight="400" font-size="70" fill="currentColor">C</text>
+  <text x="100" y="100" dy=".355em" text-anchor="middle" font-family="'Soft Serif Stand-in','Cooper Black',Georgia,serif" font-weight="800" font-size="84" fill="currentColor">C</text>
 </svg>'''
 
 def cta_panel(heading='Tell me about <span class="coop">your project</span>'):
@@ -62,19 +62,26 @@ PAGES["index.html"] = dict(
 <section class="hero">
     <div class="hero-panel">
       <canvas class="liquid" data-strength="0.3" aria-hidden="true"></canvas>
-      <div class="seal-wrap">{SEAL.format(cls="seal", id="h")}</div>
-      <h1 class="wipe">Websites<br>that work.</h1>
-      <div class="hero-foot">
-        <p class="lede reveal" style="--d:.25s">I'm Compo. I design, build and look after bespoke websites for small businesses.</p>
-        <div class="row reveal" style="--d:.35s">
-          <a class="btn" href="contact.html">Tell me about your project {ARROW}</a>
-          <a class="btn ghost" href="pricing.html">See pricing</a>
-        </div>
+      <div class="halo" aria-hidden="true">
+        <svg viewBox="0 0 1000 1000">
+          <defs><path id="halo-path" d="M500,500 m-410,0 a410,410 0 1,1 820,0 a410,410 0 1,1 -820,0"/></defs>
+          <text><textPath href="#halo-path" startOffset="0" textLength="2572" lengthAdjust="spacing">Built by Compo • Built by Compo • Built by Compo • </textPath></text>
+        </svg>
       </div>
+      <h1 class="hero-say" aria-label="I'm Compo, a small studio that creates bespoke websites for small businesses.">
+        <span aria-hidden="true">I'm Compo, a small studio that <span class="swap" data-words="creates|builds|designs|hosts|maintains"><span class="swap-w">creates</span></span> bespoke websites for <span class="swap" data-words="small businesses|you|your business"><span class="swap-w">small businesses</span></span>.</span>
+      </h1>
     </div>
 </section>
 
 {ribbons()}
+
+<div class="wrap hero-actions">
+  <div class="row reveal">
+    <a class="btn" href="contact.html">Tell me about your project {ARROW}</a>
+    <a class="btn ghost" href="pricing.html">See pricing</a>
+  </div>
+</div>
 
 <section class="statement-sec">
   <div class="wrap">
@@ -484,6 +491,7 @@ def page(name, p, preview=False):
 <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
+<link rel="preload" href="fonts/soft-serif-standin.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="fonts/roboto.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="css/site.css{v}">
 <script>(function(){{try{{var r=document.referrer,same=r&&new URL(r).host===location.host;if(!same&&!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches))document.documentElement.classList.add("intro")}}catch(e){{}}}})()</script>

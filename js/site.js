@@ -92,6 +92,27 @@
     }, { passive: true });
   }
 
+  /* ----- Hero sentence: the two changing words take turns rolling to the next one ----- */
+  var swaps = Array.prototype.slice.call(document.querySelectorAll(".swap"));
+  if (swaps.length && !reduce) {
+    swaps.forEach(function (sw) { sw._words = sw.dataset.words.split("|"); sw._i = 0; sw.style.width = sw.firstElementChild.offsetWidth + "px"; });
+    var turn = 0;
+    var roll = function () {
+      if (paused || document.hidden) return;
+      var sw = swaps[turn % swaps.length]; turn++;
+      var old = sw.firstElementChild; sw._i = (sw._i + 1) % sw._words.length;
+      var nw = document.createElement("span"); nw.className = "swap-w pre"; nw.textContent = sw._words[sw._i];
+      nw.style.position = "absolute"; nw.style.left = "0"; sw.style.position = "relative"; sw.appendChild(nw);
+      var w = nw.offsetWidth; old.classList.add("out"); sw.style.width = w + "px";
+      requestAnimationFrame(function () { requestAnimationFrame(function () { nw.classList.remove("pre"); }); });
+      setTimeout(function () { if (old.parentNode) sw.removeChild(old); nw.style.position = ""; nw.style.left = ""; }, 520);
+    };
+    var fixW = function () { swaps.forEach(function (sw) { sw.style.width = "auto"; sw.style.width = sw.firstElementChild.offsetWidth + "px"; }); };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fixW);
+    window.addEventListener("resize", fixW);
+    setTimeout(function () { setInterval(roll, 2100); }, 2600);
+  }
+
   /* ----- Curved ribbon: text travels along the curve ----- */
   document.querySelectorAll(".arc textPath").forEach(function (tp) {
     var text = tp.parentNode, unit = 0, off = 0, last = 0, vis = true;

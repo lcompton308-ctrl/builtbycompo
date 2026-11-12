@@ -1,6 +1,7 @@
 /* Built by Compo. Layout idea: big friendly sentence-case type on a warm canvas, orange pills and
    stickers, a curved moving ribbon, and the red/yellow liquid behind the hero and footer.
    One light look on purpose (brand colours). */
+@font-face { font-family: "Soft Serif Stand-in"; src: url("../fonts/soft-serif-standin.woff") format("woff"); font-weight: 100 900; font-display: swap; }
 @font-face { font-family: "Roboto"; src: url("../fonts/roboto.woff") format("woff"); font-weight: 100 900; font-stretch: 75% 100%; font-display: swap; }
 @font-face { font-family: "Sao Torpes"; src: url("../fonts/sao-torpes.woff") format("woff"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Anton"; src: url("../fonts/anton.woff") format("woff"); font-weight: 400; font-display: swap; }
@@ -17,7 +18,7 @@
   --line: #e7dccf;
   --footer-red: #f42902;
   --f-display: "Roboto", "Segoe UI", Arial, sans-serif;
-  --f-accent: "Sao Torpes", "Roboto", "Arial Black", sans-serif;
+  --f-accent: "Soft Serif Stand-in", "Cooper Black", Georgia, serif;   /* stand-in for Bogart until it is licensed */
   --f-ribbon: "Sao Torpes", "Anton", "Arial Narrow", Impact, sans-serif;
   --f-body: "Roboto", "Segoe UI", system-ui, -apple-system, sans-serif;
   --radius: 26px;
@@ -328,10 +329,24 @@ fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 10px; }
 .hero-panel::after { content: ""; position: absolute; inset: auto 0 0 0; height: clamp(170px, 26vw, 330px); background: linear-gradient(to top, var(--canvas) 0%, rgba(246, 244, 239, .92) 18%, rgba(246, 244, 239, .6) 45%, rgba(246, 244, 239, .22) 72%, rgba(246, 244, 239, 0) 100%); pointer-events: none; }
 .arc { margin-top: clamp(-40px, -3vw, -10px); }
 
-/* ---------- Fonts: Roboto for reading, Sao Torpes for headlines, highlight words, the logo and the ribbon ---------- */
-h1, .coop, .foot-talk h2 b, .logo b, .foot-logo b, .intro-cover b, .card-work.yours .big { font-family: var(--f-accent); font-weight: 400; letter-spacing: 0; }
-h1, .page-hero h1 { line-height: 1; font-size: clamp(2.1rem, 8.2vw, 6.6rem); }
-.hero h1 { line-height: .96; font-size: clamp(2.5rem, 10.6vw, 9.4rem); }
-.foot-logo { font-size: clamp(2rem, 10.4vw, 11rem); }
-.foot-logo b, .logo b, .intro-cover b { font-size: .86em; }
+/* ---------- Fonts: Roboto for reading; the soft serif for headlines, highlight words and the logo; Sao Torpes on the ribbon ---------- */
+h1, .coop, .foot-talk h2 b, .logo b, .foot-logo b, .intro-cover b, .card-work.yours .big { font-family: var(--f-accent); font-weight: 800; letter-spacing: -.035em; }
+h1, .page-hero h1 { line-height: .98; }
 .price .amt { font-family: var(--f-display); font-weight: 900; letter-spacing: -.04em; }
+
+/* ---------- Hero: the name turning on a big circle (top half only), with a sentence whose words change ---------- */
+.hero-panel { --halo: clamp(600px, 175vw, 1500px); display: block; align-content: center; padding: 0 0 clamp(150px, 22vw, 300px); min-height: calc(100vh + 120px); min-height: calc(100svh + 120px); }
+.halo { position: relative; height: calc(var(--halo) * .47); margin-top: clamp(70px, 9vh, 110px); overflow: hidden; -webkit-mask-image: linear-gradient(#000 58%, transparent 96%); mask-image: linear-gradient(#000 58%, transparent 96%); pointer-events: none; }
+.halo svg { position: absolute; left: 50%; top: 0; width: var(--halo); height: var(--halo); max-width: none; margin-left: calc(var(--halo) / -2); animation: halo-turn 70s linear infinite; }
+.halo text { font-family: var(--f-accent); font-weight: 800; font-size: 124px; fill: #fff; }
+@keyframes halo-turn { to { transform: rotate(-360deg); } }
+.hero h1.hero-say { position: relative; margin: calc(var(--halo) * -.235) auto 0; width: min(100% - 44px, 15.5em); min-height: 5.2em; text-align: center; font: 600 clamp(1.4rem, 3.9vw, 2.9rem)/1.22 var(--f-display); letter-spacing: -.025em; text-wrap: balance; }
+.swap { display: inline-block; vertical-align: bottom; overflow: hidden; white-space: nowrap; height: 1.22em; transition: width .5s cubic-bezier(.3, 1.3, .5, 1); }
+.swap-w { display: inline-block; font-family: var(--f-accent); font-weight: 800; letter-spacing: -.02em; transition: transform .45s cubic-bezier(.6, 0, .2, 1), opacity .3s ease; }
+.swap-w.out { transform: translateY(-105%); opacity: 0; }
+.swap-w.pre { transform: translateY(105%); opacity: 0; transition: none; }
+.hero-actions { padding-block: clamp(8px, 2vw, 28px) 0; }
+.hero-actions .row { justify-content: center; }
+.statement-sec { padding-top: clamp(40px, 6vw, 80px); }
+.paused .halo svg { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .halo svg { animation: none; } .swap, .swap-w { transition: none; } }
