@@ -336,7 +336,8 @@ h1, .page-hero h1 { line-height: .98; }
 .price .amt { font-family: var(--f-display); font-weight: 900; letter-spacing: -.04em; }
 
 /* ---------- Hero: the name turning on a big circle (top half only), with a sentence whose words change ---------- */
-.hero-panel { --halo: clamp(600px, 175vw, 1500px); display: block; align-content: center; padding: 0 0 clamp(150px, 22vw, 300px); min-height: calc(100vh + 120px); min-height: calc(100svh + 120px); }
+/* The hero ends just below the sentence: a shorter moving background is lighter for phones to draw */
+.hero-panel { --halo: clamp(600px, 175vw, 1500px); display: block; align-content: normal; padding: 0 0 calc(clamp(170px, 26vw, 330px) + 14px); min-height: 0; }
 .halo { position: relative; height: calc(var(--halo) * .47); margin-top: clamp(70px, 9vh, 110px); overflow: hidden; pointer-events: none; }
 /* The soft fade on the arc's sides is costly to draw, and on phones the sides are off-screen anyway */
 @media (min-width: 900px) { .halo { -webkit-mask-image: linear-gradient(#000 58%, transparent 96%); mask-image: linear-gradient(#000 58%, transparent 96%); } }
