@@ -2,6 +2,7 @@
    stickers, a curved moving ribbon, and the red/yellow liquid behind the hero and footer.
    One light look on purpose (brand colours). */
 @font-face { font-family: "Outfit"; src: url("../fonts/outfit.woff") format("woff"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Sao Torpes"; src: url("../fonts/sao-torpes.woff") format("woff"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Anton"; src: url("../fonts/anton.woff") format("woff"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Instrument Sans"; src: url("../fonts/instrument-sans.woff") format("woff"); font-weight: 400 700; font-display: swap; }
 
@@ -17,7 +18,7 @@
   --line: #e7dccf;
   --footer-red: #f42902;
   --f-display: "Outfit", "Century Gothic", "Trebuchet MS", sans-serif;
-  --f-ribbon: "Anton", "Arial Narrow", Impact, sans-serif;
+  --f-ribbon: "Sao Torpes", "Anton", "Arial Narrow", Impact, sans-serif;
   --f-body: "Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
   --radius: 26px;
   --gutter-l: max(20px, env(safe-area-inset-left, 0px));
@@ -77,6 +78,8 @@ h3 { font-size: clamp(1.3rem, 2.4vw, 1.75rem); letter-spacing: -.035em; line-hei
 .site-head.over .logo, .menu-open .logo { color: #fff; }
 .logo { position: relative; z-index: 41; transition: color .3s ease; }
 .nav canvas.liquid { display: none; }
+.site-head.over .menu-btn { background: transparent; color: #fff; box-shadow: inset 0 0 0 2px #fff; font-weight: 700; }
+@media (min-width: 901px) { .site-head.over .nav .btn { background: transparent; color: #fff; box-shadow: inset 0 0 0 2px #fff; font-weight: 700; } }
 .nav { display: flex; align-items: center; gap: 6px; }
 .nav a:not(.btn) { padding: 12px 18px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: .98rem; background: var(--card); transition: background .2s ease, transform .3s cubic-bezier(.3, 1.6, .5, 1); }
 .nav a:not(.btn):hover { background: var(--peach); transform: rotate(-2deg); }
@@ -91,7 +94,7 @@ h3 { font-size: clamp(1.3rem, 2.4vw, 1.75rem); letter-spacing: -.035em; line-hei
   .nav a:not(.btn) { font: 600 clamp(2.2rem, 10vw, 3.2rem)/1.1 var(--f-display); letter-spacing: -.045em; padding: 8px 0; background: none; }
   .nav a:not(.btn):hover, .nav a[aria-current="page"]:not(.btn) { background: none; color: #fff; transform: none; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; }
   .nav .btn { margin: 22px 0 0; background: var(--canvas); }
-  .menu-open .menu-btn { background: var(--canvas); }
+  .menu-open .site-head .menu-btn { background: var(--canvas); color: var(--ink); box-shadow: none; }
 }
 
 /* ---------- Hero (liquid panel) ---------- */
@@ -116,7 +119,7 @@ canvas.liquid.on { opacity: 1; }
 /* ---------- Curved ribbon (home) ---------- */
 .arc { height: clamp(170px, 27vw, 400px); margin-top: clamp(28px, 5vw, 72px); position: relative; z-index: 2; pointer-events: none; }
 .arc svg { width: 100%; height: 100%; max-width: none; overflow: visible; }
-.arc text { font-family: var(--f-ribbon); font-size: 92px; letter-spacing: 1px; fill: #fff; text-transform: uppercase; }
+.arc text { font-family: var(--f-ribbon); font-size: 76px; letter-spacing: 1px; fill: #fff; text-transform: uppercase; }
 
 /* ---------- Straight ribbons (other pages): slow, steady, one direction ---------- */
 .ribbon { overflow: hidden; padding-block: clamp(12px, 1.5vw, 18px); }

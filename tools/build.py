@@ -20,11 +20,11 @@ def ribbon_track(words, n=8):
     return f'<div class="ribbon-shift" data-speed="{{speed}}"><div class="ribbon-track" aria-hidden="true">{spans}{spans}</div></div>'
 
 def ribbons():
-    unit = "Websites that work  •  Bespoke builds  •  "
-    return f'''<div class="arc" role="img" aria-label="Websites that work. Bespoke builds.">
+    unit = "Websites that work  •  Bespoke builds  •  Built only for you  •  "
+    return f'''<div class="arc" role="img" aria-label="Websites that work. Bespoke builds. Built only for you.">
   <svg viewBox="0 0 1600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <path id="arc-path" d="M-200,395 Q760,-70 1800,215" fill="none" stroke="#ff5412" stroke-width="150"/>
-    <text dy="32" xml:space="preserve"><textPath href="#arc-path" startOffset="0" data-unit="{len(unit)}">{unit * 9}</textPath></text>
+    <text dy="27" xml:space="preserve"><textPath href="#arc-path" startOffset="0" data-unit="{len(unit)}">{unit * 7}</textPath></text>
   </svg>
 </div>'''
 
@@ -123,7 +123,6 @@ PAGES["index.html"] = dict(
 <section aria-labelledby="say-h">
   <div class="wrap deck-wrap">
     <div style="display:grid;gap:14px;justify-items:center;text-align:center">
-      <p class="eyebrow reveal">Kind words</p>
       <h2 id="say-h" class="reveal">Apparently, they <span class="coop">like it</span></h2>
     </div>
     <ul class="deck reveal">
@@ -235,13 +234,7 @@ PAGES["what-i-do.html"] = dict(
     {svc('Hosting and <span class="coop">care</span>', "Once you're live, I keep things running. You send me changes by WhatsApp or email and I make them.", ["Hosting included in every care plan", "A health check every month", "Small changes made for you, with no logging in", "You own your domain, your accounts and your finished site"], 5)}
 </div></section>
 
-<section>
-  <div class="wrap narrow" style="display:grid;gap:18px">
-    <h2 class="reveal" style="font-size:clamp(1.6rem,4vw,2.6rem)">What I don't do</h2>
-    <p class="reveal">To keep my work good, I stick to websites. I don't offer blog writing, ongoing SEO campaigns or social media management. If you need those, I'm happy to point you towards someone who does.</p>
-    <div class="row reveal"><a class="btn" href="pricing.html">See pricing {ARROW}</a><a class="btn ghost" href="contact.html">Start a conversation</a></div>
-  </div>
-</section>
+{cta_panel('Got something <span class="coop">in mind?</span>')}
 ''')
 
 def price(name, amt, per, blurb, ticks, feature=False):
@@ -421,7 +414,7 @@ PAGES["privacy.html"] = dict(title="Privacy policy · Built by Compo", desc="How
 <p>You can ask me for a copy of your information, ask me to correct or delete it, ask me to limit how I use it, or object to me using it. To do any of these, email <a href="mailto:{EMAIL}">{EMAIL}</a> and I'll reply within one month.</p>
 <p>If you're unhappy with how I've handled your information, please tell me first so I can put it right. You can also complain to the Information Commissioner's Office at <a href="https://ico.org.uk/make-a-complaint/" rel="noopener">ico.org.uk</a> or on 0303 123 1113.</p>
 <h2>Cookies</h2>
-<p>This website doesn't use cookies. See the <a href="cookies.html">cookie policy</a> for the one small thing it saves on your device.</p>
+<p>This website doesn't use cookies. See the <a href="cookies.html">cookie policy</a>.</p>
 <h2>Changes</h2>
 <p>If I change this policy, I'll update the date at the top of this page.</p>
 '''))
@@ -430,11 +423,7 @@ PAGES["cookies.html"] = dict(title="Cookie policy · Built by Compo", desc="Buil
 <h2>The short version</h2>
 <p>This website doesn't set any cookies, and it has no advertising or tracking tools. That's why you don't see a cookie banner.</p>
 <h2>What is saved on your device</h2>
-<div class="scroll-x"><table>
-<tr><th>Name</th><th>What it does</th><th>How long</th></tr>
-<tr><td>bbc-motion</td><td>Remembers if you pressed the "pause animations" button, so the site stays still on your next visit. It's kept in your browser only and never sent to me.</td><td>Until you clear your browser data</td></tr>
-</table></div>
-<p>This is only saved if you use that button, and it's there to make the site work the way you asked.</p>
+<p>Nothing. This website doesn't save anything in your browser.</p>
 <h2>Visitor counts</h2>
 <p>{TODO("If Cloudflare Web Analytics is added")} I count page visits with Cloudflare Web Analytics. It doesn't use cookies, doesn't store anything on your device and doesn't follow you around the web.</p>
 <h2>Other websites</h2>
@@ -563,10 +552,6 @@ def page(name, p, preview=False):
     </div>
   </div>
 </footer>
-<button class="motion-btn" type="button" aria-pressed="false" aria-label="Pause animations">
-  <svg class="pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="4" width="5" height="16" rx="1"/><rect x="14" y="4" width="5" height="16" rx="1"/></svg>
-  <svg class="play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>
-</button>
 <script src="js/site.js"></script>
 <script src="js/liquid.js"></script>'''
     if name == "404.html" and not preview: head = '<base href="/">\n' + head
