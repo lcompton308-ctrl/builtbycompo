@@ -352,3 +352,6 @@ h1, .page-hero h1 { line-height: .98; }
 .statement-sec { padding-top: clamp(40px, 6vw, 80px); }
 .paused .halo svg { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) { .halo svg { animation: none; } .swap, .swap-w { transition: none; } }
+/* The intro cover shows the logo, so it uses the logo's font and weights */
+.intro .intro-cover span { font-family: var(--f-accent); font-weight: 500; letter-spacing: -.035em; }
+.intro .intro-cover b { font-weight: 800; }
