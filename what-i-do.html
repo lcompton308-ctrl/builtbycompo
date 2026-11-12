@@ -23,10 +23,12 @@
 <link rel="manifest" href="site.webmanifest">
 <link rel="preload" href="fonts/nunito.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="css/site.css">
+<script>(function(){try{var r=document.referrer,same=r&&new URL(r).host===location.host;if(!same&&!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches))document.documentElement.classList.add("intro")}catch(e){}})()</script>
 
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div class="intro-cover" aria-hidden="true"><span>Built by <b>Compo</b></span></div>
 <header class="site-head">
   <div class="wrap">
     <a class="logo" href="./" aria-label="Built by Compo, home">Built by <b>Compo</b></a>
@@ -87,24 +89,13 @@
 <footer class="site-foot">
   <canvas class="liquid" data-strength="0.3" aria-hidden="true"></canvas>
   <div class="wrap">
-    <div class="foot-hello">
-      <p class="foot-label">Say hello</p>
-      <a class="foot-email" href="mailto:luke@builtbycompo.co.uk">luke@builtbycompo.co.uk</a>
-      <div class="row"><a class="btn hot" href="https://wa.me/447517945561" rel="noopener">Message me on WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-    </div>
-    <nav class="foot-pills" aria-label="Footer">
-      <a href="about.html">About me</a><a href="what-i-do.html">What I do</a><a href="pricing.html">Pricing</a><a href="faqs.html">FAQs</a><a href="contact.html">Contact</a>
-    </nav>
-    <a class="foot-logo" href="./" aria-label="Built by Compo, home">Built by Compo</a>
-    <div class="foot-bar">
-      <ul>
-        <li><a href="privacy.html">Privacy policy</a></li>
-        <li><a href="cookies.html">Cookie policy</a></li>
-        <li><a href="terms.html">Terms and conditions</a></li>
-        <li><a href="refunds.html">Refund policy</a></li>
-        <li><button class="motion-link" type="button" aria-pressed="false">Pause animations</button></li>
-      </ul>
-      <p>© 2026 Built by Compo · Essex, England. Designed and built by me, obviously.</p>
+    <p class="foot-line">Got a project in mind? I'm all ears.</p>
+    <a class="foot-cta" href="contact.html">Tell me about it</a>
+    <div class="foot-rows">
+      <a class="foot-logo" href="./" aria-label="Built by Compo, home">Built by <b>Compo</b></a>
+      <span class="foot-links"><a href="mailto:luke@builtbycompo.co.uk">Email <span aria-hidden="true">↗</span></a><a href="https://wa.me/447517945561" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a></span>
+      <span>© 2026 Built by Compo</span>
+      <span class="foot-links"><a href="privacy.html">Privacy policy</a><button class="motion-link" type="button" aria-pressed="false">Pause animations</button></span>
     </div>
   </div>
 </footer>

@@ -17,6 +17,20 @@
     setPaused(!paused);
   });
 
+  /* ----- Header colours: white over the red areas, pills everywhere else ----- */
+  var head = document.querySelector(".site-head"), reds = document.querySelectorAll(".hero-panel, .site-foot");
+  if (head) {
+    var headTick = false;
+    var headCheck = function () {
+      headTick = false;
+      var y = head.offsetHeight / 2, on = false;
+      reds.forEach(function (r) { var b = r.getBoundingClientRect(); if (b.top <= y && b.bottom >= y) on = true; });
+      head.classList.toggle("on-red", on);
+    };
+    window.addEventListener("scroll", function () { if (!headTick) { headTick = true; requestAnimationFrame(headCheck); } }, { passive: true });
+    window.addEventListener("resize", headCheck); headCheck();
+  }
+
   /* ----- Mobile menu ----- */
   var menuBtn = document.querySelector(".menu-btn"), nav = document.getElementById("nav");
   if (menuBtn && nav) {

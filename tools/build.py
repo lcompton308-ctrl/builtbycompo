@@ -395,22 +395,11 @@ PAGES["privacy.html"] = dict(title="Privacy policy · Built by Compo", desc="How
 <p>You can ask me for a copy of your information, ask me to correct or delete it, ask me to limit how I use it, or object to me using it. To do any of these, email <a href="mailto:{EMAIL}">{EMAIL}</a> and I'll reply within one month.</p>
 <p>If you're unhappy with how I've handled your information, please tell me first so I can put it right. You can also complain to the Information Commissioner's Office at <a href="https://ico.org.uk/make-a-complaint/" rel="noopener">ico.org.uk</a> or on 0303 123 1113.</p>
 <h2>Cookies</h2>
-<p>This website doesn't use cookies. See the <a href="cookies.html">cookie policy</a>.</p>
+<p>This website doesn't use cookies and doesn't save anything on your device. It has no advertising or tracking tools, which is why you don't see a cookie banner.</p>
+<h2>Other policies</h2>
+<p>See also the <a href="terms.html">website terms</a> and the <a href="refunds.html">refund policy</a>.</p>
 <h2>Changes</h2>
 <p>If I change this policy, I'll update the date at the top of this page.</p>
-'''))
-
-PAGES["cookies.html"] = dict(title="Cookie policy · Built by Compo", desc="Built by Compo's website doesn't use cookies. Here's what it does save on your device.", body=legal("Cookie policy", f'''
-<h2>The short version</h2>
-<p>This website doesn't set any cookies, and it has no advertising or tracking tools. That's why you don't see a cookie banner.</p>
-<h2>What is saved on your device</h2>
-<p>Nothing. This website doesn't save anything in your browser.</p>
-<h2>Visitor counts</h2>
-<p>This website doesn't use any analytics or visitor tracking.</p>
-<h2>Other websites</h2>
-<p>If you follow a link to WhatsApp, a client's website or a social network, that site may set its own cookies. Their policies apply there.</p>
-<h2>Questions</h2>
-<p>Email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
 '''))
 
 PAGES["terms.html"] = dict(title="Terms and conditions · Built by Compo", desc="Terms for using the Built by Compo website.", body=legal("Terms and conditions", f'''
@@ -491,9 +480,11 @@ def page(name, p, preview=False):
 <link rel="manifest" href="site.webmanifest">
 <link rel="preload" href="fonts/nunito.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="css/site.css">
+<script>(function(){{try{{var r=document.referrer,same=r&&new URL(r).host===location.host;if(!same&&!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches))document.documentElement.classList.add("intro")}}catch(e){{}}}})()</script>
 {f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>' if ld else ""}'''
     body = f'''<a class="skip" href="#main">Skip to content</a>
-<header class="site-head{" over" if name == "index.html" else ""}">
+<div class="intro-cover" aria-hidden="true"><span>Built by <b>Compo</b></span></div>
+<header class="site-head{" on-red" if name == "index.html" else ""}">
   <div class="wrap">
     <a class="logo" href="{home}" aria-label="Built by Compo, home">Built by <b>Compo</b></a>
     <button class="btn menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
@@ -504,24 +495,13 @@ def page(name, p, preview=False):
 <footer class="site-foot">
   <canvas class="liquid" data-strength="0.3" aria-hidden="true"></canvas>
   <div class="wrap">
-    <div class="foot-hello">
-      <p class="foot-label">Say hello</p>
-      <a class="foot-email" href="mailto:{EMAIL}">{EMAIL}</a>
-      <div class="row"><a class="btn hot" href="https://wa.me/{WA}" rel="noopener">Message me on WhatsApp {ARROW}</a></div>
-    </div>
-    <nav class="foot-pills" aria-label="Footer">
-      {"".join(f'<a href="{h}">{t}</a>' for h, t in NAV)}<a href="contact.html">Contact</a>
-    </nav>
-    <a class="foot-logo" href="{home}" aria-label="Built by Compo, home">Built by Compo</a>
-    <div class="foot-bar">
-      <ul>
-        <li><a href="privacy.html">Privacy policy</a></li>
-        <li><a href="cookies.html">Cookie policy</a></li>
-        <li><a href="terms.html">Terms and conditions</a></li>
-        <li><a href="refunds.html">Refund policy</a></li>
-        <li><button class="motion-link" type="button" aria-pressed="false">Pause animations</button></li>
-      </ul>
-      <p>© {YEAR} Built by Compo · Essex, England. Designed and built by me, obviously.</p>
+    <p class="foot-line">Got a project in mind? I'm all ears.</p>
+    <a class="foot-cta" href="contact.html">Tell me about it</a>
+    <div class="foot-rows">
+      <a class="foot-logo" href="{home}" aria-label="Built by Compo, home">Built by <b>Compo</b></a>
+      <span class="foot-links"><a href="mailto:{EMAIL}">Email <span aria-hidden="true">↗</span></a><a href="https://wa.me/{WA}" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a></span>
+      <span>© {YEAR} Built by Compo</span>
+      <span class="foot-links"><a href="privacy.html">Privacy policy</a><button class="motion-link" type="button" aria-pressed="false">Pause animations</button></span>
     </div>
   </div>
 </footer>
