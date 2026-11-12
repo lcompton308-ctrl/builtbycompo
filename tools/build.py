@@ -60,7 +60,6 @@ PAGES["index.html"] = dict(
   desc="Bespoke websites for small businesses, designed, built and looked after by Compo. A small web studio based in Essex, England.",
   body=f'''
 <section class="hero">
-  <div class="wrap">
     <div class="hero-panel">
       <canvas class="liquid" data-strength="0.3" aria-hidden="true"></canvas>
       <div class="seal-wrap">{SEAL.format(cls="seal", id="h")}</div>
@@ -73,7 +72,6 @@ PAGES["index.html"] = dict(
         </div>
       </div>
     </div>
-  </div>
 </section>
 
 {ribbons()}
@@ -81,9 +79,8 @@ PAGES["index.html"] = dict(
 <section class="statement-sec">
   <div class="wrap">
     <p class="eyebrow reveal">A bit about me</p>
-    <p class="statement" data-fill>I think a good website should be simple to use, quick to load and easy to find. So I design and build each one from scratch, then look after it once it's live.
-      <span class="sticker pop s1">One-person studio</span><span class="sticker peach pop s2" style="--d:.35s">Allergic to templates</span><span class="sticker red pop s3" style="--d:.5s">Phones first</span>
-    </p>
+    <div class="sticker-row"><span class="sticker pop" style="--r:-5deg">One-person studio</span><span class="sticker peach pop" style="--r:3deg;--d:.35s">Allergic to templates</span><span class="sticker red pop" style="--r:-3deg;--d:.5s">Phones first</span></div>
+    <p class="statement" data-fill>I think a good website should be simple to use, quick to load and easy to find. So I design and build each one from scratch, then look after it once it's live.</p>
     <div class="row reveal"><a class="btn ghost" href="about.html">More about me {ARROW}</a></div>
   </div>
 </section>
@@ -221,7 +218,7 @@ PAGES["what-i-do.html"] = dict(
 <section style="padding-block:0"><div class="wrap">
     {svc('Website <span class="coop">design</span>', "Every site starts as a blank page, not a template. I design it around your business and your customers.", ["Designed for phones first, then tablets and laptops", "Your colours, your photos and your way of talking", "Clear buttons that lead to a call, a message or a booking"], 1)}
 </div></section>
-{ribbon_solo(["Built by hand", "Fast to load"], "b rev", "0.3")}
+{ribbon_solo(["Built by hand", "Fast to load"], "b", "0.3")}
 <section style="padding-block:0"><div class="wrap">
     {svc('Website <span class="coop">build</span>', "I build your site by hand, so it's quick, tidy and only carries what it needs.", ["Fast pages, tested on real phones", "Built to be easy to read and use for everyone", "Simple animations included, like the ones on this site", "Your domain connected for you"], 2)}
 </div></section>
@@ -229,7 +226,7 @@ PAGES["what-i-do.html"] = dict(
 <section style="padding-block:0"><div class="wrap">
     {svc('Custom <span class="coop">features</span>', "Sometimes a site needs to do more than show information. I can build tools that are made just for you.", ["Quizzes with personal results, like the one on tanyahill.co.uk", "Photo galleries, booking helpers and enquiry buttons", "Custom animation and illustration as extras"], 3)}
 </div></section>
-{ribbon_solo(["Found on Google", "SEO set-up"], "a rev", "0.3")}
+{ribbon_solo(["Found on Google", "SEO set-up"], "a", "0.3")}
 <section style="padding-block:0"><div class="wrap">
     {svc('SEO <span class="coop">set-up</span>', "SEO is short for search engine optimisation. It's the behind-the-scenes work that helps Google understand your site and show it to people searching for what you do.", ["Page titles and descriptions written the way people search", "Your site registered with Google, so new pages get picked up", "Fast, tidy pages, which Google rewards", "Help with your Google Business Profile, so you show up on Maps", "A proper preview image when your link is shared"], 4)}
 </div></section>
@@ -526,11 +523,11 @@ def page(name, p, preview=False):
 <link rel="stylesheet" href="css/site.css">
 {f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>' if ld else ""}'''
     body = f'''<a class="skip" href="#main">Skip to content</a>
-<header class="site-head">
+<header class="site-head{" over" if name == "index.html" else ""}">
   <div class="wrap">
     <a class="logo" href="{home}" aria-label="Built by Compo, home">Built by <b>Compo</b></a>
     <button class="btn menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
-    <nav class="nav" id="nav" aria-label="Main">{nav}<a class="btn" href="contact.html"{cur("contact.html")}>Let's talk</a></nav>
+    <nav class="nav" id="nav" aria-label="Main"><canvas class="liquid" data-strength="0.3" aria-hidden="true"></canvas>{nav}<a class="btn" href="contact.html"{cur("contact.html")}>Let's talk</a></nav>
   </div>
 </header>
 <main id="main">{p["body"].replace("{HOME}", home)}</main>
