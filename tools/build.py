@@ -37,7 +37,7 @@ SEAL = '''<svg class="{cls}" viewBox="0 0 200 200" role="img" aria-label="Built 
   <circle cx="100" cy="100" r="97" fill="none" stroke="currentColor" stroke-width="3"/>
   <circle cx="100" cy="100" r="54" fill="none" stroke="currentColor" stroke-width="2"/>
   <text font-family="Roboto,Arial,sans-serif" font-weight="800" font-size="13.5" fill="currentColor"><textPath href="#sealpath-{id}" startOffset="0" textLength="463" lengthAdjust="spacing">BUILT BY COMPO ✦ BESPOKE WEBSITES ✦ ESSEX, ENGLAND ✦ </textPath></text>
-  <text x="100" y="100" dy=".355em" text-anchor="middle" font-family="Calistoga,'Cooper Black',Georgia,serif" font-weight="400" font-size="76" fill="currentColor">C</text>
+  <text x="100" y="100" dy=".355em" text-anchor="middle" font-family="'Sao Torpes',Roboto,Arial,sans-serif" font-weight="400" font-size="70" fill="currentColor">C</text>
 </svg>'''
 
 def cta_panel(heading='Tell me about <span class="coop">your project</span>'):
@@ -449,6 +449,10 @@ PAGES["404.html"] = dict(title="Page not found · Built by Compo", desc="That pa
 <section class="page-hero"><div class="wrap"><h1>Nothing <span class="coop">here.</span></h1><p class="lede">That page has moved or never existed.</p><div class="row"><a class="btn" href="{{HOME}}">Back to the homepage {ARROW}</a></div></div></section>''')
 
 # ------------------------------------------------------------------ LAYOUT
+def _curly(s):
+    # the headline font has a curly apostrophe but no straight one
+    return re.sub(r"(<h[12][^>]*>)(.*?)(</h[12]>)", lambda m: m.group(1) + m.group(2).replace("'", "\u2019") + m.group(3), s, flags=re.S)
+
 def _ver():
     import hashlib
     h = hashlib.md5()
@@ -494,7 +498,7 @@ def page(name, p, preview=False):
     <nav class="nav" id="nav" aria-label="Main"><canvas class="liquid" data-strength="0.3" aria-hidden="true"></canvas>{nav}<a class="btn" href="contact.html"{cur("contact.html")}>Let's talk</a></nav>
   </div>
 </header>
-<main id="main">{p["body"].replace("{HOME}", home)}</main>
+<main id="main">{_curly(p["body"].replace("{HOME}", home))}</main>
 <footer class="site-foot">
   <canvas class="liquid" data-strength="0.3" aria-hidden="true"></canvas>
   <div class="wrap">
