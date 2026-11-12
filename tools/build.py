@@ -454,7 +454,15 @@ PAGES["404.html"] = dict(title="Page not found · Built by Compo", desc="That pa
 <section class="page-hero"><div class="wrap"><h1>Nothing <span class="coop">here.</span></h1><p class="lede">That page has moved or never existed.</p><div class="row"><a class="btn" href="{{HOME}}">Back to the homepage {ARROW}</a></div></div></section>''')
 
 # ------------------------------------------------------------------ LAYOUT
+def _ver():
+    import hashlib
+    h = hashlib.md5()
+    for f in ("css/site.css", "js/site.js", "js/liquid.js"):
+        h.update(open(os.path.join(ROOT, f), "rb").read())
+    return h.hexdigest()[:8]
+
 def page(name, p, preview=False):
+    v = "" if preview else "?v=" + _ver()
     home = "index.html" if preview else "./"
     cur = lambda href: ' aria-current="page"' if href == name else ""
     nav = "".join(f'<a href="{h}"{cur(h)}>{t}</a>' for h, t in NAV)
@@ -479,7 +487,7 @@ def page(name, p, preview=False):
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preload" href="fonts/nunito.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/site.css{v}">
 <script>(function(){{try{{var r=document.referrer,same=r&&new URL(r).host===location.host;if(!same&&!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches))document.documentElement.classList.add("intro")}}catch(e){{}}}})()</script>
 {f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>' if ld else ""}'''
     body = f'''<a class="skip" href="#main">Skip to content</a>
@@ -495,18 +503,16 @@ def page(name, p, preview=False):
 <footer class="site-foot">
   <canvas class="liquid" data-strength="0.3" aria-hidden="true"></canvas>
   <div class="wrap">
-    <p class="foot-line">Got a project in mind? I'm all ears.</p>
-    <a class="foot-cta" href="contact.html">Tell me about it</a>
+    <p class="foot-contact"><a href="mailto:{EMAIL}">{EMAIL}</a><a href="https://wa.me/{WA}" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a></p>
+    <a class="foot-logo" href="{home}" aria-label="Built by Compo, home">Built by <b>Compo</b></a>
     <div class="foot-rows">
-      <a class="foot-logo" href="{home}" aria-label="Built by Compo, home">Built by <b>Compo</b></a>
-      <span class="foot-links"><a href="mailto:{EMAIL}">Email <span aria-hidden="true">↗</span></a><a href="https://wa.me/{WA}" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a></span>
       <span>© {YEAR} Built by Compo</span>
       <span class="foot-links"><a href="privacy.html">Privacy policy</a><button class="motion-link" type="button" aria-pressed="false">Pause animations</button></span>
     </div>
   </div>
 </footer>
-<script src="js/site.js"></script>
-<script src="js/liquid.js"></script>'''
+<script src="js/site.js{v}"></script>
+<script src="js/liquid.js{v}"></script>'''
     if name == "404.html" and not preview: head = '<base href="/">\n' + head
     if preview == "bare":   # artifact main page: the publisher adds the outer skeleton
         return head.replace(p["title"], "Built by Compo Site", 1) + '\n<meta name="claude:viewport-fit-sides" content="cover">\n<script>document.documentElement.classList.add("no-js")</script>\n' + body
