@@ -505,7 +505,7 @@ def page(name, p, preview=False):
   <div class="wrap">
     <a class="logo{" is-white" if name == "index.html" else ""}" href="{home}" aria-label="Built by Compo, home">Built by <b>Compo</b></a>
     <button class="menu-btn{" is-white" if name == "index.html" else ""}" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span></button>
-    <nav class="nav" id="nav" aria-label="Main"><canvas class="liquid" data-strength="0.3" aria-hidden="true"></canvas>{nav}<a class="btn" href="contact.html"{cur("contact.html")}>Let's talk</a><a class="nav-mail" href="{MAILTO}">{EMAIL}</a></nav>
+    <nav class="nav" id="nav" aria-label="Main"><canvas class="liquid" data-strength="0.3" aria-hidden="true"></canvas>{nav}<a class="btn" href="contact.html"{cur("contact.html")}>Let's talk</a></nav>
   </div>
 </header>
 <main id="main">{_curly(p["body"].replace("{HOME}", home))}</main>

@@ -106,7 +106,7 @@ main { padding-top: 84px; }
   .nav.open { transform: none; visibility: visible; transition: transform .5s cubic-bezier(.7, 0, .2, 1); }
   .nav a:not(.btn) { font: 800 clamp(2.2rem, 10vw, 3.2rem)/1.1 var(--f-display); letter-spacing: -.04em; padding: 8px 0; background: none; box-shadow: none; }
   .nav a:not(.btn):hover, .nav a[aria-current="page"]:not(.btn) { background: none; color: #fff; transform: none; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; }
-  .nav .btn { display: block; margin: 0; min-height: 0; padding: 8px 0; border-radius: 0; background: none; box-shadow: none; color: #fff; font: 800 clamp(2.2rem, 10vw, 3.2rem)/1.1 var(--f-accent); letter-spacing: -.035em; }
+  .nav .btn { display: block; margin: 0; min-height: 0; padding: 8px 0; border-radius: 0; background: none; box-shadow: none; color: #fff; font: 800 clamp(2.2rem, 10vw, 3.2rem)/1.1 var(--f-display); letter-spacing: -.04em; }
   .nav .btn[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; }
   .menu-open .site-head .menu-btn { color: #fff; }
   .nav a.nav-mail { display: block; margin-top: 30px; padding: 6px 0; font: 600 1.15rem/1.3 var(--f-accent); letter-spacing: -.01em; text-decoration: underline; text-underline-offset: 4px; }
