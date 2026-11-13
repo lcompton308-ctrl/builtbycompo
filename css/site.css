@@ -92,17 +92,24 @@ main { padding-top: 84px; }
 .nav a[aria-current="page"]:not(.btn) { background: var(--peach); }
 .nav .btn { min-height: 46px; margin-left: 6px; box-shadow: 0 0 0 2px var(--canvas); transition: transform .35s cubic-bezier(.3, 1.6, .5, 1), background .3s ease, color .3s ease, box-shadow .3s ease; }
 .menu-btn { display: none; }
+.nav a.nav-mail { display: none; }
 @media (min-width: 901px) { .nav .btn.is-white { background: transparent; color: #fff; box-shadow: inset 0 0 0 2px #fff; } }
 @media (max-width: 900px) {
-  .menu-btn { display: inline-flex; min-height: 46px; padding: 0 1.3em; position: relative; z-index: 41; background: var(--card); box-shadow: inset 0 0 0 2px var(--line); transition: background .3s ease, color .3s ease, box-shadow .3s ease, transform .35s cubic-bezier(.3, 1.6, .5, 1); }
-  .menu-btn.is-white { background: transparent; color: #fff; box-shadow: inset 0 0 0 2px #fff; }
-  .nav { position: fixed; inset: 0; z-index: 40; background: var(--footer-red); color: #fff; isolation: isolate; flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px; padding: 90px var(--gutter-r) 40px var(--gutter-l); transform: translateY(-102%); visibility: hidden; transition: transform .45s cubic-bezier(.7, 0, .2, 1), visibility 0s .45s; }
+  .menu-btn { display: grid; place-items: center; width: 48px; height: 48px; margin-right: -11px; padding: 0; border: 0; background: none; color: var(--orange-text); cursor: pointer; position: relative; z-index: 41; transition: color .45s ease; }
+  .menu-btn.is-white { color: #fff; }
+  .menu-btn .bars { display: grid; gap: 6px; width: 26px; }
+  .menu-btn .bars i { display: block; height: 2.5px; border-radius: 2px; background: currentColor; transition: transform .4s cubic-bezier(.6, 0, .2, 1); }
+  .menu-open .menu-btn .bars i:first-child { transform: translateY(8.5px); }
+  .menu-open .menu-btn .bars i:last-child { transform: translateY(-8.5px); }
+  .nav { position: fixed; inset: 0; z-index: 40; background: var(--footer-red); color: #fff; isolation: isolate; flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px; padding: 90px var(--gutter-r) 40px var(--gutter-l); overflow: hidden; transform: translateX(102%); visibility: hidden; transition: transform .5s cubic-bezier(.7, 0, .2, 1), visibility 0s .5s; }
   .nav canvas.liquid { display: block; }
-  .nav.open { transform: none; visibility: visible; transition: transform .45s cubic-bezier(.7, 0, .2, 1); }
+  .nav.open { transform: none; visibility: visible; transition: transform .5s cubic-bezier(.7, 0, .2, 1); }
   .nav a:not(.btn) { font: 800 clamp(2.2rem, 10vw, 3.2rem)/1.1 var(--f-display); letter-spacing: -.04em; padding: 8px 0; background: none; box-shadow: none; }
   .nav a:not(.btn):hover, .nav a[aria-current="page"]:not(.btn) { background: none; color: #fff; transform: none; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; }
-  .nav .btn { margin: 22px 0 0; background: var(--canvas); box-shadow: none; }
-  .menu-open .site-head .menu-btn { background: var(--canvas); color: var(--ink); box-shadow: none; }
+  .nav .btn { display: block; margin: 0; min-height: 0; padding: 8px 0; border-radius: 0; background: none; box-shadow: none; color: #fff; font: 800 clamp(2.2rem, 10vw, 3.2rem)/1.1 var(--f-accent); letter-spacing: -.035em; }
+  .nav .btn[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; }
+  .menu-open .site-head .menu-btn { color: #fff; }
+  .nav a.nav-mail { display: block; margin-top: 30px; padding: 6px 0; font: 600 1.15rem/1.3 var(--f-accent); letter-spacing: -.01em; text-decoration: underline; text-underline-offset: 4px; }
 }
 
 /* ---------- Hero (liquid panel) ---------- */
@@ -178,7 +185,7 @@ canvas.liquid.on { opacity: 1; }
 .svc-list li { display: grid; gap: 6px 32px; padding-block: clamp(18px, 2.6vw, 30px); border-top: 2px solid var(--line); align-items: baseline; }
 .svc-list li:last-child { border-bottom: 2px solid var(--line); }
 @media (min-width: 800px) { .svc-list li { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); } }
-.svc-list h3 { font-size: clamp(1.7rem, 4vw, 3rem); letter-spacing: -.045em; }
+.svc-list h3 { font-family: var(--f-accent); font-weight: 800; color: var(--ink); font-size: clamp(1.7rem, 4vw, 3rem); letter-spacing: -.035em; }
 .svc-block { display: grid; gap: 22px; padding-block: clamp(36px, 6vw, 72px); }
 @media (min-width: 860px) { .svc-block { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 48px; align-items: start; } }
 .svc-block h2 { font-size: clamp(2.3rem, 6.4vw, 5rem); }
@@ -336,12 +343,11 @@ h1, .page-hero h1 { line-height: .98; }
 .price .amt { font-family: var(--f-display); font-weight: 900; letter-spacing: -.04em; }
 
 /* ---------- Hero: the name turning on a big circle (top half only), with a sentence whose words change ---------- */
-/* The hero ends just below the sentence: a shorter moving background is lighter for phones to draw */
-.hero-panel { --halo: clamp(600px, 175vw, 1500px); display: block; align-content: normal; padding: 0 0 calc(clamp(170px, 26vw, 330px) + 14px); min-height: 0; }
+.hero-panel { --halo: clamp(600px, 175vw, 1500px); display: block; align-content: center; padding: 0 0 clamp(150px, 22vw, 300px); min-height: calc(100vh + 120px); min-height: calc(100svh + 120px); }
 .halo { position: relative; height: calc(var(--halo) * .47); margin-top: clamp(70px, 9vh, 110px); overflow: hidden; pointer-events: none; }
 /* The soft fade on the arc's sides is costly to draw, and on phones the sides are off-screen anyway */
 @media (min-width: 900px) { .halo { -webkit-mask-image: linear-gradient(#000 58%, transparent 96%); mask-image: linear-gradient(#000 58%, transparent 96%); } }
-.halo svg { position: absolute; left: 50%; top: 0; width: var(--halo); height: var(--halo); max-width: none; margin-left: calc(var(--halo) / -2); animation: halo-turn 70s linear infinite; will-change: transform; }
+.halo svg { position: absolute; left: 50%; top: 0; width: var(--halo); height: var(--halo); max-width: none; margin-left: calc(var(--halo) / -2); animation: halo-turn 46s linear infinite; will-change: transform; }
 .halo text { font-family: var(--f-accent); font-weight: 800; font-size: 124px; fill: #fff; }
 @keyframes halo-turn { to { transform: rotate(-360deg); } }
 .hero h1.hero-say { position: relative; margin: calc(var(--halo) * -.245) auto 0; width: min(100% - 44px, 22em); text-align: center; font: 600 clamp(1.4rem, 3.9vw, 2.9rem)/1.22 var(--f-display); letter-spacing: -.025em; text-wrap: balance; }
@@ -358,3 +364,7 @@ h1, .page-hero h1 { line-height: .98; }
 /* The intro cover shows the logo, so it uses the logo's font and weights */
 .intro .intro-cover span { font-family: var(--f-accent); font-weight: 500; letter-spacing: -.035em; }
 .intro .intro-cover b { font-weight: 800; }
+
+/* Second curved ribbon below "More about me": the bottom of the same imaginary circle */
+.arc.arc-low { margin-top: clamp(-10px, 1vw, 20px); margin-bottom: clamp(10px, 3vw, 40px); }
+.statement-sec { padding-bottom: clamp(20px, 4vw, 48px); }

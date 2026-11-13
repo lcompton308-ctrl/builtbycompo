@@ -77,11 +77,11 @@
   /* ----- Mobile menu ----- */
   var menuBtn = document.querySelector(".menu-btn"), nav = document.getElementById("nav");
   if (menuBtn && nav) {
-    var closeMenu = function () { nav.classList.remove("open"); root.classList.remove("menu-open"); menuBtn.setAttribute("aria-expanded", "false"); menuBtn.textContent = "Menu"; };
+    var closeMenu = function () { nav.classList.remove("open"); root.classList.remove("menu-open"); menuBtn.setAttribute("aria-expanded", "false"); menuBtn.setAttribute("aria-label", "Open menu"); };
     menuBtn.addEventListener("click", function () {
       var open = !nav.classList.contains("open");
       if (!open) return closeMenu();
-      nav.classList.add("open"); root.classList.add("menu-open"); menuBtn.setAttribute("aria-expanded", "true"); menuBtn.textContent = "Close";
+      nav.classList.add("open"); root.classList.add("menu-open"); menuBtn.setAttribute("aria-expanded", "true"); menuBtn.setAttribute("aria-label", "Close menu");
     });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && nav.classList.contains("open")) { closeMenu(); menuBtn.focus(); } });
   }
@@ -137,7 +137,7 @@
 
   /* ----- Curved ribbon: text travels along the curve ----- */
   document.querySelectorAll(".arc textPath").forEach(function (tp) {
-    var text = tp.parentNode, unit = 0, off = 0, last = 0, vis = true;
+    var text = tp.parentNode, unit = 0, off = 0, last = 0, vis = true, dir = parseFloat(tp.dataset.dir || "-1");
     function measure() { try { unit = text.getSubStringLength(0, parseInt(tp.dataset.unit, 10)); } catch (e) { unit = 0; } }
     measure(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
     if (reduce) return;
@@ -146,7 +146,10 @@
       requestAnimationFrame(step);
       if (t - last < 33) return;                    // about 30 redraws a second, whatever the screen's refresh rate
       var dt = Math.min(100, t - (last || t)); last = t;
-      if (!paused && vis && unit > 0 && !window.BBC_SCROLLING) { off -= dt * 0.07; if (off <= -unit) off += unit; tp.setAttribute("startOffset", (off - unit).toFixed(1)); }
+      if (!paused && vis && unit > 0) {                        // keeps moving while you scroll
+        off += dir * dt * 0.11; if (off <= -unit) off += unit; if (off > 0) off -= unit;
+        tp.setAttribute("startOffset", (off - unit).toFixed(1));
+      }
     }
     requestAnimationFrame(step);
   });

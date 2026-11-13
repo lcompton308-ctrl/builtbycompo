@@ -10,9 +10,12 @@ function bbcLiquid(canvas) {
   var SPEED = 0.16;          // how fast the pattern flows
   var SCALE = 1.3;           // bigger number = smaller pools
   var STRENGTH = 0.42;        // how strong the yellow is (0 to 1)
-  var RESOLUTION = 0.4;      // draws at half size and lets the browser smooth it (saves battery)
+  // Firefox on Android struggles with this effect, so it gets a lighter version
+  var LITE = /Android/i.test(navigator.userAgent) && /Firefox/i.test(navigator.userAgent);
+  var RESOLUTION = LITE ? 0.25 : 0.4;   // draws smaller and lets the browser smooth it (saves battery)
+  var INTERVAL = LITE ? 55 : 40;        // milliseconds between pictures
 
-  var gl = canvas.getContext("webgl", { antialias: false, alpha: false, premultipliedAlpha: false, powerPreference: "low-power" });
+  var gl = canvas.getContext("webgl", { antialias: false, alpha: true, premultipliedAlpha: true, powerPreference: "low-power" });
   if (!gl) return;
 
   var vert = "attribute vec2 a;void main(){gl_Position=vec4(a,0.0,1.0);}";
@@ -97,28 +100,33 @@ function bbcLiquid(canvas) {
   function resize() {
     var w = Math.max(1, Math.round(canvas.clientWidth * RESOLUTION));
     var h = Math.max(1, Math.round(canvas.clientHeight * RESOLUTION));
-    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; gl.viewport(0, 0, w, h); }
+    // Changing the size wipes the picture, so mark it to be drawn again straight away
+    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; gl.viewport(0, 0, w, h); needDraw = true; }
     gl.uniform2f(uRes, w, h);
   }
-  window.addEventListener("resize", resize);
+  var needDraw = true, lost = false;
+  window.addEventListener("resize", function () { if (!lost) { resize(); draw(); } });
+  // If the phone takes the graphics chip away, show the plain red (never black) and start again when it comes back
+  canvas.addEventListener("webglcontextlost", function (e) { e.preventDefault(); lost = true; canvas.classList.remove("on"); });
+  canvas.addEventListener("webglcontextrestored", function () { bbcLiquid(canvas); });
   resize();
 
-  // Only draw while the footer is on screen and animations aren't paused
-  var visible = false, t = Math.random() * 50, last = 0, drawn = false;
-  if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(canvas);
+  // Only draw while it is on screen. It holds still while the page is being scrolled, but is always
+  // redrawn after a size change (phones resize as the address bar hides) so it can't be left black.
+  var visible = false, t = Math.random() * 50, last = 0, sized = 0;
+  if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible) needDraw = true; }).observe(canvas);
   else visible = true;
-  // The pattern moves slowly, so a modest redraw rate looks the same and leaves room for scrolling
-  var sized = 0;
+  function draw() { gl.uniform1f(uT, t); gl.drawArrays(gl.TRIANGLES, 0, 6); needDraw = false; }
   function frame(now) {
+    if (lost) return;
     requestAnimationFrame(frame);
-    if (now - last < 40) return;                                   // about 25 pictures a second on any screen, including 120Hz phones
+    if (now - last < INTERVAL) return;
     var dt = Math.min(0.1, (now - (last || now)) / 1000); last = now;
-    if (window.BBC_SCROLLING && drawn) return;                     // hold still while the page is being scrolled
-    if (visible && (!window.BBC_PAUSED || !drawn)) {
-      if (!window.BBC_PAUSED) t += dt * speed;
-      if (!sized || now - sized > 500) { resize(); sized = now; }
-      gl.uniform1f(uT, t); gl.drawArrays(gl.TRIANGLES, 0, 6); drawn = true;
-    }
+    if (!visible) return;
+    if (!sized || now - sized > 500) { resize(); sized = now; }
+    if (needDraw) { draw(); return; }
+    if (window.BBC_SCROLLING || window.BBC_PAUSED) return;
+    t += dt * speed; draw();
   }
   requestAnimationFrame(frame);
   canvas.classList.add("on");

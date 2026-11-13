@@ -8,6 +8,7 @@ import sys, os, html, json, re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://builtbycompo.co.uk"
 EMAIL = "luke@builtbycompo.co.uk"
+MAILTO = "mailto:" + EMAIL + "?subject=Website%20enquiry&body=Hi%20Compo%2C%0A%0AI%E2%80%99d%20like%20to%20talk%20about%20a%20website.%0A%0A"
 WA = "447517945561"   # used in the WhatsApp link only; the number is not shown on the page
 YEAR = "2026"
 TODO = lambda t: f'<mark class="todo">[{t}]</mark>'
@@ -19,12 +20,13 @@ def ribbon_track(words, n=8):
     spans = "".join(f"<span>{w}</span>" for w in words) * n
     return f'<div class="ribbon-shift" data-speed="{{speed}}"><div class="ribbon-track" aria-hidden="true">{spans}{spans}</div></div>'
 
-def ribbons():
+def ribbons(low=False):
     unit = "Websites that work  •  Bespoke builds  •  Built only for you  •  "
-    return f'''<div class="arc" role="img" aria-label="Websites that work. Bespoke builds. Built only for you.">
+    pid, d, dy, cls, dirn = ("arc-path-low", "M-200,5 Q760,470 1800,185", "27", "arc arc-low", "1") if low else ("arc-path", "M-200,395 Q760,-70 1800,215", "27", "arc", "-1")
+    return f'''<div class="{cls}" role="img" aria-label="Websites that work. Bespoke builds. Built only for you.">
   <svg viewBox="0 0 1600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <path id="arc-path" d="M-200,395 Q760,-70 1800,215" fill="none" stroke="#ff5412" stroke-width="150"/>
-    <text dy="27" xml:space="preserve"><textPath href="#arc-path" startOffset="0" data-unit="{len(unit)}">{unit * 7}</textPath></text>
+    <path id="{pid}" d="{d}" fill="none" stroke="#ff5412" stroke-width="150"/>
+    <text dy="{dy}" xml:space="preserve"><textPath href="#{pid}" startOffset="0" data-unit="{len(unit)}" data-dir="{dirn}">{unit * 7}</textPath></text>
   </svg>
 </div>'''
 
@@ -92,9 +94,10 @@ PAGES["index.html"] = dict(
   </div>
 </section>
 
+{ribbons(low=True)}
+
 <section class="work" aria-labelledby="work-h">
   <div class="wrap sec-head">
-    <p class="eyebrow reveal">Selected work</p>
     <h2 id="work-h" class="reveal">Recently <span class="coop">built</span></h2>
     <p class="muted reveal" style="max-width:34ch">Drag or swipe to look around. One of these spots is always yours.</p>
   </div>
@@ -123,7 +126,7 @@ PAGES["index.html"] = dict(
       <li class="reveal"><h3>Custom features</h3><p>Quizzes, galleries, booking buttons. If it helps your customers get in touch, I can build it.</p></li>
       <li class="reveal"><h3>Hosting and care</h3><p>I keep your site online, check it every month and make your changes for you.</p></li>
     </ul>
-    <div class="row reveal"><a class="btn ghost" href="what-i-do.html">Everything I do {ARROW}</a></div>
+    <div class="row reveal" style="justify-content:center"><a class="btn ghost" href="what-i-do.html">Everything I do {ARROW}</a></div>
   </div>
 </section>
 
@@ -395,7 +398,7 @@ PAGES["privacy.html"] = dict(title="Privacy policy · Built by Compo", desc="How
 <h2>Your rights</h2>
 <p>You can ask me for a copy of your information, ask me to correct or delete it, ask me to limit how I use it, or object to me using it. To do any of these, email <a href="mailto:{EMAIL}">{EMAIL}</a> and I'll reply within one month.</p>
 <p>If you're unhappy with how I've handled your information, please tell me first so I can put it right. You can also complain to the Information Commissioner's Office at <a href="https://ico.org.uk/make-a-complaint/" rel="noopener">ico.org.uk</a> or on 0303 123 1113.</p>
-<h2>Cookies</h2>
+<h2 id="cookies">Cookies</h2>
 <p>This website doesn't use cookies and doesn't save anything on your device. It has no advertising or tracking tools, which is why you don't see a cookie banner.</p>
 <h2>Other policies</h2>
 <p>See also the <a href="terms.html">website terms</a> and the <a href="refunds.html">refund policy</a>.</p>
@@ -473,6 +476,7 @@ def page(name, p, preview=False):
     nav = "".join(f'<a href="{h}"{cur(h)}>{t}</a>' for h, t in NAV)
     canon = SITE + "/" + ("" if name == "index.html" else name.replace(".html", ""))
     ld = p.get("jsonld") or ({"@context": "https://schema.org", "@type": "ProfessionalService", "name": "Built by Compo", "url": SITE + "/", "email": EMAIL, "areaServed": "GB", "address": {"@type": "PostalAddress", "addressRegion": "Essex", "addressCountry": "GB"}, "description": "Bespoke websites for small businesses, designed, built and looked after by Compo."} if name == "index.html" else None)
+    if name == "index.html": ld = [ld, {"@context": "https://schema.org", "@type": "WebSite", "name": "Built by Compo", "url": SITE + "/"}]
     head = f'''<title>{p["title"]}</title>
 <meta name="description" content="{html.escape(p["desc"])}">
 {'<meta name="robots" content="noindex">' if p.get("noindex") else f'<link rel="canonical" href="{canon}">'}
@@ -501,8 +505,8 @@ def page(name, p, preview=False):
 <header class="site-head">
   <div class="wrap">
     <a class="logo{" is-white" if name == "index.html" else ""}" href="{home}" aria-label="Built by Compo, home">Built by <b>Compo</b></a>
-    <button class="btn menu-btn{" is-white" if name == "index.html" else ""}" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
-    <nav class="nav" id="nav" aria-label="Main"><canvas class="liquid" data-strength="0.3" aria-hidden="true"></canvas>{nav}<a class="btn" href="contact.html"{cur("contact.html")}>Let's talk</a></nav>
+    <button class="menu-btn{" is-white" if name == "index.html" else ""}" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span></button>
+    <nav class="nav" id="nav" aria-label="Main"><canvas class="liquid" data-strength="0.3" aria-hidden="true"></canvas>{nav}<a class="btn" href="contact.html"{cur("contact.html")}>Let's talk</a><a class="nav-mail" href="{MAILTO}">{EMAIL}</a></nav>
   </div>
 </header>
 <main id="main">{_curly(p["body"].replace("{HOME}", home))}</main>
@@ -512,7 +516,7 @@ def page(name, p, preview=False):
     <div class="foot-talk">
       <h2>Tell me about <b>your project.</b></h2>
       <a class="foot-btn solid" href="contact.html#project-form">Let's talk</a>
-      <a class="foot-btn" href="mailto:{EMAIL}">{EMAIL} <span aria-hidden="true">↗</span></a>
+      <a class="foot-btn" href="{MAILTO}">{EMAIL} <span aria-hidden="true">↗</span></a>
       <a class="foot-btn" href="https://wa.me/{WA}" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a>
     </div>
     <p class="foot-small"><span>© {YEAR} Built by Compo</span><a href="privacy.html">Privacy policy</a><button class="motion-link" type="button" aria-pressed="false">Pause animations</button></p>
@@ -531,6 +535,7 @@ def main():
     for name, p in PAGES.items():
         open(os.path.join(ROOT, name), "w", encoding="utf-8").write(page(name, p))
     urls = "".join(f"  <url><loc>{SITE}/{'' if n == 'index.html' else n.replace('.html', '')}</loc><lastmod>{YEAR}-11-12</lastmod></url>\n" for n, p in PAGES.items() if not p.get("noindex"))
+    open(os.path.join(ROOT, "cookies.html"), "w").write('<!doctype html>\n<html lang="en-GB">\n<head>\n<meta charset="utf-8">\n<meta name="robots" content="noindex">\n<meta http-equiv="refresh" content="0; url=/privacy#cookies">\n<link rel="canonical" href="' + SITE + '/privacy">\n<title>Cookies · Built by Compo</title>\n</head>\n<body><p>This page has moved to the <a href="/privacy#cookies">privacy policy</a>.</p></body>\n</html>\n')
     open(os.path.join(ROOT, "sitemap.xml"), "w").write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
     if preview:
         d = os.path.join(ROOT, "_preview"); os.makedirs(d, exist_ok=True)
