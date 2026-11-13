@@ -117,7 +117,6 @@ PAGES["index.html"] = dict(
 <section aria-labelledby="svc-h">
   <div class="wrap" style="display:grid;gap:clamp(24px,4vw,44px)">
     <div style="display:grid;gap:14px">
-      <p class="eyebrow reveal">What I do</p>
       <h2 id="svc-h" class="reveal">Designed and <span class="coop">built by Compo</span></h2>
     </div>
     <ul class="svc-list">
