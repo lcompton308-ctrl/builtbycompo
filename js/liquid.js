@@ -7,6 +7,7 @@ function bbcLiquid(canvas) {
   // Colours as 0-1 RGB. Change these to re-theme the background.
   var PRIMARY = [244 / 255, 41 / 255, 2 / 255];    // #F42902 red orange
   var SECONDARY = [200 / 255, 253 / 255, 2 / 255]; // #C8FD02 yellow
+  if (window.BBC_LIQUID_COLOURS) { PRIMARY = window.BBC_LIQUID_COLOURS[0]; SECONDARY = window.BBC_LIQUID_COLOURS[1]; }   // colour scheme previews
   var SPEED = 0.16;          // how fast the pattern flows
   var SCALE = 1.3;           // bigger number = smaller pools
   var STRENGTH = 0.42;        // how strong the yellow is (0 to 1)

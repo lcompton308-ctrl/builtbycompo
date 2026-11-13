@@ -60,7 +60,8 @@
       watch.forEach(function (el) {
         var r = el.getBoundingClientRect(); if (!r.width) return;
         var c = behind(r.left + Math.min(r.width / 2, 60), r.top + r.height / 2), L = lum(c[0], c[1], c[2]);
-        el.classList.toggle("is-white", (1.05) / (L + 0.05) > 2.4 && c[0] > c[2] + 60 && L < 0.5);
+        var sat = Math.max(c[0], c[1], c[2]) - Math.min(c[0], c[1], c[2]);
+        el.classList.toggle("is-white", sat > 60 && L < 0.6);     // over a strong brand colour, not the pale page
       });
       var lg = head.querySelector(".logo"); head.classList.toggle("over-dark", !!lg && lg.classList.contains("is-white"));
     };
