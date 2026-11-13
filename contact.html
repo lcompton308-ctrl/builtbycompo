@@ -23,7 +23,7 @@
 <link rel="manifest" href="site.webmanifest">
 <link rel="preload" href="fonts/soft-serif-standin.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="fonts/roboto.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=b3791689">
+<link rel="stylesheet" href="css/site.css?v=c0b27c94">
 <script>(function(){try{var r=document.referrer,same=r&&new URL(r).host===location.host;if(!same&&!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches))document.documentElement.classList.add("intro")}catch(e){}})()</script>
 
 </head>
@@ -50,7 +50,6 @@
       <div style="display:grid;gap:20px">
         <h2 style="font-size:clamp(2rem,5vw,3.8rem)">Tell me about <span class="coop">your project</span></h2>
         <p>I'd like a proper conversation, so I can understand your business before I suggest anything. Pop your name in and I'll get a message started for you.</p>
-        <p class="small">This form doesn't send or store anything. It opens your own email or WhatsApp with a message ready, and you press send.</p>
       </div>
       <form class="form" id="project-form" data-email="luke@builtbycompo.co.uk" data-wa="447517945561" novalidate>
         <fieldset>
@@ -64,6 +63,7 @@
         <div class="field"><label for="last">Last name</label><input id="last" name="last" autocomplete="family-name" required></div>
         <div class="field"><label for="business">Business name</label><input id="business" name="business" autocomplete="organization"></div>
         <div class="row"><button class="btn hot" type="submit" id="form-go">Open my email app <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+        <p class="small form-note">Nothing is sent or stored here. It opens your own email or WhatsApp with a message ready, and you press send.</p>
         <p id="form-out" class="small" role="status" aria-live="polite"></p>
       </form>
     </div>
@@ -71,8 +71,8 @@
 </section>
 
 <section style="padding-top:0">
-  <div class="wrap narrow">
-    <ul class="plain-list">
+  <div class="wrap">
+    <ul class="plain-list details">
       <li class="reveal"><b>Email</b><span><a href="mailto:luke@builtbycompo.co.uk">luke@builtbycompo.co.uk</a> <button class="btn ghost mini" type="button" data-copy="luke@builtbycompo.co.uk">Copy</button></span></li>
       <li class="reveal"><b>WhatsApp</b><span><a href="https://wa.me/447517945561" rel="noopener">Message me on WhatsApp</a></span></li>
       <li class="reveal"><b>Where</b><span>Essex, England. I work with businesses anywhere in the UK.</span></li>
@@ -85,8 +85,8 @@
   <canvas class="liquid" data-strength="0.3" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="foot-talk">
-      <h2>Tell me about <b>your project.</b></h2>
-      <a class="foot-btn solid" href="contact.html#project-form">Let's talk</a>
+      
+      
       <a class="foot-btn" href="mailto:luke@builtbycompo.co.uk?subject=Website%20enquiry&body=Hi%20Compo%2C%0A%0AI%E2%80%99d%20like%20to%20talk%20about%20a%20website.%0A%0A">luke@builtbycompo.co.uk <span aria-hidden="true">↗</span></a>
       <a class="foot-btn" href="https://wa.me/447517945561" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a>
     </div>
@@ -94,7 +94,7 @@
   </div>
   <a class="foot-logo" href="./" aria-label="Built by Compo, home">Built by <b>Compo</b></a>
 </footer>
-<script src="js/site.js?v=b3791689"></script>
-<script src="js/liquid.js?v=b3791689"></script>
+<script src="js/site.js?v=c0b27c94"></script>
+<script src="js/liquid.js?v=c0b27c94"></script>
 </body>
 </html>

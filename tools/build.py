@@ -87,7 +87,6 @@ PAGES["index.html"] = dict(
 
 <section class="statement-sec">
   <div class="wrap">
-    <p class="eyebrow reveal">A bit about me</p>
     <div class="sticker-row"><span class="sticker pop" style="--r:-5deg">One-person studio</span><span class="sticker peach pop" style="--r:3deg;--d:.35s">No templates</span><span class="sticker red pop" style="--r:-3deg;--d:.5s">Any screen, any size</span></div>
     <p class="statement" data-fill>I think a good website should be simple to use, quick to load and easy to find. So I design and build each one from scratch, then look after it once it's live.</p>
     <div class="row reveal"><a class="btn ghost" href="about.html">More about me {ARROW}</a></div>
@@ -157,40 +156,37 @@ PAGES["about.html"] = dict(
 </section>
 
 <section class="about-main" style="padding-top:0">
-  <div class="wrap">
+  <div class="wrap about-grid">
+    <h2 class="about-sub reveal">A small studio based in Essex, England.</h2>
     <div class="about-copy">
-      <h2 class="reveal" style="font-size:clamp(1.6rem,4vw,2.6rem)">A small studio based in Essex, England</h2>
       <p class="reveal">Built by Compo is me, a laptop and a lot of coffee. Compo has been my nickname for years, and it stuck.</p>
       <p class="reveal">I make websites for small businesses that want something better than a template. I design each one from scratch, build it by hand and set it up to be found on Google. Then I host it and look after it, so you never have to log in to anything.</p>
       <p class="reveal">I like things that are simple, quick and a bit different. I'll tell you plainly what I think will work, and I'll always give you a fixed price before I start.</p>
       <p class="reveal">When I'm not building websites, I'm usually out walking Lemon, my chihuahua. She's in charge of morale.</p>
-    </div>
-    <div class="reveal" style="display:grid;gap:14px;justify-items:center">
-      <p class="display" style="font-size:clamp(1.6rem,4vw,2.4rem);color:var(--orange-text)">Websites that work</p>
-      <p class="logo-text">Built by <b>Compo</b></p>
+      <p class="logo-text sign reveal">Built by <b>Compo</b></p>
     </div>
   </div>
 </section>
 
-{ribbon_solo(["Design", "Build", "Hosting", "Care"], "ink")}
-
 <section>
   <div class="wrap" style="display:grid;gap:clamp(24px,4vw,44px)">
     <h2 class="reveal">How I <span class="coop">work</span></h2>
-    <ul class="svc-list">
+    <ol class="svc-list steps">
       <li class="reveal"><h3>We talk</h3><p>A relaxed conversation about your business, your customers and what you need the site to do.</p></li>
       <li class="reveal"><h3>I quote</h3><p>One fixed price in writing, with everything it includes. Nothing starts until you're happy.</p></li>
       <li class="reveal"><h3>I build</h3><p>You get a private preview link to watch it come together, with two rounds of changes included.</p></li>
       <li class="reveal"><h3>We launch</h3><p>Your site goes live on your own domain, and I keep looking after it on a monthly care plan.</p></li>
-    </ul>
+    </ol>
   </div>
 </section>
 
 ''')
 
+SVC_IDS = {1: "design", 2: "build", 3: "features", 4: "seo", 5: "care"}
+
 def svc(h, lead, ticks, i):
     lis = "".join(f"<li>{t}</li>" for t in ticks)
-    return f'''<div class="svc-block">
+    return f'''<div class="svc-block" id="{SVC_IDS[i]}">
       <h2 class="reveal">{h}</h2>
       <div class="body"><p class="lede reveal" style="max-width:none">{lead}</p><ul class="ticks reveal">{lis}</ul></div>
     </div>'''
@@ -203,6 +199,7 @@ PAGES["what-i-do.html"] = dict(
   <div class="wrap">
     <h1 class="wipe">Designed and <span class="coop">built by Compo.</span></h1>
     <p class="lede reveal" style="max-width:44ch">I take a website from first idea to live and looked after. Here's what that covers.</p>
+    <nav class="jump reveal" aria-label="On this page"><a href="#design">Design</a><a href="#build">Build</a><a href="#features">Custom features</a><a href="#seo">SEO set-up</a><a href="#care">Hosting and care</a></nav>
   </div>
 </section>
 
@@ -253,11 +250,10 @@ PAGES["pricing.html"] = dict(
       {price("Standard", "£1,795", "", "More room to show what you do, with one custom feature.", ["Up to 8 pages", "One custom feature, such as a gallery or simple quiz", "Full SEO set-up", "Help with your Google Business Profile"], True)}
       {price("Bespoke", "from £2,750", "", "For custom tools, custom animation or a more involved design.", ["Custom tools, like a quiz with result pages", "Custom animation and design", "Help with your wording", "Quoted to fit the job"])}
     </div>
-    <p class="muted reveal">Every build includes simple animations, connecting your domain, and two rounds of changes.</p>
+    <div class="included reveal"><span class="muted">Every build includes</span><span class="chip">Simple animations</span><span class="chip">Your domain connected</span><span class="chip">Two rounds of changes</span></div>
   </div>
 </section>
 
-{ribbon_solo(["Hosting", "Health checks", "Changes made for you"], "b", "-0.3")}
 
 <section aria-labelledby="care-h">
   <div class="wrap" style="display:grid;gap:24px">
@@ -302,7 +298,6 @@ PAGES["contact.html"] = dict(
       <div style="display:grid;gap:20px">
         <h2 style="font-size:clamp(2rem,5vw,3.8rem)">Tell me about <span class="coop">your project</span></h2>
         <p>I'd like a proper conversation, so I can understand your business before I suggest anything. Pop your name in and I'll get a message started for you.</p>
-        <p class="small">This form doesn't send or store anything. It opens your own email or WhatsApp with a message ready, and you press send.</p>
       </div>
       <form class="form" id="project-form" data-email="{EMAIL}" data-wa="{WA}" novalidate>
         <fieldset>
@@ -316,6 +311,7 @@ PAGES["contact.html"] = dict(
         <div class="field"><label for="last">Last name</label><input id="last" name="last" autocomplete="family-name" required></div>
         <div class="field"><label for="business">Business name</label><input id="business" name="business" autocomplete="organization"></div>
         <div class="row"><button class="btn hot" type="submit" id="form-go">Open my email app {ARROW}</button></div>
+        <p class="small form-note">Nothing is sent or stored here. It opens your own email or WhatsApp with a message ready, and you press send.</p>
         <p id="form-out" class="small" role="status" aria-live="polite"></p>
       </form>
     </div>
@@ -323,8 +319,8 @@ PAGES["contact.html"] = dict(
 </section>
 
 <section style="padding-top:0">
-  <div class="wrap narrow">
-    <ul class="plain-list">
+  <div class="wrap">
+    <ul class="plain-list details">
       <li class="reveal"><b>Email</b><span><a href="mailto:{EMAIL}">{EMAIL}</a> <button class="btn ghost mini" type="button" data-copy="{EMAIL}">Copy</button></span></li>
       <li class="reveal"><b>WhatsApp</b><span><a href="https://wa.me/{WA}" rel="noopener">Message me on WhatsApp</a></span></li>
       <li class="reveal"><b>Where</b><span>Essex, England. I work with businesses anywhere in the UK.</span></li>
@@ -513,8 +509,8 @@ def page(name, p, preview=False):
   <canvas class="liquid" data-strength="0.3" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="foot-talk">
-      <h2>Tell me about <b>your project.</b></h2>
-      <a class="foot-btn solid" href="contact.html#project-form">Let's talk</a>
+      {'' if name == "contact.html" else '<h2>Tell me about <b>your project.</b></h2>'}
+      {'' if name == "contact.html" else '<a class="foot-btn solid" href="contact.html#project-form">Let&#8217;s talk</a>'}
       <a class="foot-btn" href="{MAILTO}">{EMAIL} <span aria-hidden="true">↗</span></a>
       <a class="foot-btn" href="https://wa.me/{WA}" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a>
     </div>

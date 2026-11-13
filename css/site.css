@@ -368,3 +368,83 @@ h1, .page-hero h1 { line-height: .98; }
 /* Second curved ribbon below "More about me": the bottom of the same imaginary circle */
 .arc.arc-low { margin-top: clamp(-10px, 1vw, 20px); margin-bottom: clamp(10px, 3vw, 40px); }
 .statement-sec { padding-bottom: clamp(20px, 4vw, 48px); }
+
+/* =====================================================================
+   Design pass (preview): one heading voice, clearer grouping, gentle motion
+   ===================================================================== */
+
+/* All headings speak in the primary font; Roboto is for reading and buttons */
+h2, h3 { font-family: var(--f-accent); font-weight: 800; letter-spacing: -.03em; }
+h2 { line-height: 1; }
+.foot-talk h2 { font-family: var(--f-display); font-weight: 500; letter-spacing: -.035em; }
+.price h3 { font-size: clamp(1.4rem, 2.6vw, 1.75rem); }
+
+/* Headings rise in word by word */
+.js h2.split.reveal { opacity: 1; transform: none; }
+.wd { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .1em; margin-bottom: -.1em; }
+.wd > span { display: inline-block; }
+.js .split .wd > span { transform: translateY(108%); transition: transform .8s cubic-bezier(.2, .8, .2, 1); transition-delay: calc(var(--w, 0) * 55ms); }
+.js .split.in .wd > span { transform: none; }
+
+/* Tick lists arrive one line at a time */
+.js .ticks.reveal { opacity: 1; transform: none; }
+.js .ticks.reveal li { opacity: 0; transform: translateX(-10px); transition: opacity .5s ease, transform .6s cubic-bezier(.2, .8, .2, 1); transition-delay: calc(var(--i, 0) * 70ms + .1s); }
+.js .ticks.reveal.in li { opacity: 1; transform: none; }
+
+/* Sections breathe a little more evenly */
+section { padding-block: clamp(64px, 10vw, 128px); }
+.sec-head { gap: 12px; }
+
+/* About: heading and story side by side on wider screens, copy reads left-aligned */
+.about-main { text-align: left; }
+.about-main .wrap.about-grid { display: grid; gap: clamp(18px, 3vw, 28px) clamp(32px, 6vw, 96px); justify-items: stretch; align-items: start; }
+@media (min-width: 900px) { .about-grid { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); } .about-sub { position: sticky; top: 110px; } }
+.about-sub { font-size: clamp(1.9rem, 4.6vw, 3.4rem); line-height: 1.02; color: var(--ink); max-width: 13em; }
+.about-copy { max-width: 60ch; font-size: clamp(1.05rem, 1rem + .3vw, 1.2rem); line-height: 1.65; }
+.about-copy p:first-child { font-size: 1.18em; line-height: 1.5; color: var(--ink); }
+.about-copy .sign { margin-top: 10px; font-size: clamp(1.8rem, 4vw, 2.4rem); }
+
+/* How I work: a real sequence, so the steps are numbered */
+.steps { counter-reset: step; }
+.steps li { counter-increment: step; position: relative; }
+.steps li h3 { display: flex; align-items: center; gap: 14px; }
+.steps li h3::before { content: counter(step); flex: none; display: grid; place-items: center; width: 1.6em; height: 1.6em; border-radius: 50%; background: var(--orange); color: var(--ink); font: 800 .62em/1 var(--f-display); letter-spacing: 0; }
+
+/* What I do: jump links, and each service set apart */
+.jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.jump a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.05em; border-radius: 999px; background: var(--card); box-shadow: inset 0 0 0 2px var(--line); text-decoration: none; font-weight: 700; font-size: .95rem; transition: background .25s ease; }
+@media (hover: hover) and (pointer: fine) { .jump a:hover { background: var(--peach); } }
+.svc-block { border-top: 2px solid var(--line); scroll-margin-top: 96px; }
+
+/* Pricing: what every build includes, as a row of chips */
+.included { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.included .muted { font-weight: 600; flex-basis: 100%; }
+.chip { display: inline-flex; align-items: center; min-height: 40px; padding: 0 1em; border-radius: 999px; background: var(--peach); font-weight: 700; font-size: .95rem; }
+
+/* Contact: note under the button, details laid out as a grid */
+.form-note { opacity: .85; max-width: 40ch; }
+@media (min-width: 760px) { .plain-list.details { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; } }
+.plain-list.details b { font-family: var(--f-accent); font-weight: 800; font-size: 1.25rem; letter-spacing: -.02em; }
+
+/* Gentle hover lift on cards people compare */
+.price { transition: transform .45s cubic-bezier(.2, .8, .2, 1), box-shadow .45s ease; }
+@media (hover: hover) and (pointer: fine) {
+  .price:hover { transform: translateY(-6px); box-shadow: inset 0 0 0 2px var(--line), 0 18px 40px rgba(120, 60, 20, .12); }
+  .price.feature:hover { box-shadow: 0 18px 40px rgba(232, 72, 10, .28); }
+  .card-work { transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
+  .card-work:hover { transform: translateY(-6px) rotate(-.6deg); }
+}
+
+/* Moving between pages fades softly in browsers that support it; the header stays put */
+@view-transition { navigation: auto; }
+.site-head { view-transition-name: site-head; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .35s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .split .wd > span, .js .ticks.reveal li { transform: none; opacity: 1; transition: none; }
+  .price, .card-work { transition: none; }
+  @view-transition { navigation: none; }
+}
+/* Service and step descriptions: a touch larger so they hold their own beside the headings */
+.svc-list p { font-size: clamp(1rem, .95rem + .35vw, 1.2rem); max-width: 46ch; color: var(--muted); }
+@media (min-width: 800px) { .svc-list li { align-items: center; } }

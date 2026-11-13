@@ -86,6 +86,28 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && nav.classList.contains("open")) { closeMenu(); menuBtn.focus(); } });
   }
 
+  /* ----- Headings: wrap each word so they can rise in one after another ----- */
+  if (!reduce) document.querySelectorAll("main h2.reveal").forEach(function (h) {
+    var n = 0;
+    (function walk(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (c) {
+        if (c.nodeType === 1) return walk(c);
+        if (c.nodeType !== 3 || !c.textContent.trim()) return;
+        var frag = document.createDocumentFragment();
+        c.textContent.split(/(\s+)/).forEach(function (part) {
+          if (!part) return;
+          if (!part.trim()) { frag.appendChild(document.createTextNode(part)); return; }
+          var o = document.createElement("span"), i = document.createElement("span");
+          o.className = "wd"; i.textContent = part; i.style.setProperty("--w", n++); o.appendChild(i); frag.appendChild(o);
+        });
+        node.replaceChild(frag, c);
+      });
+    })(h);
+    h.classList.add("split");
+  });
+  /* ----- Tick lists: number each line so they can arrive in turn ----- */
+  document.querySelectorAll(".ticks").forEach(function (ul) { Array.prototype.forEach.call(ul.children, function (li, i) { li.style.setProperty("--i", i); }); });
+
   /* ----- Reveal on scroll ----- */
   var items = document.querySelectorAll(".reveal, .wipe, .pop");
   if (!("IntersectionObserver" in window) || reduce) { items.forEach(function (el) { el.classList.add("in"); }); }
@@ -98,6 +120,25 @@
       });
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
     items.forEach(function (el) { io.observe(el.classList.contains("wipe") ? el.parentElement : el); });
+  }
+
+  /* ----- Prices count up the first time they come into view ----- */
+  var amts = document.querySelectorAll(".price .amt");
+  if (amts.length && !reduce && "IntersectionObserver" in window) {
+    var countIO = new IntersectionObserver(function (en) {
+      en.forEach(function (e) {
+        if (!e.isIntersecting) return; countIO.unobserve(e.target);
+        var node = e.target.firstChild; if (!node || node.nodeType !== 3) return;
+        var m = node.textContent.match(/([\d,]+)/); if (!m) return;
+        var end = parseInt(m[1].replace(/,/g, ""), 10), before = node.textContent.slice(0, m.index), after = node.textContent.slice(m.index + m[1].length), t0 = performance.now();
+        (function tick(now) {
+          var k = Math.min(1, (now - t0) / 900), v = Math.round(end * (1 - Math.pow(1 - k, 3)));
+          node.textContent = before + v.toLocaleString("en-GB") + after;
+          if (k < 1) requestAnimationFrame(tick);
+        })(t0);
+      });
+    }, { threshold: 0.6 });
+    amts.forEach(function (a) { countIO.observe(a); });
   }
 
   /* ----- Ribbons drift a little further as you scroll ----- */
