@@ -235,7 +235,7 @@ def price(name, amt, per, blurb, ticks, feature=False):
 
 PAGES["pricing.html"] = dict(
   title="Pricing · Built by Compo",
-  desc="Clear website prices. Starter £1,095, Standard £1,795, Bespoke from £2,650, with monthly care plans from £50. Fixed quotes before any work starts.",
+  desc="Clear website prices. Starter £1,195, Standard £1,795, Bespoke from £2,650, with monthly care plans from £50. Fixed quotes before any work starts.",
   body=f'''
 <section class="page-hero">
   <div class="wrap">
@@ -248,7 +248,7 @@ PAGES["pricing.html"] = dict(
   <div class="wrap" style="display:grid;gap:24px">
     <h2 id="builds-h" class="reveal">Website <span class="coop">builds</span></h2>
     <div class="price-grid">
-      {price("Starter", "£1,095", "", "A smart, simple site that gets you found and gets you contacted.", ["Up to 5 pages", "Designed for phones first", "WhatsApp or booking button", "SEO basics set up", "Privacy policy page"])}
+      {price("Starter", "£1,195", "", "A smart, simple site that gets you found and gets you contacted.", ["Up to 5 pages", "Designed for phones first", "WhatsApp or booking button", "SEO basics set up", "Privacy policy page"])}
       {price("Standard", "£1,795", "", "More room to show what you do, with one custom feature.", ["Up to 8 pages", "One custom feature, such as a gallery or simple quiz", "Full SEO set-up", "Help with your Google Business Profile"], True)}
       {price("Bespoke", "from £2,650", "", "For custom tools, custom animation or a more involved design.", ["Custom tools, like a quiz with result pages", "Custom animation and design", "Help with your wording", "Quoted to fit the job"])}
     </div>
