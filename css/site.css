@@ -423,7 +423,7 @@ section { padding-block: clamp(64px, 10vw, 128px); }
 
 /* Contact: note under the button, details laid out as a grid */
 .form-note { opacity: .85; max-width: 40ch; }
-@media (min-width: 760px) { .plain-list.details { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; } }
+@media (min-width: 760px) { .plain-list.details { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; } }
 .plain-list.details b { font-family: var(--f-accent); font-weight: 800; font-size: 1.25rem; letter-spacing: -.02em; }
 
 /* Gentle hover lift on cards people compare */

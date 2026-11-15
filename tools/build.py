@@ -9,7 +9,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://builtbycompo.co.uk"
 EMAIL = "luke@builtbycompo.co.uk"
 MAILTO = "mailto:" + EMAIL + "?subject=Website%20enquiry&body=Hi%20Compo%2C%0A%0AI%E2%80%99d%20like%20to%20talk%20about%20a%20website.%0A%0A"
-WA = "447517945561"   # used in the WhatsApp link only; the number is not shown on the page
+WA = "447517945561"
+PHONE = "07517 945561"
+TEL = "+447517945561"   # used in the WhatsApp link only; the number is not shown on the page
 YEAR = "2026"
 TODO = lambda t: f'<mark class="todo">[{t}]</mark>'
 
@@ -233,7 +235,7 @@ def price(name, amt, per, blurb, ticks, feature=False):
 
 PAGES["pricing.html"] = dict(
   title="Pricing · Built by Compo",
-  desc="Clear website prices. Starter £1,195, Standard £1,795, Bespoke from £2,750, with monthly care plans from £50. Fixed quotes before any work starts.",
+  desc="Clear website prices. Starter £1,095, Standard £1,795, Bespoke from £2,650, with monthly care plans from £125. Fixed quotes before any work starts.",
   body=f'''
 <section class="page-hero">
   <div class="wrap">
@@ -246,11 +248,12 @@ PAGES["pricing.html"] = dict(
   <div class="wrap" style="display:grid;gap:24px">
     <h2 id="builds-h" class="reveal">Website <span class="coop">builds</span></h2>
     <div class="price-grid">
-      {price("Starter", "£1,195", "", "A smart, simple site that gets you found and gets you contacted.", ["Up to 5 pages", "Designed for phones first", "WhatsApp or booking button", "SEO basics set up", "Privacy policy page"])}
+      {price("Starter", "£1,095", "", "A smart, simple site that gets you found and gets you contacted.", ["Up to 5 pages", "Designed for phones first", "WhatsApp or booking button", "SEO basics set up", "Privacy policy page"])}
       {price("Standard", "£1,795", "", "More room to show what you do, with one custom feature.", ["Up to 8 pages", "One custom feature, such as a gallery or simple quiz", "Full SEO set-up", "Help with your Google Business Profile"], True)}
-      {price("Bespoke", "from £2,750", "", "For custom tools, custom animation or a more involved design.", ["Custom tools, like a quiz with result pages", "Custom animation and design", "Help with your wording", "Quoted to fit the job"])}
+      {price("Bespoke", "from £2,650", "", "For custom tools, custom animation or a more involved design.", ["Custom tools, like a quiz with result pages", "Custom animation and design", "Help with your wording", "Quoted to fit the job"])}
     </div>
     <div class="included reveal"><span class="muted">Every build includes</span><span class="chip">Simple animations</span><span class="chip">Your domain connected</span><span class="chip">Two rounds of changes</span></div>
+    <p class="small muted reveal">Most sites take 2–3 weeks from when I have your wording and photos, depending on the project.</p>
   </div>
 </section>
 
@@ -259,7 +262,7 @@ PAGES["pricing.html"] = dict(
   <div class="wrap" style="display:grid;gap:24px">
     <h2 id="care-h" class="reveal">Monthly <span class="coop">plans</span></h2>
     <div class="price-grid two">
-      {price("Care", "£50", "a month", "Your site hosted, checked and kept up to date.", ["Hosting", "A health check every month", "Renewals and security looked after", "Up to 30 minutes of small changes each month"])}
+      {price("Care", "£175", "a month", "Your site hosted, checked and kept up to date.", ["Hosting", "A health check every month", "Renewals and security looked after", "Up to 30 minutes of small changes each month"])}
       {price("Growth", "£125", "a month", "Everything in Care, with more time and more help being found.", ["Everything in Care", "Google Business Profile posts", "Monthly search tweaks", "Up to 2 hours of changes each month", "A short monthly report"])}
     </div>
   </div>
@@ -322,6 +325,7 @@ PAGES["contact.html"] = dict(
   <div class="wrap">
     <ul class="plain-list details">
       <li class="reveal"><b>Email</b><span><a href="mailto:{EMAIL}">{EMAIL}</a> <button class="btn ghost mini" type="button" data-copy="{EMAIL}">Copy</button></span></li>
+      <li class="reveal"><b>Phone</b><span><a href="tel:{TEL}">{PHONE}</a></span></li>
       <li class="reveal"><b>WhatsApp</b><span><a href="https://wa.me/{WA}" rel="noopener">Message me on WhatsApp</a></span></li>
       <li class="reveal"><b>Where</b><span>Essex, England. I work with businesses anywhere in the UK.</span></li>
       <li class="reveal"><b>When</b><span>Monday to Saturday. I aim to reply within one working day.</span></li>
@@ -470,7 +474,7 @@ def page(name, p, preview=False):
     cur = lambda href: ' aria-current="page"' if href == name else ""
     nav = "".join(f'<a href="{h}"{cur(h)}>{t}</a>' for h, t in NAV)
     canon = SITE + "/" + ("" if name == "index.html" else name.replace(".html", ""))
-    ld = p.get("jsonld") or ({"@context": "https://schema.org", "@type": "ProfessionalService", "name": "Built by Compo", "url": SITE + "/", "email": EMAIL, "areaServed": "GB", "address": {"@type": "PostalAddress", "addressRegion": "Essex", "addressCountry": "GB"}, "description": "Bespoke websites for small businesses, designed, built and looked after by Compo."} if name == "index.html" else None)
+    ld = p.get("jsonld") or ({"@context": "https://schema.org", "@type": "ProfessionalService", "name": "Built by Compo", "url": SITE + "/", "email": EMAIL, "telephone": TEL, "areaServed": "GB", "address": {"@type": "PostalAddress", "addressRegion": "Essex", "addressCountry": "GB"}, "description": "Bespoke websites for small businesses, designed, built and looked after by Compo."} if name == "index.html" else None)
     if name == "index.html": ld = [ld, {"@context": "https://schema.org", "@type": "WebSite", "name": "Built by Compo", "url": SITE + "/"}]
     head = f'''<title>{p["title"]}</title>
 <meta name="description" content="{html.escape(p["desc"])}">
@@ -513,6 +517,7 @@ def page(name, p, preview=False):
       {'' if name == "contact.html" else '<a class="foot-btn solid" href="contact.html#project-form">Let&#8217;s talk</a>'}
       <a class="foot-btn" href="{MAILTO}">{EMAIL} <span aria-hidden="true">↗</span></a>
       <a class="foot-btn" href="https://wa.me/{WA}" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a>
+      <a class="foot-btn" href="tel:{TEL}">Call {PHONE}</a>
     </div>
     <p class="foot-small"><span>© {YEAR} Built by Compo</span><a href="privacy.html">Privacy policy</a><button class="motion-link" type="button" aria-pressed="false">Pause animations</button></p>
   </div>
