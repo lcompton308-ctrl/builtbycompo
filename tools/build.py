@@ -235,7 +235,7 @@ def price(name, amt, per, blurb, ticks, feature=False):
 
 PAGES["pricing.html"] = dict(
   title="Pricing · Built by Compo",
-  desc="Clear website prices. Starter £1,095, Standard £1,795, Bespoke from £2,650, with monthly care plans from £125. Fixed quotes before any work starts.",
+  desc="Clear website prices. Starter £1,095, Standard £1,795, Bespoke from £2,650, with monthly care plans from £50. Fixed quotes before any work starts.",
   body=f'''
 <section class="page-hero">
   <div class="wrap">
@@ -262,8 +262,8 @@ PAGES["pricing.html"] = dict(
   <div class="wrap" style="display:grid;gap:24px">
     <h2 id="care-h" class="reveal">Monthly <span class="coop">plans</span></h2>
     <div class="price-grid two">
-      {price("Care", "£175", "a month", "Your site hosted, checked and kept up to date.", ["Hosting", "A health check every month", "Renewals and security looked after", "Up to 30 minutes of small changes each month"])}
-      {price("Growth", "£125", "a month", "Everything in Care, with more time and more help being found.", ["Everything in Care", "Google Business Profile posts", "Monthly search tweaks", "Up to 2 hours of changes each month", "A short monthly report"])}
+      {price("Care", "£50", "a month", "Your site hosted, checked and kept up to date.", ["Hosting", "A health check every month", "Renewals and security looked after", "Up to 30 minutes of small changes each month"])}
+      {price("Growth", "£175", "a month", "Everything in Care, with more time and more help being found.", ["Everything in Care", "Google Business Profile posts", "Monthly search tweaks", "Up to 2 hours of changes each month", "A short monthly report"])}
     </div>
   </div>
 </section>
