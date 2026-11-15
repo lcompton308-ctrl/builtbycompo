@@ -103,7 +103,7 @@ PAGES["index.html"] = dict(
   <div class="slider reveal" tabindex="0" role="region" aria-label="Portfolio, scrolls sideways">
     <div class="slider-track">
       <a class="card-work" href="https://tanyahill.co.uk" rel="noopener">
-        <img src="img/work-tanya.jpg" width="960" height="960" loading="lazy" alt="Homepage of tanyahill.co.uk, a business coaching website with a 'Which boss are you?' quiz">
+        <img src="img/work-tanya-2.jpg" width="960" height="960" loading="lazy" alt="Homepage of tanyahill.co.uk, a business coaching website with a 'Which boss are you?' quiz">
         <span class="cap"><span>Tanya Hill Coaching</span></span>
       </a>
       <a class="card-work yours c1" href="contact.html"><span><span class="big">Your website</span><span class="sm">This spot's free</span></span></a>
