@@ -248,9 +248,9 @@ PAGES["pricing.html"] = dict(
   <div class="wrap" style="display:grid;gap:24px">
     <h2 id="builds-h" class="reveal">Website <span class="coop">builds</span></h2>
     <div class="price-grid">
-      {price("Starter", "£895", "", "A smart, simple site that gets you found and gets you contacted.", ["Up to 5 pages", "Designed for phones first", "WhatsApp or booking button", "SEO basics set up", "Privacy policy page"])}
-      {price("Standard", "£1,495", "", "More room to show what you do, with one custom feature.", ["Up to 8 pages", "One custom feature, such as a gallery or simple quiz", "Full SEO set-up", "Help with your Google Business Profile"], True)}
-      {price("Bespoke", "from £2,250", "", "For custom tools, custom animation or a more involved design.", ["Custom tools, like a quiz with result pages", "Custom animation and design", "Help with your wording", "Quoted to fit the job"])}
+      {price("Starter", "£895", "", "A smart, simple site that gets you found and gets you contacted.", ["Up to 5 pages", "Designed for phones first", "Booking and contact made easy", "SEO set-up, so Google can find you", "Privacy policy written for you"])}
+      {price("Standard", "£1,495", "", "More room to show what you do, with one custom feature.", ["Up to 8 pages", "One custom feature, e.g. a gallery", "Full SEO set-up", "Help with your Google Business Profile"], True)}
+      {price("Bespoke", "from £2,250", "", "For businesses that need something built just for them.", ["As many pages as you need", "Custom tools", "Custom animation and design", "Quoted to fit the job"])}
     </div>
     <div class="included reveal"><span class="muted">Every build includes</span><span class="chip">Simple animations</span><span class="chip">Your domain connected</span><span class="chip">Two rounds of changes</span></div>
     <p class="small muted reveal">Most sites take 2–3 weeks from when I have your wording and photos, depending on the project.</p>
@@ -262,8 +262,8 @@ PAGES["pricing.html"] = dict(
   <div class="wrap" style="display:grid;gap:24px">
     <h2 id="care-h" class="reveal">Monthly <span class="coop">plans</span></h2>
     <div class="price-grid two">
-      {price("Care", "£50", "a month", "Your site hosted, checked and kept up to date.", ["Hosting", "A health check every month", "Renewals and security looked after", "Up to 30 minutes of small changes each month"])}
-      {price("Growth", "£175", "a month", "Everything in Care, with more time and more help being found.", ["Everything in Care", "Google Business Profile posts", "Monthly search tweaks", "Up to 2 hours of changes each month", "A short monthly report"])}
+      {price("Care", "£50", "a month", "Your site hosted, checked and kept up to date.", ["Hosting included", "A health check every month", "Renewals and security looked after", "Up to 30 minutes of small changes each month"])}
+      {price("Growth", "£175", "a month", "More time each month, and more help getting found on Google.", ["Everything in Care", "Google Business Profile posts", "Monthly tweaks to help you show up on Google", "Up to 2 hours of changes each month", "A short monthly report"])}
     </div>
   </div>
 </section>
