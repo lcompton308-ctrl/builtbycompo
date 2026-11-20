@@ -245,14 +245,14 @@ PAGES["pricing.html"] = dict(
   </div>
 </section>
 
-<section style="padding-top:0" aria-labelledby="builds-h">
+<section class="tight" style="padding-top:0" aria-labelledby="builds-h">
   <div class="wrap" style="display:grid;gap:24px">
     <h2 id="builds-h" class="reveal">Website <span class="coop">builds</span></h2>
     <div class="price-grid four">
       {price("Starter", "£450", "", "A clean, simple site to get your business online.", ["Up to 3 pages", "Designed for phones first", "Booking and contact made easy", "SEO basics, so Google can find you", "Privacy policy written for you", "Ready sooner, usually in 1–2 weeks"])}
       {price("Essentials", "£895", "", "A smart, simple site that gets you found and gets you contacted.", ["Up to 5 pages", "Full SEO set-up", "Simple animations", "A contact form that writes the message for your customer", "A section for your reviews"], plus="Everything in Starter, plus:", soft=True)}
       {price("Standard", "£1,495", "", "More room to show what you do, with one custom feature.", ["Up to 10 pages", "One custom feature, e.g. a gallery", "Help with your Google Business Profile"], plus="Everything in Essentials, plus:", tone="tier3")}
-      {price("Bespoke", "from £2,250", "", "For businesses that need something built just for them.", ["As many pages as you need", "Custom tools", "Custom animation and design", "Quoted to fit the job"], tone="tier4")}
+      {price("Bespoke", "<small class=\"from\">from</small> £2,250", "", "For businesses that need something built just for them.", ["As many pages as you need", "Custom tools", "Custom animation and design", "Quoted to fit the job"], tone="tier4")}
     </div>
     <div class="included reveal"><span class="muted">Every build includes</span><span class="chip">Designed by hand, not a template</span><span class="chip">Your domain connected</span><span class="chip">Two rounds of changes</span></div>
     <p class="small muted reveal">Page counts include your home page. Your privacy policy, terms and “page not found” page are extra and don’t count. Most sites take 2–3 weeks from when I have your wording and photos, depending on the project; Starter sites are usually ready in 1–2 weeks.</p>
@@ -260,7 +260,7 @@ PAGES["pricing.html"] = dict(
 </section>
 
 
-<section aria-labelledby="care-h">
+<section class="tight" aria-labelledby="care-h">
   <div class="wrap" style="display:grid;gap:24px">
     <h2 id="care-h" class="reveal">Monthly <span class="coop">plans</span></h2>
     <div class="price-grid two">
@@ -270,7 +270,7 @@ PAGES["pricing.html"] = dict(
   </div>
 </section>
 
-<section style="padding-top:0" aria-labelledby="know-h">
+<section class="tight" style="padding-top:0" aria-labelledby="know-h">
   <div class="wrap" style="display:grid;gap:24px">
     <h2 id="know-h" class="reveal" style="font-size:clamp(1.6rem,4vw,2.6rem)">Good to know</h2>
     <div class="notes">

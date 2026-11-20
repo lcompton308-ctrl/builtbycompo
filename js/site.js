@@ -129,7 +129,7 @@
     var countIO = new IntersectionObserver(function (en) {
       en.forEach(function (e) {
         if (!e.isIntersecting) return; countIO.unobserve(e.target);
-        var node = e.target.firstChild; if (!node || node.nodeType !== 3) return;
+        var node = Array.prototype.find.call(e.target.childNodes, function (n) { return n.nodeType === 3 && /\d/.test(n.textContent); }); if (!node) return;
         var m = node.textContent.match(/([\d,]+)/); if (!m) return;
         var end = parseInt(m[1].replace(/,/g, ""), 10), before = node.textContent.slice(0, m.index), after = node.textContent.slice(m.index + m[1].length), t0 = performance.now();
         (function tick(now) {
