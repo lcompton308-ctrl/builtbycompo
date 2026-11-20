@@ -223,9 +223,10 @@ PAGES["what-i-do.html"] = dict(
 
 ''')
 
-def price(name, amt, per, blurb, ticks, feature=False, plus="", soft=False):
+def price(name, amt, per, blurb, ticks, feature=False, plus="", soft=False, tone=""):
     lis = "".join(f"<li>{t}</li>" for t in ticks)
     cls = "price feature" if feature else ("price soft" if soft else "price")
+    if tone: cls = f"price {tone}"
     return f'''<article class="{cls} reveal">
       <h3>{name}</h3>
       <p class="amt">{amt}{f" <small>{per}</small>" if per else ""}</p>
@@ -250,8 +251,8 @@ PAGES["pricing.html"] = dict(
     <div class="price-grid four">
       {price("Starter", "£450", "", "A clean, simple site to get your business online.", ["Up to 3 pages", "Designed for phones first", "Booking and contact made easy", "SEO basics, so Google can find you", "Privacy policy written for you", "Ready sooner, usually in 1–2 weeks"])}
       {price("Essentials", "£895", "", "A smart, simple site that gets you found and gets you contacted.", ["Up to 5 pages", "Full SEO set-up", "Simple animations", "A contact form that writes the message for your customer", "A section for your reviews"], plus="Everything in Starter, plus:", soft=True)}
-      {price("Standard", "£1,495", "", "More room to show what you do, with one custom feature.", ["Up to 10 pages", "One custom feature, e.g. a gallery", "Help with your Google Business Profile"], True, plus="Everything in Essentials, plus:")}
-      {price("Bespoke", "from £2,250", "", "For businesses that need something built just for them.", ["As many pages as you need", "Custom tools", "Custom animation and design", "Quoted to fit the job"])}
+      {price("Standard", "£1,495", "", "More room to show what you do, with one custom feature.", ["Up to 10 pages", "One custom feature, e.g. a gallery", "Help with your Google Business Profile"], plus="Everything in Essentials, plus:", tone="tier3")}
+      {price("Bespoke", "from £2,250", "", "For businesses that need something built just for them.", ["As many pages as you need", "Custom tools", "Custom animation and design", "Quoted to fit the job"], tone="tier4")}
     </div>
     <div class="included reveal"><span class="muted">Every build includes</span><span class="chip">Designed by hand, not a template</span><span class="chip">Your domain connected</span><span class="chip">Two rounds of changes</span></div>
     <p class="small muted reveal">Page counts include your home page. Your privacy policy, terms and “page not found” page are extra and don’t count. Most sites take 2–3 weeks from when I have your wording and photos, depending on the project; Starter sites are usually ready in 1–2 weeks.</p>
