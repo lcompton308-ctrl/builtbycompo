@@ -209,7 +209,7 @@ PAGES["what-i-do.html"] = dict(
     {svc('Website <span class="coop">design</span>', "Every site starts as a blank page, not a template. I design it around your business and your customers.", ["Designed for phones first, then tablets and laptops", "Your colours, your photos and your way of talking", "Clear buttons that lead to a call, a message or a booking"], 1)}
 </div></section>
 <section style="padding-block:0"><div class="wrap">
-    {svc('Website <span class="coop">build</span>', "I build your site by hand, so it's quick, tidy and only carries what it needs.", ["Fast pages, tested on real phones", "Built to be easy to read and use for everyone", "Simple animations included, like the ones on this site", "Your domain connected for you"], 2)}
+    {svc('Website <span class="coop">build</span>', "I build your site by hand, so it's quick, tidy and only carries what it needs.", ["Fast pages, tested on real phones", "Built to be easy to read and use for everyone", "Simple animations, like the ones on this site, from Essentials up", "Your domain connected for you"], 2)}
 </div></section>
 <section style="padding-block:0"><div class="wrap">
     {svc('Custom <span class="coop">features</span>', "Sometimes a site needs to do more than show information. I can build tools that are made just for you.", ["Quizzes with personal results, like the one on tanyahill.co.uk", "Photo galleries, booking helpers and enquiry buttons", "Custom animation and illustration as extras"], 3)}
@@ -223,19 +223,19 @@ PAGES["what-i-do.html"] = dict(
 
 ''')
 
-def price(name, amt, per, blurb, ticks, feature=False):
+def price(name, amt, per, blurb, ticks, feature=False, plus="", soft=False):
     lis = "".join(f"<li>{t}</li>" for t in ticks)
-    cls = "price feature" if feature else "price"
+    cls = "price feature" if feature else ("price soft" if soft else "price")
     return f'''<article class="{cls} reveal">
       <h3>{name}</h3>
       <p class="amt">{amt}{f" <small>{per}</small>" if per else ""}</p>
       <p>{blurb}</p>
-      <ul class="ticks">{lis}</ul>
+      {f'<p class="plus">{plus}</p>' if plus else ""}<ul class="ticks">{lis}</ul>
     </article>'''
 
 PAGES["pricing.html"] = dict(
   title="Pricing · Built by Compo",
-  desc="Clear website prices. Starter £895, Standard £1,495, Bespoke from £2,250, with monthly care plans from £50. Fixed quotes before any work starts.",
+  desc="Clear website prices. Starter £450, Essentials £895, Standard £1,495, Bespoke from £2,250, with monthly care plans from £50. Fixed quotes before any work starts.",
   body=f'''
 <section class="page-hero">
   <div class="wrap">
@@ -247,13 +247,14 @@ PAGES["pricing.html"] = dict(
 <section style="padding-top:0" aria-labelledby="builds-h">
   <div class="wrap" style="display:grid;gap:24px">
     <h2 id="builds-h" class="reveal">Website <span class="coop">builds</span></h2>
-    <div class="price-grid">
-      {price("Starter", "£895", "", "A smart, simple site that gets you found and gets you contacted.", ["Up to 5 pages", "Designed for phones first", "Booking and contact made easy", "SEO set-up, so Google can find you", "Privacy policy written for you"])}
-      {price("Standard", "£1,495", "", "More room to show what you do, with one custom feature.", ["Up to 8 pages", "One custom feature, e.g. a gallery", "Full SEO set-up", "Help with your Google Business Profile"], True)}
+    <div class="price-grid four">
+      {price("Starter", "£450", "", "A clean, simple site to get your business online.", ["Up to 3 pages", "Designed for phones first", "Booking and contact made easy", "SEO basics, so Google can find you", "Privacy policy written for you", "Ready sooner, usually in 1–2 weeks"])}
+      {price("Essentials", "£895", "", "A smart, simple site that gets you found and gets you contacted.", ["Up to 5 pages", "Full SEO set-up", "Simple animations", "A contact form that writes the message for your customer", "A section for your reviews"], plus="Everything in Starter, plus:", soft=True)}
+      {price("Standard", "£1,495", "", "More room to show what you do, with one custom feature.", ["Up to 10 pages", "One custom feature, e.g. a gallery", "Help with your Google Business Profile"], True, plus="Everything in Essentials, plus:")}
       {price("Bespoke", "from £2,250", "", "For businesses that need something built just for them.", ["As many pages as you need", "Custom tools", "Custom animation and design", "Quoted to fit the job"])}
     </div>
-    <div class="included reveal"><span class="muted">Every build includes</span><span class="chip">Simple animations</span><span class="chip">Your domain connected</span><span class="chip">Two rounds of changes</span></div>
-    <p class="small muted reveal">Most sites take 2–3 weeks from when I have your wording and photos, depending on the project.</p>
+    <div class="included reveal"><span class="muted">Every build includes</span><span class="chip">Designed by hand, not a template</span><span class="chip">Your domain connected</span><span class="chip">Two rounds of changes</span></div>
+    <p class="small muted reveal">Page counts include your home page. Your privacy policy, terms and “page not found” page are extra and don’t count. Most sites take 2–3 weeks from when I have your wording and photos, depending on the project; Starter sites are usually ready in 1–2 weeks.</p>
   </div>
 </section>
 
@@ -335,7 +336,7 @@ PAGES["contact.html"] = dict(
 ''')
 
 FAQS = [
- ("What projects do you take on?", ["Websites for small businesses, sole traders and local services. That could be a simple five-page site or something with custom tools, like a quiz or a booking helper.", "If you're not sure whether your idea fits, ask me. I'll tell you straight if I'm not the right person for it."]),
+ ("What projects do you take on?", ["Websites for small businesses, sole traders and local services. That could be a simple three-page site or something with custom tools, like a quiz or a booking helper.", "If you're not sure whether your idea fits, ask me. I'll tell you straight if I'm not the right person for it."]),
  ("How much does a project cost?", ['My <a href="pricing.html">pricing page</a> shows the starting price for each type of build and for the monthly plans.', "Bespoke projects vary, so those prices depend on what you need. Take a look at the pricing page or start a conversation, and I'll give you one fixed price before anything begins."]),
  ("How involved do I have to be?", ["Not very. I need your knowledge of your business, the facts and your feedback. I do the rest.", "You'll get a private preview link while I build, and two rounds of changes are included."]),
  ("When can you start, and how long will it take?", ["It depends on the size of the project and what I already have booked in. Once we've talked, I'll give you an accurate start date and timeframe in writing with your quote.", "The clock starts when I have your wording and photos, so having those ready is the quickest way to a finished site."]),
