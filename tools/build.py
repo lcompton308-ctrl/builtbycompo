@@ -157,7 +157,7 @@ PAGES["about.html"] = dict(
   </div>
 </section>
 
-<section class="about-main" style="padding-top:0">
+<section class="about-main" style="padding-top:0;padding-bottom:clamp(20px,3vw,36px)">
   <div class="wrap about-grid">
     <h2 class="about-sub reveal">A small studio based in Essex, England.</h2>
     <div class="about-copy">
@@ -165,12 +165,11 @@ PAGES["about.html"] = dict(
       <p class="reveal">I make websites for small businesses that want something better than a template. I design each one from scratch, build it by hand and set it up to be found on Google. Then I host it and look after it, so you never have to log in to anything.</p>
       <p class="reveal">I like things that are simple, quick and a bit different. I'll tell you plainly what I think will work, and I'll always give you a fixed price before I start.</p>
       <p class="reveal">When I'm not building websites, I'm usually out walking Lemon, my chihuahua. She's in charge of morale.</p>
-      <p class="logo-text sign reveal">Built by <b>Compo</b></p>
     </div>
   </div>
 </section>
 
-<section>
+<section style="padding-top:clamp(20px,3vw,36px)">
   <div class="wrap" style="display:grid;gap:clamp(24px,4vw,44px)">
     <h2 class="reveal">How I <span class="coop">work</span></h2>
     <ol class="svc-list steps">
