@@ -502,3 +502,4 @@ section.tight[style*="padding-top:0"] { padding-top: 0; }
 .intro .intro-cover { background: var(--footer-red); isolation: isolate; overflow: hidden; }
 .intro-cover canvas.liquid { transition-duration: .25s; }
 .intro-cover canvas.liquid { bottom: auto; height: calc(100vh + 120px); height: calc(100svh + 120px); }
+.svc-list p { color: var(--ink); }
