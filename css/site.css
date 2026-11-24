@@ -157,7 +157,7 @@ canvas.liquid.on { opacity: 1; }
 /* ---------- Home: big statement that fills in as you scroll ---------- */
 .statement-sec .wrap { display: grid; gap: clamp(20px, 3vw, 36px); justify-items: center; text-align: center; }
 .statement { position: relative; font: 800 clamp(2rem, 6.2vw, 5.4rem)/1.02 var(--f-display); letter-spacing: -.05em; max-width: 17em; text-wrap: balance; }
-.js .statement .w { color: #f3b59c; transition: color .35s ease; }
+.js .statement .w { color: #ff9b6b; transition: color .35s ease; }
 .js .statement .w.on { color: var(--ink); }
 .sticker-row { display: flex; flex-wrap: wrap; gap: 10px 12px; justify-content: center; }
 
