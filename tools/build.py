@@ -120,7 +120,7 @@ PAGES["index.html"] = dict(
     <div style="display:grid;gap:14px">
       <h2 id="svc-h" class="reveal">Designed and <span class="coop">built by Compo</span></h2>
     </div>
-    <ul class="svc-list">
+    <ul class="svc-list spaced">
       <li class="reveal"><h3>Design</h3><p>A look made for your business, drawn up for a phone screen first because that's where most of your visitors are.</p></li>
       <li class="reveal"><h3>Build</h3><p>Written by hand, so it loads quickly and only has what you need on it.</p></li>
       <li class="reveal"><h3>Custom features</h3><p>Quizzes, galleries, booking buttons. If it helps your customers get in touch, I can build it.</p></li>
@@ -519,7 +519,7 @@ def page(name, p, preview=False):
       {'' if name == "contact.html" else '<a class="foot-btn solid" href="contact.html#project-form">Let&#8217;s talk</a>'}
       <div class="foot-icons">
         <a href="{MAILTO}" aria-label="Email me at {EMAIL}"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Email</span></a>
-        <a href="https://wa.me/{WA}" rel="noopener" aria-label="WhatsApp me"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8.9 7.6c.3-.2.7-.2.9.1l1.1 1.8c.2.3.1.7-.1.9l-.7.6c.6 1.4 1.6 2.4 3 3l.6-.7c.2-.3.6-.3.9-.1l1.8 1.1c.3.2.4.6.2.9l-.5.9c-.4.6-1.1.9-1.8.7-3-.9-5.3-3.2-6.2-6.2-.2-.7.1-1.4.7-1.8z" fill="currentColor"/></svg><span>WhatsApp</span></a>
+        <a href="https://wa.me/{WA}" rel="noopener" aria-label="WhatsApp me"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.99 16.97A8.5 8.5 0 1 1 9.32 19.38L3.8 21.2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9.4 6.9c.45-.1.85.15 1 .55l.95 2.25c.12.3.05.65-.17.88l-.75.8c.75 1.45 1.9 2.65 3.35 3.4l.8-.78c.23-.22.58-.28.88-.15l2.25 1c.4.17.63.6.5 1.02l-.2.75c-.3 1-1.3 1.65-2.35 1.5-4.2-.6-7.45-3.85-8.05-8.05-.15-1.05.5-2.05 1.5-2.35z" fill="currentColor" transform="translate(12.5 11.6) scale(.8) translate(-12.9 -12.35)"/></svg><span>WhatsApp</span></a>
         <a href="tel:{TEL}" aria-label="Call me on {PHONE}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5 9 4l1.2 4-2 1.5a12 12 0 0 0 6.3 6.3l1.5-2 4 1.2.5 2.5c-.3 1.5-1.6 2.5-3.1 2.4C10.5 19.4 4.6 13.5 4.1 6.6 4 5.1 5 3.8 6.5 3.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>Call</span></a>
       </div>
     </div>

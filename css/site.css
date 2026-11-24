@@ -487,3 +487,8 @@ section.tight[style*="padding-top:0"] { padding-top: 0; }
 @media (hover: hover) and (pointer: fine) { .foot-icons a:hover svg { background: #fff; color: var(--ink); scale: 1.06; } }
 .foot-icons a:focus-visible { outline: 3px solid #fff; outline-offset: 4px; border-radius: 12px; }
 @media (prefers-reduced-motion: reduce) { .foot-icons svg { transition: none; } }
+
+/* Home services list without dividers: space and orange headings (24 Nov 2026) */
+.svc-list.spaced { display: grid; gap: clamp(26px, 4vw, 40px); }
+.svc-list.spaced li, .svc-list.spaced li:last-child { border: 0; padding-block: 0; }
+.svc-list.spaced h3 { color: var(--orange-text); }
