@@ -89,7 +89,7 @@ PAGES["index.html"] = dict(
 
 <section class="statement-sec">
   <div class="wrap">
-    <div class="sticker-row"><span class="sticker pop" style="--r:-5deg">One-person studio</span><span class="sticker peach pop" style="--r:3deg;--d:.35s">No templates</span><span class="sticker red pop" style="--r:-3deg;--d:.5s">Any screen, any size</span></div>
+    <ul class="fact-row" aria-label="About Built by Compo"><li class="fact">One-person studio</li><li class="fact">No templates</li><li class="fact">Any screen, any size</li></ul>
     <p class="statement" data-fill>I think a good website should be simple to use, quick to load and easy to find. So I design and build each one from scratch, then look after it once it's live.</p>
     <div class="row reveal"><a class="btn ghost" href="about.html">More about me {ARROW}</a></div>
   </div>
@@ -517,9 +517,11 @@ def page(name, p, preview=False):
     <div class="foot-talk">
       {'' if name == "contact.html" else '<h2>Tell me about <b>your project.</b></h2>'}
       {'' if name == "contact.html" else '<a class="foot-btn solid" href="contact.html#project-form">Let&#8217;s talk</a>'}
-      <a class="foot-btn" href="{MAILTO}">{EMAIL} <span aria-hidden="true">↗</span></a>
-      <a class="foot-btn" href="https://wa.me/{WA}" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a>
-      <a class="foot-btn" href="tel:{TEL}">Call {PHONE}</a>
+      <div class="foot-icons">
+        <a href="{MAILTO}" aria-label="Email me at {EMAIL}"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Email</span></a>
+        <a href="https://wa.me/{WA}" rel="noopener" aria-label="WhatsApp me"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 9.5c.4 2 2.2 3.9 4.5 4.6l1.2-1.1 1.6.8-.4 1.4c-3.6.2-7-3.1-7.1-6.6l1.4-.5.8 1.6z" fill="currentColor"/></svg><span>WhatsApp</span></a>
+        <a href="tel:{TEL}" aria-label="Call me on {PHONE}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5 9 4l1.2 4-2 1.5a12 12 0 0 0 6.3 6.3l1.5-2 4 1.2.5 2.5c-.3 1.5-1.6 2.5-3.1 2.4C10.5 19.4 4.6 13.5 4.1 6.6 4 5.1 5 3.8 6.5 3.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>Call</span></a>
+      </div>
     </div>
     <p class="foot-small"><span>© {YEAR} Built by Compo</span><a href="privacy.html">Privacy policy</a><button class="motion-link" type="button" aria-pressed="false">Pause animations</button></p>
   </div>

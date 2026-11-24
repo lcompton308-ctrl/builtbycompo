@@ -475,3 +475,15 @@ section.tight { padding-block: clamp(16px, 2.5vw, 32px); }
 section.tight[style*="padding-top:0"] { padding-top: 0; }
 .price .amt { white-space: nowrap; }
 .price .amt .from { font: 700 1rem var(--f-body); letter-spacing: 0; color: inherit; margin-right: .15em; }
+
+/* Facts above the home paragraph: clear, flat pills that don't look clickable (24 Nov 2026) */
+.fact-row { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 10px; justify-content: center; }
+.fact { font: 600 clamp(.9rem, 1.5vw, 1.05rem)/1 var(--f-body); color: var(--ink); padding: .6em 1.1em; border-radius: 999px; background: rgba(255, 84, 18, .08); }
+
+/* Footer contact icons (24 Nov 2026) */
+.foot-icons { display: flex; justify-content: center; gap: clamp(22px, 5vw, 40px); margin-top: 6px; }
+.foot-icons a { display: grid; justify-items: center; gap: 8px; color: #fff; text-decoration: none; font: 700 1rem/1 var(--f-body); }
+.foot-icons svg { width: 28px; height: 28px; box-sizing: content-box; padding: 18px; border-radius: 50%; background: rgba(255, 255, 255, .2); transition: background .3s ease, color .3s ease, scale .4s cubic-bezier(.3, 1.6, .5, 1); }
+@media (hover: hover) and (pointer: fine) { .foot-icons a:hover svg { background: #fff; color: var(--ink); scale: 1.06; } }
+.foot-icons a:focus-visible { outline: 3px solid #fff; outline-offset: 4px; border-radius: 12px; }
+@media (prefers-reduced-motion: reduce) { .foot-icons svg { transition: none; } }
