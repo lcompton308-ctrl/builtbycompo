@@ -114,7 +114,9 @@ function bbcLiquid(canvas) {
 
   // Only draw while it is on screen. It holds still while the page is being scrolled, but is always
   // redrawn after a size change (phones resize as the address bar hides) so it can't be left black.
-  var visible = false, t = Math.random() * 50, last = 0, sized = 0;
+  // Every gradient on the page starts from the same point, so the intro cover hands over to the hero seamlessly
+  if (window.BBC_LIQUID_T0 === undefined) window.BBC_LIQUID_T0 = Math.random() * 50;
+  var visible = false, t = window.BBC_LIQUID_T0, last = 0, sized = 0;
   if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible) needDraw = true; }).observe(canvas);
   else visible = true;
   function draw() { gl.uniform1f(uT, t); gl.drawArrays(gl.TRIANGLES, 0, 6); needDraw = false; }

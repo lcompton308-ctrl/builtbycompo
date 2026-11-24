@@ -497,3 +497,8 @@ section.tight[style*="padding-top:0"] { padding-top: 0; }
 .notes > div { border-top: 0; padding-top: 0; }
 .plain-list li { border-top: 0; padding-top: 0; }
 .fact { display: inline-block; transform: rotate(var(--r, 0deg)); }
+
+/* Intro cover uses the same moving gradient as the home page (24 Nov 2026) */
+.intro .intro-cover { background: var(--footer-red); isolation: isolate; overflow: hidden; }
+.intro-cover canvas.liquid { transition-duration: .25s; }
+.intro-cover canvas.liquid { bottom: auto; height: calc(100vh + 120px); height: calc(100svh + 120px); }

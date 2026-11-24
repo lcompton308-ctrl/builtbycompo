@@ -502,7 +502,7 @@ def page(name, p, preview=False):
 <script>(function(){{try{{var r=document.referrer,same=r&&new URL(r).host===location.host;if(!same&&!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches))document.documentElement.classList.add("intro")}}catch(e){{}}}})()</script>
 {f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>' if ld else ""}'''
     body = f'''<a class="skip" href="#main">Skip to content</a>
-<div class="intro-cover" aria-hidden="true"><span>Built by <b>Compo</b></span></div>
+<div class="intro-cover" aria-hidden="true"><canvas class="liquid" data-strength="0.3"></canvas><span>Built by <b>Compo</b></span></div>
 <header class="site-head">
   <div class="wrap">
     <a class="logo{" is-white" if name == "index.html" else ""}" href="{home}" aria-label="Built by Compo, home">Built by <b>Compo</b></a>
