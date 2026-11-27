@@ -503,3 +503,17 @@ section.tight[style*="padding-top:0"] { padding-top: 0; }
 .intro-cover canvas.liquid { transition-duration: .25s; }
 .intro-cover canvas.liquid { bottom: auto; height: calc(100vh + 120px); height: calc(100svh + 120px); }
 .svc-list p { color: var(--ink); }
+
+/* Portfolio card, option C (27 Nov 2026): client logo over their dimmed site; when the card is in view (phones)
+   or hovered (mouse) the logo shrinks to a corner badge and their home page scrolls slowly behind it. */
+.card-work.live { background: var(--brand, var(--ink)); isolation: isolate; }
+.card-work.live .shot { position: absolute; inset: 0; overflow: hidden; }
+.card-work.live .shot img { display: block; width: 100%; height: auto; object-fit: fill; transition: filter .8s ease; filter: saturate(.6); will-change: transform; }
+.card-work.live .veil { position: absolute; inset: 0; background: var(--brand, var(--ink)); opacity: .74; transition: opacity .8s ease; }
+.card-work.live .brand-logo { position: absolute; left: 50%; top: 44%; width: 66%; height: auto; translate: -50% -50%; object-fit: contain; filter: drop-shadow(0 4px 14px rgba(0, 0, 0, .35)); transition: all .8s cubic-bezier(.6, 0, .2, 1); }
+.card-work.live.play .veil { opacity: 0; }
+.card-work.live.play .shot img { filter: none; animation: card-pan 26s ease-in-out .5s infinite; }
+.card-work.live.play .brand-logo { width: 28%; left: 14px; top: 14px; translate: 0 0; padding: 10px 12px; border-radius: 14px; background: color-mix(in srgb, var(--brand, var(--ink)) 88%, transparent); filter: none; }
+@keyframes card-pan { 0%, 6% { transform: translateY(0); } 46%, 54% { transform: translateY(var(--dist, 0px)); } 94%, 100% { transform: translateY(0); } }
+@media (hover: hover) and (pointer: fine) { .card-work.live:hover img { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .card-work.live.play .shot img { animation: none; } .card-work.live .veil, .card-work.live .brand-logo { transition: none; } }

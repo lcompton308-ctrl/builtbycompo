@@ -251,11 +251,36 @@
     var last = 0;
     function step(t) {
       var dt = Math.min(50, t - (last || t)); last = t;
-      if (!paused && !hold && !down && visible && !window.BBC_SCROLLING) { acc += dt * 0.045; var whole = Math.floor(acc); if (whole > 0) { sl.scrollLeft += whole; acc -= whole; wrap(); } }
+      if (!paused && !hold && !down && visible && !window.BBC_SCROLLING && !(Date.now() < (window.BBC_CARD_HOLD || 0))) { acc += dt * 0.045; var whole = Math.floor(acc); if (whole > 0) { sl.scrollLeft += whole; acc -= whole; wrap(); } }
       requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
   });
+
+  /* ----- Portfolio cards with a client logo: the logo shrinks to a badge and the site scrolls (phones: when in view; mouse: on hover) ----- */
+  (function () {
+    var cards = Array.prototype.slice.call(document.querySelectorAll(".card-work.live"));
+    if (!cards.length) return;
+    function dist(c) { var img = c.querySelector(".shot img"); var d = img.getBoundingClientRect().height - c.getBoundingClientRect().height; c.style.setProperty("--dist", (-Math.max(0, d)) + "px"); }
+    cards.forEach(function (c) {
+      var img = c.querySelector(".shot img");
+      if (img.complete) dist(c); else img.addEventListener("load", function () { dist(c); });
+      window.addEventListener("resize", function () { dist(c); });
+    });
+    var mouse = window.matchMedia && matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (mouse) cards.forEach(function (c) {
+      c.addEventListener("mouseenter", function () { dist(c); c.classList.add("play"); });
+      c.addEventListener("mouseleave", function () { c.classList.remove("play"); });
+    });
+    else if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (en) { en.forEach(function (e) {
+        var on = e.intersectionRatio >= 0.65, was = e.target.classList.contains("play");
+        if (on && !was) { dist(e.target); window.BBC_CARD_HOLD = Date.now() + 14000; }   // the row stops drifting long enough to see the page scroll down
+        e.target.classList.toggle("play", on);
+      }); }, { threshold: [0, 0.65, 1] });
+      cards.forEach(function (c) { io.observe(c); });
+    }
+  })();
 
   /* ----- Testimonial card deck ----- */
   document.querySelectorAll(".deck-wrap").forEach(function (w) {
